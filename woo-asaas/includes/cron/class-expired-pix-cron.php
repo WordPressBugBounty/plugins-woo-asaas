@@ -102,7 +102,7 @@ class Expired_Pix_Cron {
 		if ( ! $order instanceof WC_Order ) {
 			return;
 		}
-		
+
 		$pix = new Pix();
 		$pix->remove_expired_pix( $order );
 	}

@@ -55,7 +55,7 @@ class Order_Interest_Handler {
 	 * @throws \Exception If fail to add order item fee.
 	 * @return void
 	 */
-	private function add_item_fee_to_order( WC_Order_Item_Fee $order_item_fee ) : void {
+	private function add_item_fee_to_order( WC_Order_Item_Fee $order_item_fee ) {
 		$wc_order_item = $this->wc_order->add_item( $order_item_fee );
 
 		if ( false !== $wc_order_item ) {

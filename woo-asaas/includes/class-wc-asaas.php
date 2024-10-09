@@ -48,7 +48,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.6.2';
+	public $version = '2.6.3';
 
 	/**
 	 * Instance of this class
@@ -62,7 +62,7 @@ class WC_Asaas {
 	 *
 	 * @var Gateway[string]
 	 */
-	protected $gateways = array();
+	protected $gateways;
 
 	/**
 	 * Initialize the plugin public actions
@@ -79,7 +79,6 @@ class WC_Asaas {
 			return;
 		}
 
-		add_action( 'init', array( $this, 'init_gateways' ), 1 );
 		add_action( 'init', array( Endpoint::get_instance(), 'custom_rewrite_basic' ) );
 		add_action( 'init', array( $this, 'init_form_fields' ) );
 		add_action( 'init', array( Expired_Ticket_Cron::get_instance(), 'schedule_remove_expired_ticket' ) );
@@ -220,17 +219,6 @@ class WC_Asaas {
 	}
 
 	/**
-	 * Init Asaas gateways together with WooCommerce to process the inner hooks correctly
-	 */
-	public function init_gateways() {
-		foreach ( $this->get_gateways_classes() as $gateway ) {
-			$reflection                         = new \ReflectionClass( $gateway );
-			$gateway_obj                        = $reflection->newInstanceArgs();
-			$this->gateways[ $gateway_obj->id ] = $gateway_obj;
-		}
-	}
-
-	/**
 	 * Load plugin textdomain file
 	 */
 	public function load_plugin_textdomain() {
@@ -260,6 +248,18 @@ class WC_Asaas {
 	 * @return Gateway[string] The plugin gateways associated with its id.
 	 */
 	public function get_gateways() {
+		if ( is_array( $this->gateways ) ) {
+			return $this->gateways;
+		}
+
+		$this->gateways = array();
+
+		foreach ( $this->get_gateways_classes() as $gateway ) {
+			$reflection                         = new \ReflectionClass( $gateway );
+			$gateway_obj                        = $reflection->newInstanceArgs();
+			$this->gateways[ $gateway_obj->id ] = $gateway_obj;
+		}
+
 		return apply_filters( 'woocommerce_asaas_getways', $this->gateways );
 	}
 
@@ -271,7 +271,7 @@ class WC_Asaas {
 	 * @return Gateway return order gateway
 	 */
 	public function get_gateway_by_id( $id ) {
-		return $this->gateways[ $id ];
+		return $this->get_gateways()[ $id ];
 	}
 
 	/**
@@ -282,7 +282,7 @@ class WC_Asaas {
 	 * @return Gateway|NULL The gateway, if id is valid. Otherwise, null.
 	 */
 	public function get_gateway_by_billing_type( $billing_type ) {
-		foreach ( $this->gateways as $gateway ) {
+		foreach ( $this->get_gateways() as $gateway ) {
 			if ( $billing_type === $gateway->get_type()->get_id() ) {
 				return $gateway;
 			}
@@ -299,7 +299,7 @@ class WC_Asaas {
 	 * @return string[] Gateways including Asaas ones.
 	 */
 	public function register_gateways( $methods ) {
-		return array_merge( $methods, array_values( $this->gateways ) );
+		return array_merge( $methods, array_values( $this->get_gateways() ) );
 	}
 
 	/**

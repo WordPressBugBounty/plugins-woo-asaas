@@ -39,11 +39,11 @@ class View {
 
 	/**
 	 * Get the admin views directory path
-	 * 
+	 *
 	 * @param string $module Module name.
 	 * @return string The absolute path to the template directory.
 	 */
-	public function get_template_path( $module = 'admin' ): string {
+	public function get_template_path( $module = 'admin' ) : string {
 		$base_dir = __DIR__;
 
 		if ( 'admin' !== $module ) {

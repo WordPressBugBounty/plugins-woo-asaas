@@ -173,7 +173,7 @@ abstract class Settings {
 					'on-hold' => __( 'On hold', 'woo-asaas' ),
 				),
 			),
-			'endpoint'        => array(
+			'endpoint'                => array(
 				'title'       => __( 'Enviroment', 'woo-asaas' ),
 				'type'        => 'select',
 				'description' => __( 'Define the environment that will be used in your store\'s API calls. Select <code>Production</code> to use the actual transaction environment. If you are only testing the tool or are still in a testing period, select <code>Sandbox</code>. Each environment has its own key, remember to use the key corresponding to the selected environment.', 'woo-asaas' ),
@@ -182,7 +182,7 @@ abstract class Settings {
 				'section'     => 'api',
 				'priority'    => 10,
 				'options'     => array(
-					'https://api.asaas.com/v3' => __( 'Production', 'woo-asaas' ),
+					'https://api.asaas.com/v3'         => __( 'Production', 'woo-asaas' ),
 					'https://sandbox.asaas.com/api/v3' => __( 'Sandbox', 'woo-asaas' ),
 				),
 			),

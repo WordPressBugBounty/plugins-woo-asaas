@@ -329,6 +329,7 @@ class Customer {
 	public static function get_customers() {
 		$query = new \WP_User_Query(
 			array(
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'meta_query' => array(
 					array(
 						'key'     => self::META_KEY,

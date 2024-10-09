@@ -7,6 +7,8 @@
 
 namespace WC_Asaas\Api\Response;
 
+use WP_Error;
+
 /**
  * API response handler class
  */
@@ -16,10 +18,10 @@ class Error_Response extends Response {
 	/**
 	 * Get response errors, if is error.
 	 *
-	 * @return \WP_Error|bool The error object, if has error. False, otherwise.
+	 * @return WP_Error The error object.
 	 */
 	public function get_errors() {
-		$error = new \WP_Error();
+		$error = new WP_Error();
 
 		$customer_message         = __( 'An error processing your order. Contact us.', 'woo-asaas' );
 		$default_customer_message = apply_filters( 'woocommerce_asaas_internal_api_error', $customer_message );

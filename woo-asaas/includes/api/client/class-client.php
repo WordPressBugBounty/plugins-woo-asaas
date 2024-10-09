@@ -73,7 +73,7 @@ class Client {
 	 * @return Response The Asaas API response object.
 	 */
 	protected function request( $method, $endpoint, $data = array(), $filter_callback = false ) {
-		$url = apply_filters( 'woocommerce_asaas_request_url', $this->gateway->get_option( 'endpoint' ), $data) . $endpoint;
+		$url          = apply_filters( 'woocommerce_asaas_request_url', $this->gateway->get_option( 'endpoint' ), $data ) . $endpoint;
 		$access_token = apply_filters( 'woocommerce_asaas_request_api_key', $this->gateway->get_api_key(), $data );
 
 		$args = array(
@@ -86,7 +86,7 @@ class Client {
 			),
 		);
 
-		if ( 0 < count( $data )  ) {
+		if ( 0 < count( $data ) ) {
 			$args['body'] = wp_json_encode( $data );
 		}
 

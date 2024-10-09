@@ -526,8 +526,11 @@ abstract class Gateway extends \WC_Payment_Gateway {
 			return version_compare( WC()->version, '3.2.0', '<' ) ? $cart->total : $cart->get_total( false );
 		}
 
+		if ( ! isset( $_GET['key'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+			return 0;
+		}
 		// Payment from "My Account" page.
-		$key      = sanitize_text_field( wp_unslash( $_GET['key'] ) );
+		$key      = sanitize_text_field( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 		$order_id = wc_get_order_id_by_order_key( $key );
 		$order    = wc_get_order( $order_id );
 
@@ -558,9 +561,11 @@ abstract class Gateway extends \WC_Payment_Gateway {
 			}
 			return false;
 		}
-
+		if ( ! isset( $_GET['key'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+			return false;
+		}
 		// Payment from "My Account" page.
-		$key      = sanitize_text_field( wp_unslash( $_GET['key'] ) );
+		$key      = sanitize_text_field( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 		$order_id = wc_get_order_id_by_order_key( $key );
 		if ( 0 !== $order_id ) {
 			$order = new Order( $order_id );

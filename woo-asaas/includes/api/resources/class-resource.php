@@ -12,7 +12,7 @@ use WC_Asaas\Gateway\Gateway;
 /**
  * Abastract class to represent a resource.
  */
-abstract class Resource {
+abstract class Resource { // phpcs:ignore PHPCompatibility.Keywords.ForbiddenNamesAsDeclared.resourceFound, Generic.Classes.OpeningBraceSameLine.ContentAfterBrace
 
 	/**
 	 * The gateway that call the resource

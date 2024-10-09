@@ -102,6 +102,10 @@ class Webhooks extends Resource {
 			$data = json_decode( $data, true );
 		}
 
+		if ( is_null( $data ) ) {
+			return $data;
+		}
+
 		( new Webhook_Helper() )->masked_auth_token( $data );
 
 		return wp_json_encode( $data );

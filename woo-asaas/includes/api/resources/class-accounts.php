@@ -24,7 +24,6 @@ class Accounts extends Resource {
 	/**
 	 * Anticipation person type request
 	 *
-	 * @param  array $data Request body.
 	 * @return Response The HTTP response.
 	 */
 	public function commercial_info() {

@@ -59,6 +59,7 @@ class Collection_Response extends Response implements \Iterator {
 	 *
 	 * @see \Iterator::next()
 	 */
+	#[\ReturnTypeWillChange]
 	public function next() {
 		$next = next( $this->items );
 		if ( $next ) {
@@ -77,6 +78,7 @@ class Collection_Response extends Response implements \Iterator {
 	 *
 	 * @see \Iterator::valid()
 	 */
+	#[\ReturnTypeWillChange]
 	public function valid() {
 		return key( $this->items ) !== null;
 	}
@@ -86,6 +88,7 @@ class Collection_Response extends Response implements \Iterator {
 	 *
 	 * @see \Iterator::current()
 	 */
+	#[\ReturnTypeWillChange]
 	public function current() {
 		return current( $this->items );
 	}
@@ -95,6 +98,7 @@ class Collection_Response extends Response implements \Iterator {
 	 *
 	 * @see \Iterator::rewind()
 	 */
+	#[\ReturnTypeWillChange]
 	public function rewind() {
 		$response = $this->client->rewind();
 		$this->set_items( $response );
@@ -106,6 +110,7 @@ class Collection_Response extends Response implements \Iterator {
 	 *
 	 * @see \Iterator::key()
 	 */
+	#[\ReturnTypeWillChange]
 	public function key() {
 		return key( $this->items );
 	}

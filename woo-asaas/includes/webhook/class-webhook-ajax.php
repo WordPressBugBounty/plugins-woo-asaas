@@ -10,12 +10,14 @@ namespace WC_Asaas\Webhook;
 use stdClass;
 
 use WC_Asaas\Api\Api;
+use WC_Asaas\Api\Response\Collection_Response;
+use WC_Asaas\Api\Response\Error_Response;
 use WC_Asaas\Api\Response\Response;
 use WC_Asaas\Gateway\Gateway;
-use WC_Asaas\Webhook\Webhook_Setting_Data;
 use WC_Asaas\Webhook\Meta\Webhook_Meta_Status;
 use WC_Asaas\Helper\Webhook_Helper;
 use WC_Asaas\WC_Asaas;
+use WP_Error;
 
 /**
  * Webhook Ajax
@@ -146,7 +148,7 @@ class Webhook_Ajax {
 
 		$response = $this->api->webhooks()->update( $data->id, $data_to_update );
 
-		if ( 200 === $response->code ) {
+		if ( ! $response instanceof Error_Response ) {
 			$this->status->set_status( true, true );
 			wp_send_json_success( $response->get_json(), $response->code );
 		}
@@ -161,8 +163,8 @@ class Webhook_Ajax {
 	public function update_existing_webhook_email() {
 		$gateway = $this->gateway;
 		$data    = $this->retrieve_single_webhook();
-
-		if ( ! $data ) {
+		if ( null === $data ) {
+			wp_send_json_error( new WP_Error( 'webhook-url-not-found', __( 'The webhook URL of this website was not found on Asaas webhooks list.', 'woo-asaas' ) ), 404 );
 			return;
 		}
 
@@ -177,11 +179,11 @@ class Webhook_Ajax {
 
 		$response = $this->api->webhooks()->update( $data->id, $data_to_update );
 
-		if ( 200 === $response->code ) {
-			wp_send_json_success( $response->get_json(), $response->code );
+		if ( $response instanceof Error_Response ) {
+			$this->send_json_webhook_errors( $response );
+			return;
 		}
-
-		wp_send_json_error( $response->get_json(), $response->code );
+		wp_send_json_success();
 	}
 
 	/**
@@ -220,24 +222,17 @@ class Webhook_Ajax {
 
 		$response = $this->api->webhooks()->exists( $this->data->url );
 
+		if ( $response instanceof Error_Response ) {
+			$this->status->set_status( false );
+
+			return $response;
+		}
 		$email_notification = $gateway->settings['email_notification'];
 		if ( is_email( $email_notification ) ) {
 			$this->data->set_email( $email_notification );
 		}
 
-		if ( 200 === $response->code && ! $response->json->data ) {
-			$auth_token = $this->helper->generate_random_token();
-			$this->data->set_access_token( $auth_token );
-
-			$data_created = $this->api->webhooks()->create( $this->data->get_request_data() );
-			$data[]       = $data_created->get_json();
-		}
-
-		if ( $data ) {
-			return $data;
-		}
-
-		if ( 200 === $response->code && $response->json->data ) {
+		if ( $response->json->data ) {
 			$enabled     = $response->json->data[0]->enabled;
 			$interrupted = $response->json->data[0]->interrupted;
 			$auth_token  = $response->json->data[0]->authToken;
@@ -254,10 +249,14 @@ class Webhook_Ajax {
 			return $response->json->data;
 		}
 
-		if ( 401 === $response->code ) {
-			$this->status->set_status( false );
+		$auth_token = $this->helper->generate_random_token();
+		$this->data->set_access_token( $auth_token );
 
-			return $response->json->data;
+		$data_created = $this->api->webhooks()->create( $this->data->get_request_data() );
+		$data[]       = $data_created->get_json();
+
+		if ( $data ) {
+			return $data;
 		}
 
 		return $response;
@@ -266,15 +265,30 @@ class Webhook_Ajax {
 	/**
 	 * Retrieves webhook setting data.
 	 *
-	 * @return Webhook_Setting_Data|stdClass The webhook setting data or an empty stdClass object if not found.
+	 * @return stdClass|null The webhook setting data or null if object not found.
 	 */
 	private function retrieve_single_webhook() {
 		$response = $this->api->webhooks()->exists( $this->data->url );
 
-		if ( 200 === $response->code && ! empty( $response->json->data ) ) {
+		if ( ! $response instanceof Error_Response && ! empty( $response->json->data ) ) {
 			return reset( $response->json->data );
 		}
 
-		return new stdClass();
+		return null;
+	}
+
+	/**
+	 * Send a JSON error with the specific webhook response errors.
+	 *
+	 * @param Error_Response $response  The webhook response.
+	 *
+	 * @return void
+	 */
+	private function send_json_webhook_errors( Error_Response $response ) {
+		if ( $response->get_errors()->has_errors() ) {
+			wp_send_json_error( $response->get_errors(), $response->code );
+		}
+		wp_send_json_error( new WP_Error( 'unexpected-webhook-settings-error', __( 'An unexpected error occurred while processing the webhook settings update.', 'woo-asaas' ) ),
+		400 );
 	}
 }

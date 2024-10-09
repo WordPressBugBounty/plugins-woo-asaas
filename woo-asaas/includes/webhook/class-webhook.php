@@ -158,7 +158,7 @@ class Webhook {
 			if ( 200 === $response->code ) {
 				$dates = array(
 					/* phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar */
-					'next_payment' => date( 'Y-m-d H:i:s', strtotime( $response->nextDueDate . ' 12:00:00' ) ),
+					'next_payment' => gmdate( 'Y-m-d H:i:s', strtotime( $response->nextDueDate . ' 12:00:00' ) ),
 				);
 				try {
 					$this->subscription->update_dates( $dates );

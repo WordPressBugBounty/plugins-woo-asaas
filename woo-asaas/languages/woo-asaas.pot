@@ -2,16 +2,16 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Asaas Gateway for WooCommerce 2.5.2\n"
+"Project-Id-Version: Asaas Gateway for WooCommerce 2.6.3-rc1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-12T23:39:28+00:00\n"
+"POT-Creation-Date: 2024-10-09T10:58:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: woo-asaas\n"
 
 #. Plugin Name of the plugin
@@ -312,7 +312,7 @@ msgstr ""
 #: includes/cart/class-cart.php:44
 #: includes/checkout/class-checkout.php:43
 #: includes/coupon/class-coupon.php:44
-#: includes/cron/class-expired-pix-cron.php:45
+#: includes/cron/class-expired-pix-cron.php:46
 #: includes/cron/class-expired-ticket-cron.php:43
 #: includes/installments/admin/settings/class-installments-fields.php:45
 #: includes/installments/gateway/class-checkout-installments.php:45
@@ -376,17 +376,17 @@ msgstr ""
 
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
-#: includes/webhook/class-webhook-ajax.php:103
+#: includes/webhook/class-webhook-ajax.php:104
 msgid "Nonce verification failed"
 msgstr ""
 
 #: includes/anticipation/class-anticipation-ajax.php:73
 #: includes/anticipation/class-anticipation-ajax.php:106
-#: includes/webhook/class-webhook-ajax.php:107
+#: includes/webhook/class-webhook-ajax.php:108
 msgid "Permission denied"
 msgstr ""
 
-#: includes/api/response/class-error-response.php:24
+#: includes/api/response/class-error-response.php:26
 msgid "An error processing your order. Contact us."
 msgstr ""
 
@@ -491,17 +491,17 @@ msgid "New Credit Card"
 msgstr ""
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:280
+#: includes/class-wc-asaas.php:292
 #: includes/webhook/class-endpoint.php:269
 msgid "Billing type %s wasn't registered."
 msgstr ""
 
-#: includes/class-wc-asaas.php:347
+#: includes/class-wc-asaas.php:354
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr ""
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:353
+#: includes/class-wc-asaas.php:360
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr ""
 
@@ -528,7 +528,7 @@ msgstr ""
 
 #. translators: %d: the order id
 #: includes/gateway/class-credit-card.php:134
-#: includes/gateway/class-pix.php:229
+#: includes/gateway/class-pix.php:230
 #: includes/gateway/class-ticket.php:144
 msgid "Order #%d"
 msgstr ""
@@ -543,7 +543,7 @@ msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr ""
 
 #: includes/gateway/class-credit-card.php:290
-#: includes/gateway/class-pix.php:308
+#: includes/gateway/class-pix.php:309
 #: includes/gateway/class-ticket.php:217
 msgid "There was a failure on subscription generation."
 msgstr ""
@@ -552,46 +552,46 @@ msgstr ""
 msgid "Select a credit card"
 msgstr ""
 
-#: includes/gateway/class-gateway.php:598
+#: includes/gateway/class-gateway.php:591
 msgid "Order not found."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:602
+#: includes/gateway/class-gateway.php:595
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:606
+#: includes/gateway/class-gateway.php:599
 msgid "Partial refunds are not possible."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:610
+#: includes/gateway/class-gateway.php:603
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr ""
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:622
+#: includes/gateway/class-gateway.php:615
 msgid "%s payment refund request has been processed successfully."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:625
+#: includes/gateway/class-gateway.php:618
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:655
+#: includes/gateway/class-gateway.php:648
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr ""
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:812
+#: includes/gateway/class-gateway.php:805
 msgid "Subscription #%1$d - %2$s"
 msgstr ""
 
-#: includes/gateway/class-pix.php:30
+#: includes/gateway/class-pix.php:31
 msgid "Asaas Pix"
 msgstr ""
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-pix.php:32
+#: includes/gateway/class-pix.php:33
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr ""
 
@@ -604,16 +604,16 @@ msgstr ""
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:392
+#: includes/gateway/class-ticket.php:390
 msgid "Ignore remove tickets by empty setting."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:401
+#: includes/gateway/class-ticket.php:399
 msgid "No expired ticket to remove."
 msgstr ""
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:434
+#: includes/gateway/class-ticket.php:432
 msgid "Total tickets removed: %d"
 msgstr ""
 
@@ -875,7 +875,7 @@ msgid "If you have <a href=\"%1$s\">identified in the logs</a> that your webhook
 msgstr ""
 
 #: includes/webhook/admin/settings/class-webhook-settings-fields.php:90
-#: includes/webhook/admin/views/webhook-status-section.php:44
+#: includes/webhook/admin/views/webhook-status-section.php:43
 msgid "Re-enable webhook queue"
 msgstr ""
 
@@ -919,36 +919,36 @@ msgid "Required field"
 msgstr ""
 
 #. translators: Add a tooltip help.
-#: includes/webhook/admin/views/webhook-status-section.php:14
+#: includes/webhook/admin/views/webhook-status-section.php:13
 msgid "If the API key is valid, the connection to Asaas will be established. Otherwise, it will be necessary to update it."
 msgstr ""
 
-#: includes/webhook/admin/views/webhook-status-section.php:21
+#: includes/webhook/admin/views/webhook-status-section.php:20
 msgid "Asaas Payment Method"
 msgstr ""
 
-#: includes/webhook/admin/views/webhook-status-section.php:26
+#: includes/webhook/admin/views/webhook-status-section.php:25
 msgid "Connection to Asaas"
 msgstr ""
 
-#: includes/webhook/admin/views/webhook-status-section.php:30
+#: includes/webhook/admin/views/webhook-status-section.php:29
 msgid "Your API key is invalid or missing"
 msgstr ""
 
-#: includes/webhook/admin/views/webhook-status-section.php:30
+#: includes/webhook/admin/views/webhook-status-section.php:29
 msgid "Click here to provide your new key"
 msgstr ""
 
+#: includes/webhook/admin/views/webhook-status-section.php:32
 #: includes/webhook/admin/views/webhook-status-section.php:33
-#: includes/webhook/admin/views/webhook-status-section.php:34
 msgid "Webhook Status (Payment Settlements)"
 msgstr ""
 
-#: includes/webhook/admin/views/webhook-status-section.php:34
+#: includes/webhook/admin/views/webhook-status-section.php:33
 msgid "Webhook queue status"
 msgstr ""
 
-#: includes/webhook/admin/views/webhook-status-section.php:41
+#: includes/webhook/admin/views/webhook-status-section.php:40
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr ""
 
@@ -959,6 +959,14 @@ msgstr ""
 #. translators: %s: event name
 #: includes/webhook/class-endpoint.php:253
 msgid "Event %s wasn't registered."
+msgstr ""
+
+#: includes/webhook/class-webhook-ajax.php:167
+msgid "The webhook URL of this website was not found on Asaas webhooks list."
+msgstr ""
+
+#: includes/webhook/class-webhook-ajax.php:291
+msgid "An unexpected error occurred while processing the webhook settings update."
 msgstr ""
 
 #: includes/webhook/class-webhook-setting-data.php:102

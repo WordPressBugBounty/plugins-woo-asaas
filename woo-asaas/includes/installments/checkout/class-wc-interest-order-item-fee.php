@@ -57,7 +57,7 @@ class WC_Interest_Order_Item_Fee extends WC_Order_Item_Fee {
 	 *
 	 * @return void
 	 */
-	public function new_item_fee() : void {
+	public function new_item_fee() {
 		$order_value_fee = $this->get_fee_amount();
 		$fee_name        = $this->get_fee_name();
 

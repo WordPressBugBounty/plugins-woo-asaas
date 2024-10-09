@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Webhook system status section template
  *

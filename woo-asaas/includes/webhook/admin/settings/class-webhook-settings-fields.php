@@ -87,7 +87,7 @@ class Webhook_Settings_Fields {
 							'<li>' . __( 'Webhooks are responsible for updating orders in your store according to the payment status update on Asaas. If your orders are not being downloaded, click the button below to re-enable your synchronization queue.', 'woo-asaas' ) .
 							/* translators: %1$s: URL to logs. */
 							'<li>' . sprintf( __( 'If you have <a href="%1$s">identified in the logs</a> that your webhook queue is interrupted, click on the bottom below to reactivate it', 'woo-asaas' ), esc_url( $admin_status ), $asaas_log ) . '.</li>' .
-							'<li>' . '<button class="button-secondary reenable-queue" disabled>' . __( 'Re-enable webhook queue', 'woo-asaas' ) . '</button>' . '</li>' .
+							'<li><button class="button-secondary reenable-queue" disabled>' . __( 'Re-enable webhook queue', 'woo-asaas' ) . '</button></li>' .
 							/* translators: %1$s: URL to Asaas logs, %2$s: URL to Asaas documentation. */
 							'<li>' . sprintf( __( 'If even after reactivation you find that your queue is still being interrupted, please <a href="%1$s" target="_blank" rel="noopener noreferrer">access Asaas</a> to check the webhook information sent. If you have any questions, you can <a href="%2$s" target="_blank" rel="noopener noreferrer">access the documentation</a> or contact Asaas support (integracoes@asaas.com.br)', 'woo-asaas' ), $asaas_log, $asaas_doc ) . '.</li>' .
 						'</ul>',

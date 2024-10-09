@@ -27,7 +27,7 @@ class Webhook_Settings {
 	 * @param Gateway $gateway The gateway that call the logger.
 	 */
 	public function __construct( $gateway ) {
-		$this->gateway          = $gateway;
+		$this->gateway = $gateway;
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Webhook_Settings {
 				esc_html__( 'Please enter a valid email notification address.', 'woo-asaas' ),
 				esc_html__( 'Required field', 'woo-asaas' ),
 				array(
-					'back_link'	=> true,
+					'back_link' => true,
 				)
 			);
 		}

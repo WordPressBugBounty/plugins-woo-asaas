@@ -121,7 +121,7 @@ class Webhook_Setting_Data {
 	/**
 	 * Generates a random token and update the gateway settings.
 	 *
-	 * @param string $token The generated token
+	 * @param string $token The generated token.
 	 * @return void
 	 */
 	public function set_access_token( string $token ) {

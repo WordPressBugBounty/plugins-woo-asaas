@@ -34,9 +34,9 @@ class Pix extends Settings {
 		$asaas               = WC_Asaas::get_instance();
 		$credit_card_gateway = $asaas->get_gateway_by_id( 'asaas-credit-card' );
 
-		$fields['endpoint']['default']             = $credit_card_gateway->settings['endpoint'];
-		$fields['api_key']['default']              = $credit_card_gateway->settings['api_key'];
-		$fields['notification']['default']         = $credit_card_gateway->settings['notification'];
+		$fields['endpoint']['default']     = $credit_card_gateway->settings['endpoint'];
+		$fields['api_key']['default']      = $credit_card_gateway->settings['api_key'];
+		$fields['notification']['default'] = $credit_card_gateway->settings['notification'];
 
 		return array_merge(
 			apply_filters( 'woocommerce_asaas_pix_settings_fields', $fields, $this ),

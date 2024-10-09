@@ -309,7 +309,7 @@ msgstr "O plugin Asaas para o WooCommerce não suporta a funcionalidade de renov
 #: includes/cart/class-cart.php:44
 #: includes/checkout/class-checkout.php:43
 #: includes/coupon/class-coupon.php:44
-#: includes/cron/class-expired-pix-cron.php:45
+#: includes/cron/class-expired-pix-cron.php:46
 #: includes/cron/class-expired-ticket-cron.php:43
 #: includes/installments/admin/settings/class-installments-fields.php:45
 #: includes/installments/gateway/class-checkout-installments.php:45
@@ -356,7 +356,7 @@ msgstr "O recurso de antecipação automática está disponível no momento apen
 msgid "Screen data cannot be loaded at this point in the request"
 msgstr "Dados da tela não puderam ser carregados neste ponto da requisição"
 
-#: includes/api/response/class-error-response.php:24
+#: includes/api/response/class-error-response.php:26
 msgid "An error processing your order. Contact us."
 msgstr "Ocorreu um erro ao processar seu pedido. Contate-nos."
 
@@ -461,7 +461,7 @@ msgid "New Credit Card"
 msgstr "Novo Cartão de Crédito"
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:280
+#: includes/class-wc-asaas.php:292
 #: includes/webhook/class-endpoint.php:269
 msgid "Billing type %s wasn't registered."
 msgstr "Forma de pagamento %s não foi registrada."
@@ -470,12 +470,12 @@ msgstr "Forma de pagamento %s não foi registrada."
 msgid "Asaas gateway currently supports the following coupon types: "
 msgstr "Atualmente, o gateway Asaas suporta os seguintes tipos de cupom de desconto: "
 
-#: includes/class-wc-asaas.php:347
+#: includes/class-wc-asaas.php:354
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr "Asaas requisita o CPF ou CNPJ no checkout para a integração funcionar."
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:353
+#: includes/class-wc-asaas.php:360
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
 
@@ -498,7 +498,7 @@ msgstr "Você tem certeza que esse cartão existe?"
 
 #. translators: %d: the order id
 #: includes/gateway/class-credit-card.php:134
-#: includes/gateway/class-pix.php:229
+#: includes/gateway/class-pix.php:230
 #: includes/gateway/class-ticket.php:144
 msgid "Order #%d"
 msgstr "Pedido #%d"
@@ -513,7 +513,7 @@ msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr "Ocorreu uma falha no pagamento e por isso a transação foi revertida."
 
 #: includes/gateway/class-credit-card.php:290
-#: includes/gateway/class-pix.php:308
+#: includes/gateway/class-pix.php:309
 #: includes/gateway/class-ticket.php:217
 msgid "There was a failure on subscription generation."
 msgstr "Ocorreu uma falha na criação da assinatura."
@@ -522,46 +522,46 @@ msgstr "Ocorreu uma falha na criação da assinatura."
 msgid "Select a credit card"
 msgstr "Selecione um cartão de crédito"
 
-#: includes/gateway/class-gateway.php:598
+#: includes/gateway/class-gateway.php:591
 msgid "Order not found."
 msgstr "Pedido não encontrado."
 
-#: includes/gateway/class-gateway.php:602
+#: includes/gateway/class-gateway.php:595
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr "Este pedido não pode ser reembolsado por este fluxo. Por favor, faça o reembolso através do gateway de pagamento ou externamente."
 
-#: includes/gateway/class-gateway.php:606
+#: includes/gateway/class-gateway.php:599
 msgid "Partial refunds are not possible."
 msgstr "Não é possível fazer reembolsos parciais."
 
-#: includes/gateway/class-gateway.php:610
+#: includes/gateway/class-gateway.php:603
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr "Devido ao método de pagamento, para devolver fundos ao cliente, você precisará emitir um reembolso através do seu gateway de pagamento ou externamente."
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:622
+#: includes/gateway/class-gateway.php:615
 msgid "%s payment refund request has been processed successfully."
 msgstr "A solicitação de reembolso de pagamento de %s foi processada com sucesso."
 
-#: includes/gateway/class-gateway.php:625
+#: includes/gateway/class-gateway.php:618
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr "Pagamento não encontrado. O pedido não pode ser reembolsado por este fluxo."
 
-#: includes/gateway/class-gateway.php:655
+#: includes/gateway/class-gateway.php:648
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr "Pedido reembolsado automaticamente devido a falha total ou parcial no processamento."
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:812
+#: includes/gateway/class-gateway.php:805
 msgid "Subscription #%1$d - %2$s"
 msgstr "Assinatura #%1$d - %2$s"
 
-#: includes/gateway/class-pix.php:30
+#: includes/gateway/class-pix.php:31
 msgid "Asaas Pix"
 msgstr "Asaas Pix"
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-pix.php:32
+#: includes/gateway/class-pix.php:33
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr "Use <a href=\"%s\">Asaas</a> para permitir seus clientes comprar seus produtos via Pix."
 
@@ -574,16 +574,16 @@ msgstr "Asaas Boleto Bancário"
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos via boleto bancário."
 
-#: includes/gateway/class-ticket.php:392
+#: includes/gateway/class-ticket.php:390
 msgid "Ignore remove tickets by empty setting."
 msgstr "Ignora remoção de boletos pela configuração em branco."
 
-#: includes/gateway/class-ticket.php:401
+#: includes/gateway/class-ticket.php:399
 msgid "No expired ticket to remove."
 msgstr "Nenhum boleto para remover."
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:434
+#: includes/gateway/class-ticket.php:432
 msgid "Total tickets removed: %d"
 msgstr "Total de boletos removidos: %s"
 
@@ -845,7 +845,7 @@ msgid "If you have <a href=\"%1$s\">identified in the logs</a> that your webhook
 msgstr "Caso você tenha <a href=\"%1$s\">identificado nos logs</a> que sua fila de webhooks está interrompida. Clique no botão abaixo para reabilitar"
 
 #: includes/webhook/admin/settings/class-webhook-settings-fields.php:90
-#: includes/webhook/admin/views/webhook-status-section.php:44
+#: includes/webhook/admin/views/webhook-status-section.php:43
 msgid "Re-enable webhook queue"
 msgstr "Reabilitar fila de webhooks"
 
@@ -889,36 +889,36 @@ msgid "Required field"
 msgstr "Campo obrigatório"
 
 #. translators: Add a tooltip help.
-#: includes/webhook/admin/views/webhook-status-section.php:14
+#: includes/webhook/admin/views/webhook-status-section.php:13
 msgid "If the API key is valid, the connection to Asaas will be established. Otherwise, it will be necessary to update it."
 msgstr "Se a chave de API for válida, a conexão com Asaas será estabelecida. Caso contrário, será necessário atualizá-la."
 
-#: includes/webhook/admin/views/webhook-status-section.php:21
+#: includes/webhook/admin/views/webhook-status-section.php:20
 msgid "Asaas Payment Method"
 msgstr "Meio de Pagamentos Asaas"
 
-#: includes/webhook/admin/views/webhook-status-section.php:26
+#: includes/webhook/admin/views/webhook-status-section.php:25
 msgid "Connection to Asaas"
 msgstr "Conexão ao Asaas"
 
-#: includes/webhook/admin/views/webhook-status-section.php:30
+#: includes/webhook/admin/views/webhook-status-section.php:29
 msgid "Your API key is invalid or missing"
 msgstr "Sua chave de API é inválida ou inexistente"
 
-#: includes/webhook/admin/views/webhook-status-section.php:30
+#: includes/webhook/admin/views/webhook-status-section.php:29
 msgid "Click here to provide your new key"
 msgstr "Clique aqui para informar sua nova chave"
 
+#: includes/webhook/admin/views/webhook-status-section.php:32
 #: includes/webhook/admin/views/webhook-status-section.php:33
-#: includes/webhook/admin/views/webhook-status-section.php:34
 msgid "Webhook Status (Payment Settlements)"
 msgstr "Status dos webhooks (Baixa dos pagamentos)"
 
-#: includes/webhook/admin/views/webhook-status-section.php:34
+#: includes/webhook/admin/views/webhook-status-section.php:33
 msgid "Webhook queue status"
 msgstr "Status da fila de webhooks"
 
-#: includes/webhook/admin/views/webhook-status-section.php:41
+#: includes/webhook/admin/views/webhook-status-section.php:40
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr "Caso a fila de webhooks esteja interrompida, clique no botão ao lado para reativá-la"
 
@@ -1097,13 +1097,13 @@ msgstr "Acessar boleto"
 
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
-#: includes/webhook/class-webhook-ajax.php:103
+#: includes/webhook/class-webhook-ajax.php:104
 msgid "Nonce verification failed"
 msgstr "Verificação de nonce falhou"
 
 #: includes/anticipation/class-anticipation-ajax.php:73
 #: includes/anticipation/class-anticipation-ajax.php:106
-#: includes/webhook/class-webhook-ajax.php:107
+#: includes/webhook/class-webhook-ajax.php:108
 msgid "Permission denied"
 msgstr "Permissão negada"
 
@@ -1129,3 +1129,11 @@ msgstr "Solicitar automaticamente a antecipação de cobranças no Asaas <a href
 #: includes/anticipation/checkout/class-anticipation-interest-handler.php:86
 msgid "Anticipation successfully created. Net value of %1$s. Track the status of the advance through Asaas or <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clicking here.</a>"
 msgstr "Antecipação criada com sucesso. Valor líquido de %1$s. Acompanhe o status da antecipação através do Asaas ou <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clicando aqui.</a>"
+
+#: includes/webhook/class-webhook-ajax.php:167
+msgid "The webhook URL of this website was not found on Asaas webhooks list."
+msgstr ""
+
+#: includes/webhook/class-webhook-ajax.php:291
+msgid "An unexpected error occurred while processing the webhook settings update."
+msgstr ""

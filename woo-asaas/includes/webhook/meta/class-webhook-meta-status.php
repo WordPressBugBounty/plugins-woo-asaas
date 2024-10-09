@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Webhook Status Meta
  *
@@ -14,21 +13,29 @@ namespace WC_Asaas\Webhook\Meta;
 class Webhook_Meta_Status {
 	/**
 	 * The status of the connection.
+	 *
+	 * @var bool
 	 */
 	private $connection_status;
 
 	/**
 	 * The status of the queue.
+	 *
+	 * @var bool
 	 */
 	private $queue_status;
 
 	/**
 	 * The key of the connection status.
+	 *
+	 * @var string|bool
 	 */
 	private $connection_meta_key = 'asaas_connection_status';
 
 	/**
 	 * The key of the status.
+	 *
+	 * @var string|bool
 	 */
 	private $queue_meta_key = 'asaas_queue_status';
 

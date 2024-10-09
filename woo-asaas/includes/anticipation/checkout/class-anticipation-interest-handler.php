@@ -83,7 +83,7 @@ class Anticipation_Interest_Handler {
 		}
 
 		/* translators: %1$s is the net value, %2$s is the Asaas receivable anticipation list URL */
-		$success = sprintf( __( 'Anticipation successfully created. Net value of %1$s. Track the status of the advance through Asaas or <a href="%2$s" target="_blank" rel="noopener">clicking here.</a>', 'woo-asaas' ), wp_strip_all_tags( wc_price( $response->netValue ) ), 'https://www.asaas.com/receivableAnticipationList/index' );
+		$success = sprintf( __( 'Anticipation successfully created. Net value of %1$s. Track the status of the advance through Asaas or <a href="%2$s" target="_blank" rel="noopener">clicking here.</a>', 'woo-asaas' ), wp_strip_all_tags( wc_price( $response->netValue ) ), 'https://www.asaas.com/receivableAnticipationList/index' ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar
 
 		$this->order->add_order_note( $success );
 	}

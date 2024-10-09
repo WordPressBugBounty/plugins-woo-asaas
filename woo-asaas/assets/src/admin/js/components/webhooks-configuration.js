@@ -79,14 +79,13 @@ jQuery(function ($) {
     let enviromentUrl = $enviromentSelect.val();
 
     $enviromentSelect.on("change", function () {
+      enviromentUrl = $(this).val();
       const apiKey = $apiKeyField.val();
       if (apiKey === "") {
         return;
       }
 
       $messageElement.remove();
-
-      enviromentUrl = $(this).val();
 
       validateApiKey({ enviromentUrl, apiKey, ajaxNonce });
     });
