@@ -3,7 +3,7 @@ Contributors: asaas, aztecweb
 Donate link:
 Tags: asaas, payment, payment gateway, woocommerce, credit card, bank ticket
 Requires at least: 4.4
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.0
 Stable tag: 2.6.3
 License: GPLv2 or later
