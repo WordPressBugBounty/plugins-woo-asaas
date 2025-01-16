@@ -460,7 +460,7 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		$total     = $cart->get_total( false );
 		$min_total = floatval( str_replace( ',', '.', $this->settings['min_total'] ) );
 
-		return $total > $min_total;
+		return $total >= $min_total;
 	}
 
 	/**

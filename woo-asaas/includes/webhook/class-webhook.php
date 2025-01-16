@@ -322,10 +322,11 @@ class Webhook {
 	 * @throws Event_Exception If new subscription status is not allowed.
 	 */
 	private function on_payment_overdue() {
+		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_overdue_subscription_new_status', 'on-hold', $this->order, $this->event );
 		if ( isset( $this->data->payment->subscription ) ) {
-			Subscription::get_instance()->update_status( $this->subscription, 'on-hold', $this->event );
+			Subscription::get_instance()->update_status( $this->subscription, $new_subscription_status, $this->event );
 		} else {
-			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, 'on-hold', $this->event );
+			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, $new_subscription_status, $this->event );
 		}
 
 		try {

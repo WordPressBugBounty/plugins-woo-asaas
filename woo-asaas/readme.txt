@@ -5,7 +5,7 @@ Tags: asaas, payment, payment gateway, woocommerce, credit card, bank ticket
 Requires at least: 4.4
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.6.3
+Stable tag: 2.6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,11 @@ This gateway requires WooCommerce 2.6 and above.
 3. Credit card settings
 
 == Changelog ==
+
+= 2.6.4 =
+
+* Dev - Add filter `asaas_webhook_payment_overdue_subscription_status` to allow change the subscription status when a payment is overdue
+* Fix - Minimum order total conditional to show the payment method on the checkout page
 
 = 2.6.3 =
 
