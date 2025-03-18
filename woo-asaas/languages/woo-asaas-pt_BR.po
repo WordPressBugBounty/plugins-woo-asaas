@@ -922,9 +922,13 @@ msgstr "Status da fila de webhooks"
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr "Caso a fila de webhooks esteja interrompida, clique no botão ao lado para reativá-la"
 
-#: includes/webhook/class-endpoint.php:178
+#: includes/webhook/class-endpoint.php:179
 msgid "Webhook has been processed with success"
 msgstr "Webhook processado com sucesso"
+
+#: includes/webhook/class-endpoint.php:182
+msgid "Webhook was ignored by an external filter in this store"
+msgstr "Webhook foi ignorado por um filtro externo nesta loja"
 
 #. translators: %s: event name
 #: includes/webhook/class-endpoint.php:253
@@ -1098,6 +1102,7 @@ msgstr "Acessar boleto"
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
 #: includes/webhook/class-webhook-ajax.php:104
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:117
 msgid "Nonce verification failed"
 msgstr "Verificação de nonce falhou"
 
@@ -1137,3 +1142,12 @@ msgstr ""
 #: includes/webhook/class-webhook-ajax.php:291
 msgid "An unexpected error occurred while processing the webhook settings update."
 msgstr ""
+
+#. translators: %1$s and %2$s are the contact emails for assistance with split migration.
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:235
+msgid "Attention! In the next update of the Asaas Plugin, a new format for managing splits and partner wallets will be created. If you have configured payment splits, make sure to store the walletId of your partners to perform the migration and reconfigure your payment methods. If you have any questions, contact our team at <a href=\"mailto:%1$s\">%2$s</a>."
+msgstr "Atenção! Na próxima atualização do Plugin Asaas, um novo formato para gerenciamento dos splits e carteiras de parceiros será criado. Caso tenha splits de pagamento configurados, lembre-se de armazenar o walletId de seus parceiros para poder fazer a migração e nova configuração em suas formas de pagamento. Caso tenha qualquer dúvida, contate o nosso time em <a href=\"mailto:%1$s\">%2$s</a>."
+
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:242
+msgid "OK, got it"
+msgstr "OK, ciente"

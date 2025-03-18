@@ -173,9 +173,14 @@ class Endpoint {
 				$this->validate_content();
 				$this->validate_status( $data );
 
-				$webhook = new Webhook( $this->gateway, $order, $subscription, $data );
-				$webhook->process_event();
-				$this->response( 200, __( 'Webhook has been processed with success', 'woo-asaas' ) );
+				if ( apply_filters( 'woocommerce_asaas_should_process_webhook', true, $data, $order, $subscription ) ) {
+					$webhook = new Webhook( $this->gateway, $order, $subscription, $data );
+					$webhook->process_event();
+					$this->response( 200, __( 'Webhook has been processed with success', 'woo-asaas' ) );
+				}
+
+				$this->response( 200, __( 'Webhook was ignored by an external filter in this store', 'woo-asaas' ) );
+
 			} catch ( Billing_Type_Exception $error ) {
 				$this->response( 200, $error->getMessage() );
 			} catch ( Inconsistency_Data_Exception $error ) {

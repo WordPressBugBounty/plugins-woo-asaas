@@ -377,6 +377,7 @@ msgstr ""
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
 #: includes/webhook/class-webhook-ajax.php:104
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:117
 msgid "Nonce verification failed"
 msgstr ""
 
@@ -952,8 +953,12 @@ msgstr ""
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr ""
 
-#: includes/webhook/class-endpoint.php:178
+#: includes/webhook/class-endpoint.php:179
 msgid "Webhook has been processed with success"
+msgstr ""
+
+#: includes/webhook/class-endpoint.php:182
+msgid "Webhook was ignored by an external filter in this store"
 msgstr ""
 
 #. translators: %s: event name
@@ -1139,4 +1144,14 @@ msgstr ""
 
 #: templates/order/ticket-thankyou.php:50
 msgid "Your ticket is ready."
+msgstr ""
+
+
+#. translators: %1$s and %2$s are the contact emails for assistance with split migration.
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:235
+msgid "Attention! In the next update of the Asaas Plugin, a new format for managing splits and partner wallets will be created. If you have configured payment splits, make sure to store the walletId of your partners to perform the migration and reconfigure your payment methods. If you have any questions, contact our team at <a href=\"mailto:%1$s\">%2$s</a>."
+msgstr ""
+
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:242
+msgid "OK, got it"
 msgstr ""

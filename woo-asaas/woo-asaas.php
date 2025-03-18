@@ -9,7 +9,7 @@
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:     woo-asaas
  * Domain Path:     /languages
- * Version:         2.6.4
+ * Version:         2.6.5
  *
  * @package         WooAsaas
  */

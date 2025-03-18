@@ -28,6 +28,7 @@ use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Fields;
 use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Status;
 use WC_Asaas\Split\Admin\Settings\Split_Settings_Fields;
 use WC_Asaas\Split\Gateway\Payment_Split;
+use WC_Asaas\Split\Admin\Notice\Split_Wallet_Migration_Notices;
 use WC_Asaas\Product\Admin\Settings\Product_Settings;
 use WC_Asaas\Cart\Cart;
 use WC_Asaas\Coupon\Coupon;
@@ -48,7 +49,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.6.4';
+	public $version = '2.6.5';
 
 	/**
 	 * Instance of this class
@@ -88,9 +89,12 @@ class WC_Asaas {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_files' ) );
 		add_filter( 'woocommerce_payment_gateways', array( $this, 'register_gateways' ) );
 		add_filter( 'woocommerce_asaas_payment_data', array( Payment_Installments::get_instance(), 'installment_payment_data' ), 10, 3 );
+
 		add_filter( 'woocommerce_asaas_payment_data', array( Payment_Split::get_instance(), 'split_payment_data' ), 10, 3 );
 		add_filter( 'woocommerce_asaas_settings_sections', array( Split_Settings_Fields::get_instance(), 'add_section' ), 10, 2 );
 		add_filter( 'woocommerce_asaas_settings_fields', array( Split_Settings_Fields::get_instance(), 'add_fields' ), 10, 2 );
+		add_filter( 'admin_init', array( Split_Wallet_Migration_Notices::get_instance(), 'init' ) );
+
 		add_filter( 'woocommerce_asaas_ticket_payment_fields', array( Checkout_Installments::get_instance(), 'add_ticket_installment_field' ), 10, 2 );
 		add_filter( 'woocommerce_asaas_cc_payment_fields', array( Checkout_Installments::get_instance(), 'add_cc_installment_field' ), 10, 2 );
 		add_filter( 'woocommerce_asaas_ticket_settings_fields', array( Installments_Fields::get_instance(), 'add_installments_fields' ), 10, 2 );
