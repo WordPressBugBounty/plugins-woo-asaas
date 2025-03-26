@@ -164,7 +164,7 @@ class Split_Wallet_Migration_Notices {
 		if ( str_contains( $screen->id, 'woocommerce_page' ) ) {
 			return true;
 		}
-        return false;
+		return false;
 	}
 	/**
 	 * Determines whether to render content on the WooCommerce screen based on allowed screens and URL parameters.
@@ -191,10 +191,11 @@ class Split_Wallet_Migration_Notices {
 	 */
 	private function compare_url_parameters( array $allowed_screen ) {
 		unset( $allowed_screen['id'] );
-		unset( $_GET['page'] );
 
-        $filtered_get = $this->sanitize_input( $_GET ); // phpcs:ignore
-		if ( count( $filtered_get ) <= 0 ) {
+		$get = $_GET; // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+		unset( $get['page'] );
+		$filtered_get = $this->sanitize_input( $get );
+		if ( count( $filtered_get ) === 0 ) {
 			return false;
 		}
 		foreach ( $filtered_get as $key => $value ) {

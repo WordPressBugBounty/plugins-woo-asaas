@@ -49,7 +49,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.6.5';
+	public $version = '2.6.6';
 
 	/**
 	 * Instance of this class

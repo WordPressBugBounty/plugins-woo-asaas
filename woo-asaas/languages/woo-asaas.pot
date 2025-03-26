@@ -1,15 +1,15 @@
-# Copyright (C) 2024 Asaas
+# Copyright (C) 2025 Asaas
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Asaas Gateway for WooCommerce 2.6.3-rc1\n"
+"Project-Id-Version: Asaas Gateway for WooCommerce 2.6.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-09T10:58:27+00:00\n"
+"POT-Creation-Date: 2025-03-26T14:57:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: woo-asaas\n"
@@ -242,7 +242,7 @@ msgstr ""
 
 #: includes/admin/views/installments-interest-list.php:24
 #: includes/installments/admin/settings/class-installments-fields.php:98
-#: includes/webhook/class-webhook.php:356
+#: includes/webhook/class-webhook.php:357
 msgid "Interest"
 msgstr ""
 
@@ -319,6 +319,7 @@ msgstr ""
 #: includes/installments/gateway/class-payment-installments.php:47
 #: includes/my-account/class-woocommerce-my-account.php:43
 #: includes/product/admin/settings/class-product-settings.php:44
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:83
 #: includes/split/admin/settings/class-split-settings-fields.php:46
 #: includes/split/gateway/class-payment-split.php:46
 #: includes/subscription/admin/class-subscription-admin.php:48
@@ -376,8 +377,8 @@ msgstr ""
 
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:136
 #: includes/webhook/class-webhook-ajax.php:104
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:117
 msgid "Nonce verification failed"
 msgstr ""
 
@@ -492,17 +493,17 @@ msgid "New Credit Card"
 msgstr ""
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:292
-#: includes/webhook/class-endpoint.php:269
+#: includes/class-wc-asaas.php:296
+#: includes/webhook/class-endpoint.php:274
 msgid "Billing type %s wasn't registered."
 msgstr ""
 
-#: includes/class-wc-asaas.php:354
+#: includes/class-wc-asaas.php:358
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr ""
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:360
+#: includes/class-wc-asaas.php:364
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr ""
 
@@ -753,6 +754,15 @@ msgstr ""
 msgid "Asaas gateway currently supports the following billing cycles: %s."
 msgstr ""
 
+#. translators: %1$s and %2$s are the contact emails for assistance with split migration.
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:332
+msgid "Attention! In the next update of the Asaas Plugin, a new format for managing splits and partner wallets will be created. If you have configured payment splits, make sure to store the walletId of your partners to perform the migration and reconfigure your payment methods. If you have any questions, contact our team at <a href=\"mailto:%1$s\">%2$s</a>."
+msgstr ""
+
+#: includes/split/admin/notice/class-split-wallet-migration-notices.php:339
+msgid "OK, got it"
+msgstr ""
+
 #: includes/split/admin/settings/class-split-settings-fields.php:74
 #: includes/split/helper/class-values-formater-helper.php:120
 msgid "Split"
@@ -962,7 +972,7 @@ msgid "Webhook was ignored by an external filter in this store"
 msgstr ""
 
 #. translators: %s: event name
-#: includes/webhook/class-endpoint.php:253
+#: includes/webhook/class-endpoint.php:258
 msgid "Event %s wasn't registered."
 msgstr ""
 
@@ -1026,23 +1036,23 @@ msgstr ""
 msgid "Payment deleted."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:334
+#: includes/webhook/class-webhook.php:335
 msgid "PAYMENT_OVERDUE: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to failed."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:336
+#: includes/webhook/class-webhook.php:337
 msgid "Payment overdue."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:348
+#: includes/webhook/class-webhook.php:349
 msgid "Fine tax"
 msgstr ""
 
-#: includes/webhook/class-webhook.php:447
+#: includes/webhook/class-webhook.php:448
 msgid "PAYMENT_REFUNDED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to refunded."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:467
+#: includes/webhook/class-webhook.php:468
 msgid "PAYMENT_RESTORED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to pending."
 msgstr ""
 
@@ -1144,14 +1154,4 @@ msgstr ""
 
 #: templates/order/ticket-thankyou.php:50
 msgid "Your ticket is ready."
-msgstr ""
-
-
-#. translators: %1$s and %2$s are the contact emails for assistance with split migration.
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:235
-msgid "Attention! In the next update of the Asaas Plugin, a new format for managing splits and partner wallets will be created. If you have configured payment splits, make sure to store the walletId of your partners to perform the migration and reconfigure your payment methods. If you have any questions, contact our team at <a href=\"mailto:%1$s\">%2$s</a>."
-msgstr ""
-
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:242
-msgid "OK, got it"
 msgstr ""
