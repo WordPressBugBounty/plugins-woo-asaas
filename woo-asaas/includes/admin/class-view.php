@@ -44,13 +44,26 @@ class View {
 	 * @return string The absolute path to the template directory.
 	 */
 	public function get_template_path( $module = 'admin' ) : string {
-		$base_dir = __DIR__;
+		$base_dir = __DIR__ . '/views/';
 
-		if ( 'admin' !== $module ) {
-			$base_dir = preg_replace( '/(admin)$/', "{$module}/admin", $base_dir );
+		if ( 'admin' === $module ) {
+			return $base_dir ;
 		}
 
-		return $base_dir . '/views/';
+		$base_dir = preg_replace( '/includes\/admin\/views\//', "includes/{$module}", $base_dir );
+
+		$valid_dirs = array(
+			$base_dir . '/views/',
+			$base_dir . '/admin/views/',
+		);
+
+		foreach ( $valid_dirs as $dir ) {
+			if ( is_dir( $dir ) ) {
+				return $dir;
+			}
+		}
+
+		throw new Exception( 'The views directory was not found.' );
 	}
 
 	/**

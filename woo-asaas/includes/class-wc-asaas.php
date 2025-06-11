@@ -8,6 +8,7 @@
 namespace WC_Asaas;
 
 use WC_Asaas\Admin\Plugin_Dependency;
+use WC_Asaas\Split\Split_Manager;
 use WC_Asaas\Webhook\Endpoint;
 use WC_Asaas\Gateway\Gateway;
 use WC_Asaas\Checkout\Form_Field\Card_Expiration;
@@ -26,9 +27,6 @@ use WC_Asaas\Webhook\Admin\Settings\Webhook_Settings_Fields;
 use WC_Asaas\Webhook\Admin\Settings\Webhook_Settings_Status;
 use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Fields;
 use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Status;
-use WC_Asaas\Split\Admin\Settings\Split_Settings_Fields;
-use WC_Asaas\Split\Gateway\Payment_Split;
-use WC_Asaas\Split\Admin\Notice\Split_Wallet_Migration_Notices;
 use WC_Asaas\Product\Admin\Settings\Product_Settings;
 use WC_Asaas\Cart\Cart;
 use WC_Asaas\Coupon\Coupon;
@@ -49,7 +47,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.6.6';
+	public $version = '2.7.0';
 
 	/**
 	 * Instance of this class
@@ -90,10 +88,7 @@ class WC_Asaas {
 		add_filter( 'woocommerce_payment_gateways', array( $this, 'register_gateways' ) );
 		add_filter( 'woocommerce_asaas_payment_data', array( Payment_Installments::get_instance(), 'installment_payment_data' ), 10, 3 );
 
-		add_filter( 'woocommerce_asaas_payment_data', array( Payment_Split::get_instance(), 'split_payment_data' ), 10, 3 );
-		add_filter( 'woocommerce_asaas_settings_sections', array( Split_Settings_Fields::get_instance(), 'add_section' ), 10, 2 );
-		add_filter( 'woocommerce_asaas_settings_fields', array( Split_Settings_Fields::get_instance(), 'add_fields' ), 10, 2 );
-		add_filter( 'admin_init', array( Split_Wallet_Migration_Notices::get_instance(), 'init' ) );
+		add_action( 'init', array( Split_Manager::class, 'get_instance' ) );
 
 		add_filter( 'woocommerce_asaas_ticket_payment_fields', array( Checkout_Installments::get_instance(), 'add_ticket_installment_field' ), 10, 2 );
 		add_filter( 'woocommerce_asaas_cc_payment_fields', array( Checkout_Installments::get_instance(), 'add_cc_installment_field' ), 10, 2 );
@@ -136,6 +131,7 @@ class WC_Asaas {
 		add_filter( 'woocommerce_my_account_my_orders_actions', array( WooCommerce_My_Account::get_instance(), 'my_orders_actions' ), 10, 2 );
 
 		add_action( 'admin_notices', array( $this, 'check_checkout_settings' ) );
+		add_action( 'admin_notices', array( $this, 'notices' ) );
 
 		add_action( 'admin_init', array( $this, 'register_webhook_ajax_actions' ) );
 	}
@@ -376,22 +372,43 @@ class WC_Asaas {
 	 * @return void
 	 */
 	public function enqueue_admin_files( string $hook_suffix ) {
-		$pages_preffix = 'woocommerce_page';
-		$pages         = array( "{$pages_preffix}_wc-settings", "{$pages_preffix}_wc-status" );
-
-		if ( ! in_array( $hook_suffix, $pages, true ) ) {
+		$script_name = $this->assets_handle();
+		if ( ! apply_filters( 'woocommerce_asaas_should_enqueue_script', $this->is_valid_global_wc_admin_page( $hook_suffix ), $hook_suffix ) ) {
 			return;
 		}
-
-		wp_enqueue_style( 'woo-asaas-admin', $this->get_plugin_url() . 'assets/dist/woo-asaas-admin.css', array(), $this->version );
-		wp_enqueue_script( 'woo-asaas-admin', $this->get_plugin_url() . 'assets/dist/woo-asaas-admin.js', array(), $this->version, true );
+		wp_enqueue_style( $script_name, $this->get_plugin_url() . 'assets/dist/woo-asaas-admin.css', array(), $this->version );
+		wp_enqueue_script( $script_name, $this->get_plugin_url() . 'assets/dist/woo-asaas-admin.js', array(), $this->version, true );
 
 		$nonce = wp_create_nonce( 'woo-asaas-admin-nonce' );
 		wp_add_inline_script(
-			'woo-asaas-admin',
-			"var _wooAsaasAdminSettings = {\"nonce\":\"{$nonce}\"};",
+			$script_name,
+			'const _wooAsaasAdminSettings = ' . wp_json_encode( array( 'nonce' => $nonce ) ),
 			'before'
 		);
+		do_action( 'woocommerce_asaas_add_inline_script', $script_name );
+	}
+
+
+	/**
+	 * Get the handle name used for the WooCommerce Asaas assets on admin.
+	 *
+	 * @return string The assets handle name.
+	 */
+	public function assets_handle() {
+		return 'woo-asaas-admin';
+	}
+
+	/**
+	 * Check if the given hook suffix corresponds to a valid global WooCommerce admin page.
+	 *
+	 * @param  string $hook_suffix  The hook suffix to check against valid WooCommerce pages.
+	 *
+	 * @return bool True if the hook suffix is a valid WooCommerce admin page, false otherwise.
+	 */
+	private function is_valid_global_wc_admin_page( string $hook_suffix ) {
+		$pages_prefix = 'woocommerce_page';
+		$pages        = array( "{$pages_prefix}_wc-settings", "{$pages_prefix}_wc-status" );
+		return in_array( $hook_suffix, $pages, true );
 	}
 
 	/**
@@ -400,5 +417,20 @@ class WC_Asaas {
 	public function enqueue_frontend_files() {
 		wp_enqueue_style( 'woo-asaas-store', $this->get_plugin_url() . 'assets/dist/woo-asaas-store.css', array(), $this->version );
 		wp_enqueue_script( 'woo-asaas-store', $this->get_plugin_url() . 'assets/dist/woo-asaas-store.js', array(), $this->version, true );
+	}
+
+	public function notices() {
+		if ( 0 === count( $_POST ) ) {
+			return;
+		}
+
+		if ( 'woocommerce_page_wc-settings' !== get_current_screen()->base ) {
+			return;
+		}
+
+		$gateways = WC_Asaas::get_instance()->get_gateways();
+		foreach ( $gateways as $gateway ) {
+			$gateway->get_admin_settings()->notificator()->render();
+		}
 	}
 }

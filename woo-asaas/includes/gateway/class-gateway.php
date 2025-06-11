@@ -93,6 +93,8 @@ abstract class Gateway extends \WC_Payment_Gateway {
 	 */
 	protected $customer;
 
+	protected $notificator;
+
 	/**
 	 * Initialize the form fields, settings and add hook to process the settings form
 	 */

@@ -8,7 +8,7 @@ import {
 jQuery(function ($) {
   const gateway = urlParams.get("section");
   const ajaxUrl = window.ajaxurl;
-  const ajaxNonce = window._wooAsaasAdminSettings.nonce;
+  const ajaxNonce = _wooAsaasAdminSettings.nonce;
 
   const $anticipationCheckbox = $(`#woocommerce_${gateway}_anticipation`);
   const $enviromentSelect = $(`#woocommerce_${gateway}_endpoint`);
@@ -51,17 +51,16 @@ jQuery(function ($) {
         if (response.success) {
           const isEnabled = response.data[0].enabled;
           const isInterrupted = response.data[0].interrupted;
-          const authToken = response.data[0].authToken;
 
           $statusConnectionRow.find(".connection-yes").show();
 
-          if (authToken && isEnabled && !isInterrupted) {
+          if (isEnabled && !isInterrupted) {
             $statusQueueRow.find(".queue-yes").show();
           } else {
             $statusQueueRow.find(".queue-error").show();
           }
 
-          disableQueueButton(!authToken || !isEnabled || isInterrupted);
+          disableQueueButton(!isEnabled || isInterrupted);
         } else {
           $statusConnectionRow.find(".connection-error").show();
           $statusQueueRow.find(".queue-error").show();
@@ -153,9 +152,8 @@ jQuery(function ($) {
 
           const isEnabled = response.data[0].enabled;
           const isInterrupted = response.data[0].interrupted;
-          const authToken = response.data[0].authToken;
 
-          disableQueueButton(!authToken || !isEnabled || isInterrupted);
+          disableQueueButton(!isEnabled || isInterrupted);
           updateExistingWebhookEmail(response.data[0].email);
         } else {
           $anticipationCheckbox.prop("disabled", true);
@@ -182,8 +180,8 @@ jQuery(function ($) {
       },
       success: function (response) {
         if (response.success) {
-          const { enabled, authToken, interrupted } = response.data;
-          const settingsState = !enabled || !authToken || interrupted;
+          const { enabled, interrupted } = response.data;
+          const settingsState = !enabled || interrupted;
 
           disableQueueButton(settingsState);
 

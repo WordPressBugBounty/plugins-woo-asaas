@@ -9,7 +9,7 @@ jQuery(function ($) {
 
   const gateway = urlParams.get("section");
   const ajaxUrl = window.ajaxurl;
-  const ajaxNonce = window._wooAsaasAdminSettings.nonce;
+  const ajaxNonce = _wooAsaasAdminSettings.nonce;
 
   const $enviromentSelect = $(`#woocommerce_${gateway}_endpoint`);
   const $anticipationCheckbox = $(`#woocommerce_${gateway}_anticipation`);

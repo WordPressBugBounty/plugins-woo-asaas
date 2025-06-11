@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Asaas Gateway for WooCommerce 2.6.5\n"
+"Project-Id-Version: Asaas Gateway for WooCommerce 2.6.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-26T14:57:02+00:00\n"
+"POT-Creation-Date: 2025-06-11T16:02:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: woo-asaas\n"
@@ -89,123 +89,123 @@ msgstr ""
 msgid "Pix"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:107
+#: includes/admin/settings/class-settings.php:112
 msgid "Gateway"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:111
+#: includes/admin/settings/class-settings.php:116
 msgid "API"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:115
+#: includes/admin/settings/class-settings.php:120
 msgid "Subscriptions"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:119
+#: includes/admin/settings/class-settings.php:124
 msgid "Advanced Options"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:137
+#: includes/admin/settings/class-settings.php:142
 msgid "Enable/Disable"
 msgstr ""
 
 #. translators: %s: billing type name
-#: includes/admin/settings/class-settings.php:140
+#: includes/admin/settings/class-settings.php:145
 msgid "Enable Asaas %s"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:146
+#: includes/admin/settings/class-settings.php:151
 msgid "Title"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:148
+#: includes/admin/settings/class-settings.php:153
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:156
+#: includes/admin/settings/class-settings.php:161
 msgid "Description"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:158
+#: includes/admin/settings/class-settings.php:163
 msgid "This controls the description which the user sees during checkout."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:159
+#: includes/admin/settings/class-settings.php:164
 msgid "Pay your order using Asaas."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:165
+#: includes/admin/settings/class-settings.php:170
 msgid "Open payment order status"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:167
+#: includes/admin/settings/class-settings.php:172
 msgid "Status that the order will be saved when the customer makes a purchase and the order is not yet paid. <code>On hold</code> reduces stock, sends an email to the customer and to the shopkeeper. <code>Pending payment</code> does not reduce stock or send an email. This option is shared with other Asaas payment methods."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:172
+#: includes/admin/settings/class-settings.php:177
 msgid "Pending payment"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:173
+#: includes/admin/settings/class-settings.php:178
 msgid "On hold"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:177
+#: includes/admin/settings/class-settings.php:182
 msgid "Enviroment"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:179
+#: includes/admin/settings/class-settings.php:184
 msgid "Define the environment that will be used in your store's API calls. Select <code>Production</code> to use the actual transaction environment. If you are only testing the tool or are still in a testing period, select <code>Sandbox</code>. Each environment has its own key, remember to use the key corresponding to the selected environment."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:185
+#: includes/admin/settings/class-settings.php:190
 msgid "Production"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:186
+#: includes/admin/settings/class-settings.php:191
 msgid "Sandbox"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:190
+#: includes/admin/settings/class-settings.php:195
 msgid "API Key"
 msgstr ""
 
 #. translators: %s: Asaas integration settings panel URL
-#: includes/admin/settings/class-settings.php:193
+#: includes/admin/settings/class-settings.php:198
 msgid "The API Key used to connect with Asaas. <a href=\"%s\">Click here</a> to get it."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:200
+#: includes/admin/settings/class-settings.php:205
 msgid "Notification between Asaas and customer"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:202
+#: includes/admin/settings/class-settings.php:207
 msgid "Enable Notification"
 msgstr ""
 
 #. translators: %s: Asaas integration settings panel URL
-#: includes/admin/settings/class-settings.php:204
+#: includes/admin/settings/class-settings.php:209
 msgid "Allow Asaas to send email and SMS about the purchase and notify him periodically while the purchase is not paid."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:211
+#: includes/admin/settings/class-settings.php:216
 msgid "Debug log"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:213
+#: includes/admin/settings/class-settings.php:218
 msgid "Enable logging"
 msgstr ""
 
 #. translators: %s: log page link
-#: includes/admin/settings/class-settings.php:216
+#: includes/admin/settings/class-settings.php:221
 msgid "Log Asaas API and webhook communication, inside %s."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:222
+#: includes/admin/settings/class-settings.php:227
 msgid "This option is shared with another Asaas gateway."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:367
+#: includes/admin/settings/class-settings.php:372
 msgid "Status &gt; Logs"
 msgstr ""
 
@@ -319,9 +319,7 @@ msgstr ""
 #: includes/installments/gateway/class-payment-installments.php:47
 #: includes/my-account/class-woocommerce-my-account.php:43
 #: includes/product/admin/settings/class-product-settings.php:44
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:83
-#: includes/split/admin/settings/class-split-settings-fields.php:46
-#: includes/split/gateway/class-payment-split.php:46
+#: includes/split/class-split-manager.php:42
 #: includes/subscription/admin/class-subscription-admin.php:48
 #: includes/subscription/admin/settings/class-woocommerce-subscriptions-settings.php:46
 #: includes/subscription/class-subscription.php:70
@@ -377,7 +375,6 @@ msgstr ""
 
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:136
 #: includes/webhook/class-webhook-ajax.php:104
 msgid "Nonce verification failed"
 msgstr ""
@@ -493,18 +490,22 @@ msgid "New Credit Card"
 msgstr ""
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:296
+#: includes/class-wc-asaas.php:292
 #: includes/webhook/class-endpoint.php:274
 msgid "Billing type %s wasn't registered."
 msgstr ""
 
-#: includes/class-wc-asaas.php:358
+#: includes/class-wc-asaas.php:354
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr ""
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:364
+#: includes/class-wc-asaas.php:360
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
+msgstr ""
+
+#: includes/common/notice/validator/class-notice-validator.php:20
+msgid "Invalid notice status."
 msgstr ""
 
 #: includes/coupon/class-coupon.php:74
@@ -515,107 +516,107 @@ msgstr ""
 msgid "* supports only unlimited payments."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:37
+#: includes/gateway/class-credit-card.php:36
 msgid "Asaas Credit Card"
 msgstr ""
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-credit-card.php:39
+#: includes/gateway/class-credit-card.php:38
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products in installments using credit card."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:115
+#: includes/gateway/class-credit-card.php:114
 msgid "Are you sure that this card exists?"
 msgstr ""
 
 #. translators: %d: the order id
-#: includes/gateway/class-credit-card.php:134
-#: includes/gateway/class-pix.php:230
-#: includes/gateway/class-ticket.php:144
+#: includes/gateway/class-credit-card.php:133
+#: includes/gateway/class-pix.php:229
+#: includes/gateway/class-ticket.php:142
 msgid "Order #%d"
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:167
+#: includes/gateway/class-credit-card.php:166
 msgid "The related payment isn't pending on the gateway."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:214
-#: includes/gateway/class-credit-card.php:250
+#: includes/gateway/class-credit-card.php:213
+#: includes/gateway/class-credit-card.php:249
 msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:290
-#: includes/gateway/class-pix.php:309
-#: includes/gateway/class-ticket.php:217
+#: includes/gateway/class-credit-card.php:289
+#: includes/gateway/class-pix.php:308
+#: includes/gateway/class-ticket.php:215
 msgid "There was a failure on subscription generation."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:343
+#: includes/gateway/class-credit-card.php:342
 msgid "Select a credit card"
 msgstr ""
 
-#: includes/gateway/class-gateway.php:591
+#: includes/gateway/class-gateway.php:593
 msgid "Order not found."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:595
+#: includes/gateway/class-gateway.php:597
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:599
+#: includes/gateway/class-gateway.php:601
 msgid "Partial refunds are not possible."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:603
+#: includes/gateway/class-gateway.php:605
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr ""
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:615
+#: includes/gateway/class-gateway.php:617
 msgid "%s payment refund request has been processed successfully."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:618
+#: includes/gateway/class-gateway.php:620
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:648
+#: includes/gateway/class-gateway.php:650
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr ""
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:805
+#: includes/gateway/class-gateway.php:807
 msgid "Subscription #%1$d - %2$s"
 msgstr ""
 
-#: includes/gateway/class-pix.php:31
+#: includes/gateway/class-pix.php:30
 msgid "Asaas Pix"
 msgstr ""
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-pix.php:33
+#: includes/gateway/class-pix.php:32
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:31
+#: includes/gateway/class-ticket.php:29
 msgid "Asaas Ticket"
 msgstr ""
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-ticket.php:33
+#: includes/gateway/class-ticket.php:31
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:390
+#: includes/gateway/class-ticket.php:376
 msgid "Ignore remove tickets by empty setting."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:399
+#: includes/gateway/class-ticket.php:385
 msgid "No expired ticket to remove."
 msgstr ""
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:432
+#: includes/gateway/class-ticket.php:418
 msgid "Total tickets removed: %d"
 msgstr ""
 
@@ -754,89 +755,184 @@ msgstr ""
 msgid "Asaas gateway currently supports the following billing cycles: %s."
 msgstr ""
 
-#. translators: %1$s and %2$s are the contact emails for assistance with split migration.
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:332
-msgid "Attention! In the next update of the Asaas Plugin, a new format for managing splits and partner wallets will be created. If you have configured payment splits, make sure to store the walletId of your partners to perform the migration and reconfigure your payment methods. If you have any questions, contact our team at <a href=\"mailto:%1$s\">%2$s</a>."
+#: includes/split/class-split-message-list.php:21
+msgid "Wallet saved successfully"
 msgstr ""
 
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:339
-msgid "OK, got it"
+#: includes/split/class-split-message-list.php:22
+msgid "The wallet was kept as draft due to the invalid values provided."
 msgstr ""
 
-#: includes/split/admin/settings/class-split-settings-fields.php:74
-#: includes/split/helper/class-values-formater-helper.php:120
-msgid "Split"
+#: includes/split/class-split-message-list.php:23
+msgid "Wallet nickname cannot be empty."
 msgstr ""
 
-#: includes/split/admin/settings/class-split-settings-fields.php:76
-msgid "Split does not support subscriptions."
+#: includes/split/class-split-message-list.php:24
+msgid "Wallet ID cannot be empty."
 msgstr ""
 
-#: includes/split/admin/settings/class-split-settings-fields.php:101
-msgid "Wallet quantity"
+#: includes/split/class-split-message-list.php:25
+msgid "Invalid Wallet ID."
 msgstr ""
 
-#. translators: %s: minimum wallets quantity value
-#: includes/split/admin/settings/class-split-settings-fields.php:104
-msgid "Defines the number of wallets. Use <code>%s</code> to disable this option."
+#: includes/split/class-split-message-list.php:26
+msgid "Wallet nickname is already in use."
 msgstr ""
 
-#: includes/split/admin/settings/class-split-settings-fields.php:111
-msgid "Wallets"
+#: includes/split/class-split-message-list.php:27
+msgid "Wallet ID is already in use."
 msgstr ""
 
-#. translators: %s is the invalid messages.
-#: includes/split/admin/settings/class-split-settings.php:127
-msgid "Wallets without a nickname, invalid ID or percentage equal to zero will not be processed at checkout.<br><br> %s"
+#: includes/split/class-split-message-list.php:28
+msgid "An error occurred while updating the wallet."
 msgstr ""
 
-#: includes/split/admin/settings/class-split-settings.php:135
+#: includes/split/class-split-message-list.php:29
+msgid "Select the wallet and fill in the percentage value in the table to register a new split wallet."
+msgstr ""
+
+#: includes/split/class-split-message-list.php:30
 msgid "The sum of the split wallets cannot exceeds 100%."
 msgstr ""
 
-#: includes/split/admin/views/split-wallet-list.php:24
-msgid "Wallet"
+#: includes/split/class-split-message-list.php:31
+msgid "Invalid percentage value."
 msgstr ""
 
-#: includes/split/admin/views/split-wallet-list.php:27
-msgid "Nickname"
-msgstr ""
-
-#: includes/split/admin/views/split-wallet-list.php:30
-msgid "Wallet ID"
-msgstr ""
-
-#: includes/split/admin/views/split-wallet-list.php:33
+#: includes/split/data/class-split-types.php:16
 msgid "Percentage"
 msgstr ""
 
-#. translators: %s is the wallet number.
-#: includes/split/admin/views/split-wallet-list.php:43
-msgid "Wallet %s"
+#: includes/split/data/class-split-types.php:20
+msgid "Fixed value"
 msgstr ""
 
-#. translators: %s is the wallet incorrect field number.
-#: includes/split/helper/class-values-formater-helper.php:74
-msgid "The wallet %s contains an invalid ID format."
+#: includes/split/hook/class-split-plugins-list-hook.php:20
+msgid "Manage Split Wallets"
 msgstr ""
 
-#. translators: %1$s%% is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
-#: includes/split/helper/class-values-formater-helper.php:130
-msgid "%1$s%% for wallet %2$s Wallet ID: %3$s"
+#: includes/split/hook/class-split-settings-hook.php:22
+#: includes/split/service/class-split-wc-order-service.php:17
+msgid "Split"
 msgstr ""
 
-#: includes/split/helper/class-values-formater-helper.php:136
-msgid "There are invalid wallets for this request. See the log for more details."
+#: includes/split/hook/class-split-settings-hook.php:24
+msgid "Split does not support subscriptions."
 msgstr ""
 
-#. translators: %s is the nickname field.
-#: includes/split/helper/class-values-formater-helper.php:160
-msgid "Split to %s wallet was not processed due to invalid Wallet ID format or percentual value equal to zero."
+#: includes/split/hook/class-split-settings-hook.php:37
+#: includes/split/post-type/class-asaas-wallet-post-type.php:16
+msgid "Wallets"
+msgstr ""
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:23
+#: includes/split/hook/class-split-wallet-edit-page-hook.php:54
+msgid "Nickname"
+msgstr ""
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:24
+msgid "Wallet ID"
+msgstr ""
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:25
+msgid "Date created"
+msgstr ""
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:42
+msgid "Not available"
+msgstr ""
+
+#: includes/split/hook/class-split-wallet-edit-page-hook.php:88
+msgid "Created on"
+msgstr ""
+
+#: includes/split/metabox/class-edit-wallet-meta-box.php:12
+msgid "Edit wallet"
+msgstr ""
+
+#: includes/split/notice/class-prefixer.php:8
+msgid "Split:"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:17
+#: includes/split/views/object-setting/object-setting-table.php:20
+msgid "Wallet"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:18
+msgid "Split Wallets"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:19
+msgid "Add New"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:20
+msgid "Add New Wallet"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:21
+#: includes/split/post-type/class-asaas-wallet-post-type.php:22
+msgid "Edit Wallet"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:23
+msgid "New Wallet"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:24
+#: includes/split/post-type/class-asaas-wallet-post-type.php:25
+msgid "View Wallet"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:26
+msgid "Search Wallets"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:27
+msgid "No wallets found"
+msgstr ""
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:28
+msgid "No wallets found in Trash"
 msgstr ""
 
 #. translators: %1$s is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
-#: includes/split/helper/class-values-formater-helper.php:166
+#: includes/split/service/class-split-gateway-log-service.php:18
 msgid "Split configured at the value of %1$s%% for wallet %2$s Wallet ID: %3$s"
+msgstr ""
+
+#. translators: %1$s%% is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
+#: includes/split/service/class-split-wc-order-service.php:21
+msgid "%1$s%% for wallet %2$s Wallet ID: %3$s"
+msgstr ""
+
+#: includes/split/views/object-setting/object-setting-row.php:28
+msgid "Delete row"
+msgstr ""
+
+#: includes/split/views/object-setting/object-setting-table.php:22
+msgid "Application type"
+msgstr ""
+
+#: includes/split/views/object-setting/object-setting-table.php:24
+msgid "Value"
+msgstr ""
+
+#: includes/split/views/object-setting/object-setting-table.php:31
+msgid "No wallet registered. Split will not be applied to purchases."
+msgstr ""
+
+#: includes/split/views/object-setting/object-setting-table.php:59
+msgid "Add new wallet"
+msgstr ""
+
+#: includes/split/views/split-wallet-edit-field.php:14
+msgid "Wallet ID:"
+msgstr ""
+
+#: includes/split/views/split-wallet-misc-post-author.php:9
+msgid "Created by"
 msgstr ""
 
 #: includes/subscription/admin/class-subscription-admin.php:87
@@ -980,7 +1076,7 @@ msgstr ""
 msgid "The webhook URL of this website was not found on Asaas webhooks list."
 msgstr ""
 
-#: includes/webhook/class-webhook-ajax.php:291
+#: includes/webhook/class-webhook-ajax.php:286
 msgid "An unexpected error occurred while processing the webhook settings update."
 msgstr ""
 

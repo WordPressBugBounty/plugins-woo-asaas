@@ -5,7 +5,7 @@ Tags: asaas, payment, payment gateway, woocommerce, credit card, bank ticket
 Requires at least: 4.4
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.6.6
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,11 +47,14 @@ This gateway requires WooCommerce 2.6 and above.
 
 == Changelog ==
 
-Fixes failure in processing URL for split migration notification
+= 2.7.0 =
+
+* Feature - Split wallet administration screen
+* Fix - Webhook health check report
 
 = 2.6.6 =
 
-Fix - Failure in processing URL for split migration notification
+* Fix - Failure in processing URL for split migration notification
 
 = 2.6.5 =
 

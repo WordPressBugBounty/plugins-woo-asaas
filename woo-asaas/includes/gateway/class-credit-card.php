@@ -7,21 +7,20 @@
 
 namespace WC_Asaas\Gateway;
 
-use WC_Asaas\Meta_Data\Order;
-use WC_Asaas\Meta_Data\Customer;
-use WC_Asaas\Meta_Data\Subscription_Meta;
 use WC_Asaas\Admin\Settings\Credit_Card as Credit_Card_Settings;
-use WC_Asaas\Billing_Type\Credit_Card as Credit_Card_Type;
-use WC_Asaas\Api\Response\Error_Response;
-use WC_Asaas\Checkout\Form_Field\Card;
-use WC_Asaas\WC_Asaas;
-use WC_Asaas\Helper\Validation_Helper;
-use WC_Asaas\Checkout\Form_Field\One_Click_Options;
-use WC_Asaas\Installments\Admin\Settings\Installments_Settings;
+use WC_Asaas\Anticipation\Anticipation_Ajax;
 use WC_Asaas\Anticipation\Checkout\Anticipation_Interest_Handler;
 use WC_Asaas\Anticipation\Meta\Anticipation_Meta;
-use WC_Asaas\Anticipation\Anticipation_Ajax;
-use WC_Asaas\Split\Admin\Settings\Split_Settings;
+use WC_Asaas\Api\Response\Error_Response;
+use WC_Asaas\Billing_Type\Credit_Card as Credit_Card_Type;
+use WC_Asaas\Checkout\Form_Field\Card;
+use WC_Asaas\Checkout\Form_Field\One_Click_Options;
+use WC_Asaas\Helper\Validation_Helper;
+use WC_Asaas\Installments\Admin\Settings\Installments_Settings;
+use WC_Asaas\Meta_Data\Customer;
+use WC_Asaas\Meta_Data\Order;
+use WC_Asaas\Meta_Data\Subscription_Meta;
+use WC_Asaas\WC_Asaas;
 
 /**
  * Asaas credit card gateway
@@ -481,18 +480,6 @@ class Credit_Card extends Gateway {
 	public function generate_interest_installment_html( $key, $data ) : string {
 		$installments_settings = new Installments_Settings( $this );
 		return $installments_settings->generate_interest_installment_html( $key, $data );
-	}
-
-	/**
-	 * Render split wallets custom type attribute.
-	 *
-	 * @param string $key The interest installment value key.
-	 * @param array  $data Field config data.
-	 * @return string
-	 */
-	public function generate_split_wallet_html( $key, $data ) : string {
-		$split_settings = new Split_Settings( $this );
-		return $split_settings->generate_split_wallet_html( $key, $data );
 	}
 
 	/**

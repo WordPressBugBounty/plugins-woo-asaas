@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: Asaas Gateway for WooCommerce split-v2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -77,132 +77,128 @@ msgstr "Validade do Pix após a compra. Ao final deste período, o Pix será rem
 msgid "Copy and paste"
 msgstr "Copia e cola"
 
-#: includes/admin/settings/class-pix.php:56
-msgid "Enable copy and paste"
-msgstr "Ativar copia e cola"
-
 #: includes/admin/settings/class-pix.php:107
 #: includes/billing-type/class-pix.php:42
 msgid "Pix"
 msgstr "Pix"
 
-#: includes/admin/settings/class-settings.php:107
+#: includes/admin/settings/class-settings.php:112
 msgid "Gateway"
 msgstr "Meio de Pagamento"
 
-#: includes/admin/settings/class-settings.php:111
+#: includes/admin/settings/class-settings.php:116
 msgid "API"
 msgstr "API"
 
-#: includes/admin/settings/class-settings.php:115
+#: includes/admin/settings/class-settings.php:120
 msgid "Subscriptions"
 msgstr "Assinaturas"
 
-#: includes/admin/settings/class-settings.php:119
+#: includes/admin/settings/class-settings.php:124
 msgid "Advanced Options"
 msgstr "Opções avançadas"
 
-#: includes/admin/settings/class-settings.php:137
+#: includes/admin/settings/class-settings.php:142
 msgid "Enable/Disable"
 msgstr "Habilitar/Desabilitar"
 
 #. translators: %s: billing type name
-#: includes/admin/settings/class-settings.php:140
+#: includes/admin/settings/class-settings.php:145
 msgid "Enable Asaas %s"
 msgstr "Habilitar Asaas %s"
 
-#: includes/admin/settings/class-settings.php:146
+#: includes/admin/settings/class-settings.php:151
 msgid "Title"
 msgstr "Título"
 
-#: includes/admin/settings/class-settings.php:148
+#: includes/admin/settings/class-settings.php:153
 msgid "This controls the title which the user sees during checkout."
 msgstr "Isso controla o título que o usuário vê durante a finalização da compra."
 
-#: includes/admin/settings/class-settings.php:156
+#: includes/admin/settings/class-settings.php:161
 msgid "Description"
 msgstr "Descrição"
 
-#: includes/admin/settings/class-settings.php:158
+#: includes/admin/settings/class-settings.php:163
 msgid "This controls the description which the user sees during checkout."
 msgstr "Controla a descrição que o usuário vê durante a finalização da compra."
 
-#: includes/admin/settings/class-settings.php:159
+#: includes/admin/settings/class-settings.php:164
 msgid "Pay your order using Asaas."
 msgstr "Pague seu pedido usando Asaas."
 
-#: includes/admin/settings/class-settings.php:165
+#: includes/admin/settings/class-settings.php:170
 msgid "Open payment order status"
 msgstr "Status do pedido para pagamento em aberto"
 
-#: includes/admin/settings/class-settings.php:167
+#: includes/admin/settings/class-settings.php:172
 msgid "Status that the order will be saved when the customer makes a purchase and the order is not yet paid. <code>On hold</code> reduces stock, sends an email to the customer and to the shopkeeper. <code>Pending payment</code> does not reduce stock or send an email. This option is shared with other Asaas payment methods."
 msgstr "Status que o pedido será salvo quando o cliente fizer uma compra e o pedido ainda não estiver pago. <code>Aguardando</code> reduz o estoque, envia um e-mail para o cliente e para o lojista. <code>Pagamento pendente</code> não reduz o estoque ou envia um e-mail. Esta opção é compartilhada com outros métodos de pagamento da Asaas."
 
-#: includes/admin/settings/class-settings.php:172
+#: includes/admin/settings/class-settings.php:177
 msgid "Pending payment"
 msgstr "Pagamento pendente"
 
-#: includes/admin/settings/class-settings.php:173
+#: includes/admin/settings/class-settings.php:178
 msgid "On hold"
 msgstr "Aguardando"
 
-#: includes/admin/settings/class-settings.php:177
+#: includes/admin/settings/class-settings.php:182
 msgid "Enviroment"
 msgstr "Ambiente"
 
-#: includes/admin/settings/class-settings.php:179
+#: includes/admin/settings/class-settings.php:184
 msgid "Define the environment that will be used in your store's API calls. Select <code>Production</code> to use the actual transaction environment. If you are only testing the tool or are still in a testing period, select <code>Sandbox</code>. Each environment has its own key, remember to use the key corresponding to the selected environment."
 msgstr "Defina o ambiente que será usado nas chamadas API de sua loja. Selecione <code>Produção</code> para utilizar o ambiente real de transações. Caso esteja apenas testando a ferramenta ou ainda esteja em período de testes, selecione <code>Sandbox</code>. Cada ambiente possui sua própria chave, lembre-se de utilizar a chave respectiva ao ambiente selecionado."
 
-#: includes/admin/settings/class-settings.php:185
+#: includes/admin/settings/class-settings.php:190
 msgid "Production"
 msgstr "Produção"
 
-#: includes/admin/settings/class-settings.php:186
+#: includes/admin/settings/class-settings.php:191
 msgid "Sandbox"
 msgstr "Sandbox"
 
-#: includes/admin/settings/class-settings.php:190
+#: includes/admin/settings/class-settings.php:195
 msgid "API Key"
 msgstr "Chave da API"
 
 #. translators: %s: Asaas integration settings panel URL
-#: includes/admin/settings/class-settings.php:193
+#: includes/admin/settings/class-settings.php:198
 msgid "The API Key used to connect with Asaas. <a href=\"%s\">Click here</a> to get it."
 msgstr "A Chave de API usada para conectar com Asaas. <a href=“%s”>Clique aqui</a> para obtê-la."
 
-#: includes/admin/settings/class-settings.php:200
+#: includes/admin/settings/class-settings.php:205
 msgid "Notification between Asaas and customer"
 msgstr "Notificações entre Asaas e o cliente"
 
-#: includes/admin/settings/class-settings.php:202
+#: includes/admin/settings/class-settings.php:207
 msgid "Enable Notification"
 msgstr "Habilitar Notificações"
 
 #. translators: %s: Asaas integration settings panel URL
-#: includes/admin/settings/class-settings.php:204
+#: includes/admin/settings/class-settings.php:209
 msgid "Allow Asaas to send email and SMS about the purchase and notify him periodically while the purchase is not paid."
 msgstr "Permite a Asaas enviar e-mail e SMS sobre a compra para seu cliente e notificação-lo periodicamente enquanto a compra não é paga."
 
-#: includes/admin/settings/class-settings.php:211
+#: includes/admin/settings/class-settings.php:216
 msgid "Debug log"
 msgstr "Log de depuração"
 
-#: includes/admin/settings/class-settings.php:213
+#: includes/admin/settings/class-settings.php:218
 msgid "Enable logging"
 msgstr "Habilitar log"
 
 #. translators: %s: log page link
-#: includes/admin/settings/class-settings.php:216
+#: includes/admin/settings/class-settings.php:221
 msgid "Log Asaas API and webhook communication, inside %s."
 msgstr "Logar comunicação da Asaas API e webhook, dentro de %s."
 
-#: includes/admin/settings/class-settings.php:222
+#: includes/admin/settings/class-settings.php:227
 msgid "This option is shared with another Asaas gateway."
 msgstr "Essa opção é compartilhada com outros métodos de pagamento do Asaas."
 
-#: includes/admin/settings/class-settings.php:367
+#: includes/admin/settings/class-settings.php:372
 msgid "Status &gt; Logs"
 msgstr "Status &gt; Logs"
 
@@ -316,9 +312,7 @@ msgstr "O plugin Asaas para o WooCommerce não suporta a funcionalidade de renov
 #: includes/installments/gateway/class-payment-installments.php:47
 #: includes/my-account/class-woocommerce-my-account.php:43
 #: includes/product/admin/settings/class-product-settings.php:44
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:83
-#: includes/split/admin/settings/class-split-settings-fields.php:46
-#: includes/split/gateway/class-payment-split.php:46
+#: includes/split/class-split-manager.php:42
 #: includes/subscription/admin/class-subscription-admin.php:48
 #: includes/subscription/admin/settings/class-woocommerce-subscriptions-settings.php:46
 #: includes/subscription/class-subscription.php:70
@@ -462,7 +456,7 @@ msgid "New Credit Card"
 msgstr "Novo Cartão de Crédito"
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:296
+#: includes/class-wc-asaas.php:292
 #: includes/webhook/class-endpoint.php:274
 msgid "Billing type %s wasn't registered."
 msgstr "Forma de pagamento %s não foi registrada."
@@ -471,12 +465,12 @@ msgstr "Forma de pagamento %s não foi registrada."
 msgid "Asaas gateway currently supports the following coupon types: "
 msgstr "Atualmente, o gateway Asaas suporta os seguintes tipos de cupom de desconto: "
 
-#: includes/class-wc-asaas.php:358
+#: includes/class-wc-asaas.php:354
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr "Asaas requisita o CPF ou CNPJ no checkout para a integração funcionar."
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:364
+#: includes/class-wc-asaas.php:360
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
 
@@ -484,107 +478,107 @@ msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
 msgid "* supports only unlimited payments."
 msgstr "* suporta somente pagamentos ilimitados."
 
-#: includes/gateway/class-credit-card.php:37
+#: includes/gateway/class-credit-card.php:36
 msgid "Asaas Credit Card"
 msgstr "Asaas Cartão de Crédito"
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-credit-card.php:39
+#: includes/gateway/class-credit-card.php:38
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products in installments using credit card."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos em parcelas usando cartão de crédito."
 
-#: includes/gateway/class-credit-card.php:115
+#: includes/gateway/class-credit-card.php:114
 msgid "Are you sure that this card exists?"
 msgstr "Você tem certeza que esse cartão existe?"
 
 #. translators: %d: the order id
-#: includes/gateway/class-credit-card.php:134
-#: includes/gateway/class-pix.php:230
-#: includes/gateway/class-ticket.php:144
+#: includes/gateway/class-credit-card.php:133
+#: includes/gateway/class-pix.php:229
+#: includes/gateway/class-ticket.php:142
 msgid "Order #%d"
 msgstr "Pedido #%d"
 
-#: includes/gateway/class-credit-card.php:167
+#: includes/gateway/class-credit-card.php:166
 msgid "The related payment isn't pending on the gateway."
 msgstr "O pagamento relacionado não está pendente no gateway."
 
-#: includes/gateway/class-credit-card.php:214
-#: includes/gateway/class-credit-card.php:250
+#: includes/gateway/class-credit-card.php:213
+#: includes/gateway/class-credit-card.php:249
 msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr "Ocorreu uma falha no pagamento e por isso a transação foi revertida."
 
-#: includes/gateway/class-credit-card.php:290
-#: includes/gateway/class-pix.php:309
-#: includes/gateway/class-ticket.php:217
+#: includes/gateway/class-credit-card.php:289
+#: includes/gateway/class-pix.php:308
+#: includes/gateway/class-ticket.php:215
 msgid "There was a failure on subscription generation."
 msgstr "Ocorreu uma falha na criação da assinatura."
 
-#: includes/gateway/class-credit-card.php:343
+#: includes/gateway/class-credit-card.php:342
 msgid "Select a credit card"
 msgstr "Selecione um cartão de crédito"
 
-#: includes/gateway/class-gateway.php:591
+#: includes/gateway/class-gateway.php:593
 msgid "Order not found."
 msgstr "Pedido não encontrado."
 
-#: includes/gateway/class-gateway.php:595
+#: includes/gateway/class-gateway.php:597
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr "Este pedido não pode ser reembolsado por este fluxo. Por favor, faça o reembolso através do gateway de pagamento ou externamente."
 
-#: includes/gateway/class-gateway.php:599
+#: includes/gateway/class-gateway.php:601
 msgid "Partial refunds are not possible."
 msgstr "Não é possível fazer reembolsos parciais."
 
-#: includes/gateway/class-gateway.php:603
+#: includes/gateway/class-gateway.php:605
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr "Devido ao método de pagamento, para devolver fundos ao cliente, você precisará emitir um reembolso através do seu gateway de pagamento ou externamente."
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:615
+#: includes/gateway/class-gateway.php:617
 msgid "%s payment refund request has been processed successfully."
 msgstr "A solicitação de reembolso de pagamento de %s foi processada com sucesso."
 
-#: includes/gateway/class-gateway.php:618
+#: includes/gateway/class-gateway.php:620
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr "Pagamento não encontrado. O pedido não pode ser reembolsado por este fluxo."
 
-#: includes/gateway/class-gateway.php:648
+#: includes/gateway/class-gateway.php:650
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr "Pedido reembolsado automaticamente devido a falha total ou parcial no processamento."
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:805
+#: includes/gateway/class-gateway.php:807
 msgid "Subscription #%1$d - %2$s"
 msgstr "Assinatura #%1$d - %2$s"
 
-#: includes/gateway/class-pix.php:31
+#: includes/gateway/class-pix.php:30
 msgid "Asaas Pix"
 msgstr "Asaas Pix"
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-pix.php:33
+#: includes/gateway/class-pix.php:32
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr "Use <a href=\"%s\">Asaas</a> para permitir seus clientes comprar seus produtos via Pix."
 
-#: includes/gateway/class-ticket.php:31
+#: includes/gateway/class-ticket.php:29
 msgid "Asaas Ticket"
 msgstr "Asaas Boleto Bancário"
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-ticket.php:33
+#: includes/gateway/class-ticket.php:31
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos via boleto bancário."
 
-#: includes/gateway/class-ticket.php:390
+#: includes/gateway/class-ticket.php:376
 msgid "Ignore remove tickets by empty setting."
 msgstr "Ignora remoção de boletos pela configuração em branco."
 
-#: includes/gateway/class-ticket.php:399
+#: includes/gateway/class-ticket.php:385
 msgid "No expired ticket to remove."
 msgstr "Nenhum boleto para remover."
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:432
+#: includes/gateway/class-ticket.php:418
 msgid "Total tickets removed: %d"
 msgstr "Total de boletos removidos: %s"
 
@@ -722,82 +716,6 @@ msgstr "Chave do metadado do cliente inválido. As chaves disponíveis são: %s"
 #: includes/product/admin/settings/class-product-settings.php:72
 msgid "Asaas gateway currently supports the following billing cycles: %s."
 msgstr "Atualmente, o gateway Asaas suporta os seguintes ciclos de cobrança: %s."
-
-#: includes/split/admin/settings/class-split-settings-fields.php:74
-#: includes/split/helper/class-values-formater-helper.php:120
-msgid "Split"
-msgstr "Split"
-
-#: includes/split/admin/settings/class-split-settings-fields.php:76
-msgid "Split does not support subscriptions."
-msgstr "Split não suporta assinaturas."
-
-#: includes/split/admin/settings/class-split-settings-fields.php:101
-msgid "Wallet quantity"
-msgstr "Quantidade"
-
-#. translators: %s: minimum wallets quantity value
-#: includes/split/admin/settings/class-split-settings-fields.php:104
-msgid "Defines the number of wallets. Use <code>%s</code> to disable this option."
-msgstr "Define o número de carteiras. Use <code>%s</code> para desativar esta opção."
-
-#: includes/split/admin/settings/class-split-settings-fields.php:111
-msgid "Wallets"
-msgstr "Carteiras"
-
-#. translators: %s is the invalid messages.
-#: includes/split/admin/settings/class-split-settings.php:127
-msgid "Wallets without a nickname, invalid ID or percentage equal to zero will not be processed at checkout.<br><br> %s"
-msgstr "Carteiras sem apelido, ID inválido ou porcentagem igual a zero não serão processadas na finalização da compra.<br><br> %s"
-
-#: includes/split/admin/settings/class-split-settings.php:135
-msgid "The sum of the split wallets cannot exceeds 100%."
-msgstr "A soma das carteiras não pode ultrapassar 100%."
-
-#: includes/split/admin/views/split-wallet-list.php:24
-msgid "Wallet"
-msgstr "Carteira"
-
-#: includes/split/admin/views/split-wallet-list.php:27
-msgid "Nickname"
-msgstr "Apelido"
-
-#: includes/split/admin/views/split-wallet-list.php:30
-msgid "Wallet ID"
-msgstr "ID da carteira"
-
-#: includes/split/admin/views/split-wallet-list.php:33
-msgid "Percentage"
-msgstr "Porcentagem"
-
-#. translators: %s is the wallet number.
-#: includes/split/admin/views/split-wallet-list.php:43
-msgid "Wallet %s"
-msgstr "Carteira %s"
-
-#. translators: %s is the wallet incorrect field number.
-#: includes/split/helper/class-values-formater-helper.php:74
-msgid "The wallet %s contains an invalid ID format."
-msgstr "A carteira %s contém um formato ID inválido."
-
-#. translators: %1$s%% is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
-#: includes/split/helper/class-values-formater-helper.php:130
-msgid "%1$s%% for wallet %2$s Wallet ID: %3$s"
-msgstr "%1$s%% para a carteira %2$s Wallet ID: %3$s"
-
-#: includes/split/helper/class-values-formater-helper.php:136
-msgid "There are invalid wallets for this request. See the log for more details."
-msgstr "Existem carteiras inválidas para este pedido. Consulte o registro de log para mais detalhes."
-
-#. translators: %s is the nickname field.
-#: includes/split/helper/class-values-formater-helper.php:160
-msgid "Split to %s wallet was not processed due to invalid Wallet ID format or percentual value equal to zero."
-msgstr "Split para carteira %s não processado não foi processada devido ao formato inválido do ID da carteira ou ao valor percentual igual a zero."
-
-#. translators: %1$s is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
-#: includes/split/helper/class-values-formater-helper.php:166
-msgid "Split configured at the value of %1$s%% for wallet %2$s Wallet ID: %3$s"
-msgstr "Split configurado no valor de %1$s%% para a carteira %2$s Wallet ID: %3$s"
 
 #: includes/subscription/admin/class-subscription-admin.php:87
 msgid "Subscription update error:"
@@ -1102,7 +1020,6 @@ msgstr "Acessar boleto"
 
 #: includes/anticipation/class-anticipation-ajax.php:69
 #: includes/anticipation/class-anticipation-ajax.php:102
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:136
 #: includes/webhook/class-webhook-ajax.php:104
 msgid "Nonce verification failed"
 msgstr "Verificação de nonce falhou"
@@ -1138,17 +1055,196 @@ msgstr "Antecipação criada com sucesso. Valor líquido de %1$s. Acompanhe o st
 
 #: includes/webhook/class-webhook-ajax.php:167
 msgid "The webhook URL of this website was not found on Asaas webhooks list."
-msgstr ""
+msgstr "O URL do webhook deste site não foi encontrado na lista de webhooks do Asaas."
 
-#: includes/webhook/class-webhook-ajax.php:291
+#: includes/webhook/class-webhook-ajax.php:286
 msgid "An unexpected error occurred while processing the webhook settings update."
-msgstr ""
+msgstr "Ocorreu um erro inesperado durante o processamento da atualização das configurações do webhook."
 
-#. translators: %1$s and %2$s are the contact emails for assistance with split migration.
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:332
-msgid "Attention! In the next update of the Asaas Plugin, a new format for managing splits and partner wallets will be created. If you have configured payment splits, make sure to store the walletId of your partners to perform the migration and reconfigure your payment methods. If you have any questions, contact our team at <a href=\"mailto:%1$s\">%2$s</a>."
-msgstr "Atenção! Na próxima atualização do Plugin Asaas, um novo formato para gerenciamento dos splits e carteiras de parceiros será criado. Caso tenha splits de pagamento configurados, lembre-se de armazenar o walletId de seus parceiros para poder fazer a migração e nova configuração em suas formas de pagamento. Caso tenha qualquer dúvida, contate o nosso time em <a href=\"mailto:%1$s\">%2$s</a>."
+#: includes/split/data/class-split-types.php:16
+msgid "Percentage"
+msgstr "Porcentagem"
 
-#: includes/split/admin/notice/class-split-wallet-migration-notices.php:339
-msgid "OK, got it"
-msgstr "OK, ciente"
+#: includes/split/data/class-split-types.php:20
+msgid "Fixed value"
+msgstr "Valor fixo"
+
+#: includes/split/metabox/class-edit-wallet-meta-box.php:12
+msgid "Edit wallet"
+msgstr "Editar carteira"
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:23
+#: includes/split/hook/class-split-wallet-edit-page-hook.php:54
+msgid "Nickname"
+msgstr "Apelido"
+
+#: includes/split/class-split-message-list.php:22
+msgid "The wallet was kept as draft due to the invalid values provided."
+msgstr "A carteira foi salva como rascunho devido aos valores inválidos fornecidos."
+
+#: includes/split/class-split-message-list.php:28
+msgid "An error occurred while updating the wallet."
+msgstr "Ocorreu um erro ao atualizar a carteira."
+
+#: includes/split/class-split-message-list.php:26
+msgid "Wallet nickname is already in use."
+msgstr "O apelido da carteira já está em uso."
+
+#: includes/split/class-split-message-list.php:27
+msgid "Wallet ID is already in use."
+msgstr "O ID da carteira já está em uso."
+
+#: includes/split/class-split-message-list.php:25
+msgid "Invalid Wallet ID."
+msgstr "ID de carteira inválido."
+
+#: includes/split/hook/class-split-settings-hook.php:37
+#: includes/split/post-type/class-asaas-wallet-post-type.php:16
+msgid "Wallets"
+msgstr "Carteiras"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:17
+#: includes/split/views/object-setting/object-setting-table.php:20
+msgid "Wallet"
+msgstr "Carteira"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:18
+msgid "Split Wallets"
+msgstr "Dividir carteiras"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:19
+msgid "Add New"
+msgstr "Adicionar novo"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:20
+msgid "Add New Wallet"
+msgstr "Adicionar nova carteira"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:21
+#: includes/split/post-type/class-asaas-wallet-post-type.php:22
+msgid "Edit Wallet"
+msgstr "Editar carteira"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:23
+msgid "New Wallet"
+msgstr "Nova carteira"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:24
+#: includes/split/post-type/class-asaas-wallet-post-type.php:25
+msgid "View Wallet"
+msgstr "Ver carteira"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:26
+msgid "Search Wallets"
+msgstr "Pesquisar carteiras"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:27
+msgid "No wallets found"
+msgstr "Nenhuma carteira encontrada"
+
+#: includes/split/post-type/class-asaas-wallet-post-type.php:28
+msgid "No wallets found in Trash"
+msgstr "Nenhuma carteira encontrada na lixeira"
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:24
+msgid "Wallet ID"
+msgstr "ID da carteira"
+
+#: includes/split/views/split-wallet-edit-field.php:14
+msgid "Wallet ID:"
+msgstr "ID da carteira:"
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:25
+msgid "Date created"
+msgstr "Data de criação"
+
+#: includes/split/hook/class-split-wallet-admin-table-hook.php:42
+msgid "Not available"
+msgstr "Não disponível"
+
+#: includes/split/hook/class-split-plugins-list-hook.php:20
+msgid "Manage Split Wallets"
+msgstr "Gerenciar carteiras de split"
+
+#: includes/split/hook/class-split-settings-hook.php:22
+#: includes/split/service/class-split-wc-order-service.php:17
+msgid "Split"
+msgstr "Split"
+
+#: includes/split/hook/class-split-settings-hook.php:24
+msgid "Split does not support subscriptions."
+msgstr "Split não suporta assinaturas."
+
+#: includes/split/class-split-message-list.php:30
+msgid "The sum of the split wallets cannot exceeds 100%."
+msgstr "A soma das carteiras divididas não pode exceder 100%."
+
+#: includes/split/views/split-wallet-misc-post-author.php:9
+msgid "Created by"
+msgstr "Criado por"
+
+#. translators: %1$s%% is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
+#: includes/split/service/class-split-wc-order-service.php:21
+msgid "%1$s%% for wallet %2$s Wallet ID: %3$s"
+msgstr "%1$s%% para carteira %2$s ID da carteira: %3$s"
+
+#: includes/split/hook/class-split-wallet-edit-page-hook.php:88
+msgid "Created on"
+msgstr "Criado em"
+
+#: includes/split/views/object-setting/object-setting-table.php:31
+msgid "No wallet registered. Split will not be applied to purchases."
+msgstr "Nenhuma carteira registrada. O Split não será aplicado às compras."
+
+#: includes/split/views/object-setting/object-setting-table.php:22
+msgid "Application type"
+msgstr "Tipo de aplicação"
+
+#: includes/split/views/object-setting/object-setting-table.php:24
+msgid "Value"
+msgstr "Valor"
+
+#: includes/split/views/object-setting/object-setting-row.php:28
+msgid "Delete row"
+msgstr "Excluir linha"
+
+#: includes/split/views/object-setting/object-setting-table.php:59
+msgid "Add new wallet"
+msgstr "Adicionar nova carteira"
+
+#: includes/admin/settings/class-pix.php:56
+msgid "Enable copy and paste"
+msgstr "Ativar copia e cola"
+
+#: includes/common/notice/validator/class-notice-validator.php:20
+msgid "Invalid notice status."
+msgstr "Status de aviso inválido."
+
+#: includes/split/class-split-message-list.php:23
+msgid "Wallet nickname cannot be empty."
+msgstr "O apelido da carteira não pode estar vazio."
+
+#: includes/split/class-split-message-list.php:24
+msgid "Wallet ID cannot be empty."
+msgstr "ID da carteira não pode estar vazio."
+
+#: includes/split/class-split-message-list.php:29
+msgid "Select the wallet and fill in the percentage value in the table to register a new split wallet."
+msgstr "Selecione a carteira e preencha o valor percentual na tabela para registrar uma nova carteira de split."
+
+#: includes/split/class-split-message-list.php:31
+msgid "Invalid percentage value."
+msgstr "Valor de porcentagem inválido."
+
+#: includes/split/notice/class-prefixer.php:8
+msgid "Split:"
+msgstr "Split:"
+
+#: includes/split/class-split-message-list.php:21
+msgid "Wallet saved successfully"
+msgstr "Carteira salva com sucesso"
+
+#. translators: %1$s is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
+#: includes/split/service/class-split-gateway-log-service.php:18
+msgid "Split configured at the value of %1$s%% for wallet %2$s Wallet ID: %3$s"
+msgstr "Split configurado no valor de %1$s%% para a carteira %2$s ID da carteira: %3$s"

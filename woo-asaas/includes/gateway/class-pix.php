@@ -8,14 +8,13 @@
 namespace WC_Asaas\Gateway;
 
 use stdClass;
-use WC_Asaas\WC_Asaas;
 use WC_Asaas\Admin\Settings\Pix as Pix_Settings;
 use WC_Asaas\Api\Response\Error_Response;
-use WC_Asaas\Meta_Data\Order;
-use WC_Asaas\Meta_Data\Subscription_Meta;
 use WC_Asaas\Billing_Type\Pix as Pix_Type;
 use WC_Asaas\Cron\Expired_Pix_Cron;
-use WC_Asaas\Split\Admin\Settings\Split_Settings;
+use WC_Asaas\Meta_Data\Order;
+use WC_Asaas\Meta_Data\Subscription_Meta;
+use WC_Asaas\WC_Asaas;
 
 /**
  * Asaas pix gateway
@@ -437,18 +436,6 @@ class Pix extends Gateway {
 		}
 
 		$this->api->payments()->delete( $asaas_id );
-	}
-
-	/**
-	 * Render split wallets custom type attribute.
-	 *
-	 * @param string $key The interest installment value key.
-	 * @param array  $data Field config data.
-	 * @return string
-	 */
-	public function generate_split_wallet_html( $key, $data ) : string {
-		$split_settings = new Split_Settings( $this );
-		return $split_settings->generate_split_wallet_html( $key, $data );
 	}
 
 	/**

@@ -235,14 +235,9 @@ class Webhook_Ajax {
 		if ( $response->json->data ) {
 			$enabled     = $response->json->data[0]->enabled;
 			$interrupted = $response->json->data[0]->interrupted;
-			$auth_token  = $response->json->data[0]->authToken;
-
-			$access_token = $gateway->settings['webhook_access_token'];
-
-			if ( '' !== $auth_token && $access_token === $auth_token && $enabled && ! $interrupted ) {
+			if ( $enabled && ! $interrupted ) {
 				$this->status->set_status( true, true );
 			} else {
-				$response->json->data[0]->authToken = null;
 				$this->status->set_status();
 			}
 

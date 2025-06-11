@@ -8,6 +8,7 @@
 namespace WC_Asaas\Admin\Settings;
 
 use WC_Asaas\Api\Api;
+use WC_Asaas\Common\Notice\Notificator\Simple_Notificator;
 use WC_Asaas\Gateway\Gateway;
 use WC_Asaas\Webhook\Endpoint;
 use WC_Asaas\Helper\WP_List_Util;
@@ -67,13 +68,17 @@ abstract class Settings {
 	 */
 	protected $config_url_replacement = '%config_url%';
 
+	protected $notificator;
+
 	/**
 	 * Init the default field sections
 	 *
 	 * @param Gateway $gateway The gateway that call the logger.
 	 */
 	public function __construct( $gateway ) {
-		$this->gateway  = $gateway;
+		$this->gateway     = $gateway;
+		$this->notificator = new Simple_Notificator();
+
 		$this->fields   = $this->get_fields();
 		$this->sections = $this->get_sections();
 	}
@@ -380,5 +385,9 @@ abstract class Settings {
 			return 'invalid_customer' === $response->errors[0]->code;
 		}
 		return false;
+	}
+
+	public function notificator() {
+		return $this->notificator;
 	}
 }
