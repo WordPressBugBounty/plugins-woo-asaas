@@ -2,6 +2,7 @@
 
 namespace WC_Asaas\Split\Hook;
 
+use WC_Asaas\Split\Service\Split_Legacy_Service;
 use WC_Order;
 use WC_Asaas\Gateway\Gateway;
 use WC_Asaas\Split\Adapter\Split_Payment_Method_Object_Setting_Array_To_Data_Adapter;
@@ -19,6 +20,8 @@ class Split_Checkout_Hook {
 	}
 
 	public function split_payment_data( array $payment_data, WC_Order $wc_order, Gateway $gateway ) {
+		( new Split_Legacy_Service( $gateway ) )->ensure_legacy_settings_are_removed();
+
 		$split_settings = $gateway->settings[ Split_Settings_Service::SETTING_NAME ];
 
 		if ( null === $split_settings ) {

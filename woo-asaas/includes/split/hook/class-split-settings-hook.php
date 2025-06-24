@@ -2,6 +2,7 @@
 
 namespace WC_Asaas\Split\Hook;
 
+use WC_Asaas\Split\Service\Split_Legacy_Service;
 use WC_Asaas\Split\Service\Split_Settings_Service;
 
 class Split_Settings_Hook {
@@ -48,6 +49,8 @@ class Split_Settings_Hook {
 		if ( Split_Settings_Service::SETTING_NAME !== $key ) {
 			return $field_html;
 		}
+
+		( new Split_Legacy_Service( $gateway ) )->ensure_legacy_settings_are_removed();
 
 		return ( new Split_Settings_Service( $gateway ) )->generate_split_wallet_html( $key, $field_config );
 	}

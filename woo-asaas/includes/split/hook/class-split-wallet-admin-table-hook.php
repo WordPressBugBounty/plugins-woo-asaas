@@ -48,6 +48,10 @@ class Split_Wallet_Admin_Table_Hook {
 	}
 
 	public function remove_quick_actions( array $actions, WP_Post $post ) {
+		if ( $post->post_type !== ( new Asaas_Wallet_Post_Type() )->slug() ) {
+			return $actions;
+		}
+
 		unset( $actions['inline hide-if-no-js'] );
 		unset( $actions['view'] );
 

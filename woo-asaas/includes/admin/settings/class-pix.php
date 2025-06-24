@@ -54,7 +54,7 @@ class Pix extends Settings {
 					'title'    => __( 'Copy and paste', 'woo-asaas' ),
 					'type'     => 'checkbox',
 					'label'    => __( 'Enable copy and paste', 'woo-asaas' ),
-					'default'  => 'no',
+					'default'  => 'yes',
 					'section'  => 'gateway',
 					'priority' => 20,
 				),

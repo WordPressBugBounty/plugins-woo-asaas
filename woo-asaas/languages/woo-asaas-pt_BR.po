@@ -104,6 +104,7 @@ msgstr "Habilitar/Desabilitar"
 
 #. translators: %s: billing type name
 #: includes/admin/settings/class-settings.php:145
+#, php-format
 msgid "Enable Asaas %s"
 msgstr "Habilitar Asaas %s"
 
@@ -165,6 +166,7 @@ msgstr "Chave da API"
 
 #. translators: %s: Asaas integration settings panel URL
 #: includes/admin/settings/class-settings.php:198
+#, php-format
 msgid "The API Key used to connect with Asaas. <a href=\"%s\">Click here</a> to get it."
 msgstr "A Chave de API usada para conectar com Asaas. <a href=“%s”>Clique aqui</a> para obtê-la."
 
@@ -191,6 +193,7 @@ msgstr "Habilitar log"
 
 #. translators: %s: log page link
 #: includes/admin/settings/class-settings.php:221
+#, php-format
 msgid "Log Asaas API and webhook communication, inside %s."
 msgstr "Logar comunicação da Asaas API e webhook, dentro de %s."
 
@@ -242,17 +245,20 @@ msgstr "Juros"
 #. translators: %s: The plugin name
 #: includes/admin/views/missing-dependency-plugin.php:26
 #: includes/admin/views/missing-subscription-dependency-plugin.php:36
+#, php-format
 msgid "Install %s"
 msgstr "Instalar %s"
 
 #. translators: %s: The plugin name
 #: includes/admin/views/missing-dependency-plugin.php:42
 #: includes/admin/views/missing-subscription-dependency-plugin.php:52
+#, php-format
 msgid "Activate %s"
 msgstr "Ativar %s"
 
 #. translators: 1: The plugin name, 2: The dependency plugin name
 #: includes/admin/views/missing-dependency-plugin.php:49
+#, php-format
 msgid "<strong>%1$s</strong> depends on the %2$s plugin to work."
 msgstr "<strong>%1$s</strong> depende do plugin %2$s para funcionar."
 
@@ -262,6 +268,7 @@ msgstr "Visitar o site do plugin"
 
 #. translators: 1: The plugin name, 2: The dependency plugin name
 #: includes/admin/views/missing-subscription-dependency-plugin.php:61
+#, php-format
 msgid "The subscriptions feature depends on the <strong>%1$s plugin version %2$s or greater</strong> to work."
 msgstr "A funcionalidade de assinaturas depende do <strong>%1$s versão %2$s ou maior</strong> para funcionar."
 
@@ -271,6 +278,7 @@ msgstr "O plugin está preparado para processar pagamentos de assinaturas."
 
 #. translators: %s: billing cycles
 #: includes/admin/views/subscription-feature-is-ready.php:24
+#, php-format
 msgid "We currently support the following billing cycles: %s."
 msgstr "Suportamos os seguintes ciclos de cobrança: %s."
 
@@ -335,6 +343,7 @@ msgstr "Habilitar"
 
 #. translators: %1$s is the error description, %2$s is the Asaas anticipation URL
 #: includes/anticipation/checkout/class-anticipation-interest-handler.php:78
+#, php-format
 msgid "Anticipation not created. %1$s <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">Click here for more details.</a>"
 msgstr "Antecipação não criada. %1$s (<a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clique aqui para detalhes</a>)"
 
@@ -389,6 +398,7 @@ msgstr "O gateway de pagamento Asaas foi desativado porque ele não suporta o ci
 
 #. translators: %s: coupon code
 #: includes/cart/class-cart.php:166
+#, php-format
 msgid "The Asaas payment gateway was disabled because it does not support the following coupon code: %s."
 msgstr "O gateway de pagamento Asaas foi desativado porque ele não suporta o seguinte cupom de desconto: %s."
 
@@ -414,6 +424,7 @@ msgstr "AAAA"
 
 #. translators: %s: the field label
 #: includes/checkout/form-field/class-card-expiration.php:159
+#, php-format
 msgid "Expiration %s"
 msgstr "%s de expiração"
 
@@ -423,11 +434,13 @@ msgstr "<strong>Expiration</strong> deve ser uma data não passada."
 
 #. translators: %s: field name
 #: includes/checkout/form-field/class-card-expiration.php:239
+#, php-format
 msgid "%s must have two digits and be a valid month number."
 msgstr "%s deve ter dois dígitos e ser um número de mês válido."
 
 #. translators: %s: field name
 #: includes/checkout/form-field/class-card-expiration.php:253
+#, php-format
 msgid "%s must at least 2 digits and be a non-past year."
 msgstr "%s deve ter pelo menos dois dígitos e ser um ano não passado."
 
@@ -458,6 +471,7 @@ msgstr "Novo Cartão de Crédito"
 #. translators: %s: billing type name
 #: includes/class-wc-asaas.php:292
 #: includes/webhook/class-endpoint.php:274
+#, php-format
 msgid "Billing type %s wasn't registered."
 msgstr "Forma de pagamento %s não foi registrada."
 
@@ -471,6 +485,7 @@ msgstr "Asaas requisita o CPF ou CNPJ no checkout para a integração funcionar.
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
 #: includes/class-wc-asaas.php:360
+#, php-format
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
 
@@ -484,6 +499,7 @@ msgstr "Asaas Cartão de Crédito"
 
 #. translators: %s: Asaas website URL
 #: includes/gateway/class-credit-card.php:38
+#, php-format
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products in installments using credit card."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos em parcelas usando cartão de crédito."
 
@@ -495,6 +511,7 @@ msgstr "Você tem certeza que esse cartão existe?"
 #: includes/gateway/class-credit-card.php:133
 #: includes/gateway/class-pix.php:229
 #: includes/gateway/class-ticket.php:142
+#, php-format
 msgid "Order #%d"
 msgstr "Pedido #%d"
 
@@ -535,6 +552,7 @@ msgstr "Devido ao método de pagamento, para devolver fundos ao cliente, você p
 
 #. translators: %s: Asaas payment id
 #: includes/gateway/class-gateway.php:617
+#, php-format
 msgid "%s payment refund request has been processed successfully."
 msgstr "A solicitação de reembolso de pagamento de %s foi processada com sucesso."
 
@@ -548,6 +566,7 @@ msgstr "Pedido reembolsado automaticamente devido a falha total ou parcial no pr
 
 #. translators: 1: the subscription order id, 2: The items names
 #: includes/gateway/class-gateway.php:807
+#, php-format
 msgid "Subscription #%1$d - %2$s"
 msgstr "Assinatura #%1$d - %2$s"
 
@@ -557,6 +576,7 @@ msgstr "Asaas Pix"
 
 #. translators: %s: Asaas website URL
 #: includes/gateway/class-pix.php:32
+#, php-format
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr "Use <a href=\"%s\">Asaas</a> para permitir seus clientes comprar seus produtos via Pix."
 
@@ -566,6 +586,7 @@ msgstr "Asaas Boleto Bancário"
 
 #. translators: %s: Asaas website URL
 #: includes/gateway/class-ticket.php:31
+#, php-format
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos via boleto bancário."
 
@@ -579,6 +600,7 @@ msgstr "Nenhum boleto para remover."
 
 #. translators: %d: Total of removed tickets
 #: includes/gateway/class-ticket.php:418
+#, php-format
 msgid "Total tickets removed: %d"
 msgstr "Total de boletos removidos: %s"
 
@@ -665,11 +687,13 @@ msgstr "% de desconto sobre o produto recorrente*"
 
 #. translators: %s: field name
 #: includes/helper/class-validation-helper.php:73
+#, php-format
 msgid "%s is a required field."
 msgstr "%s é um campo obrigatório."
 
 #. translators: %d: maximum installments allowed
 #: includes/installments/admin/settings/class-installments-fields.php:75
+#, php-format
 msgid "Define the installment limit allowed. The max value is <code>%d</code>. Use <code>0</code> to disable this option."
 msgstr "Define o limite de parcelas permitido. O valor máximo é <code>%d</code>. Use <code>0</code> para desabilitar esta opção."
 
@@ -683,11 +707,13 @@ msgstr "Mínimo do valor de parcelas"
 
 #. translators: %d: minimum installments value
 #: includes/installments/admin/settings/class-installments-fields.php:108
+#, php-format
 msgid "The minimum value for each installment. The minimum value accepted by Asaas is <code>%s</code>."
 msgstr "O valor mínimo de cada parcela. Use <code>0</code> para desabilitar esta opção. O valor mínimo aceitado pelo Asaas é <code>%s</code>."
 
 #. translators: %d: installment number, %s: installment value, %s: interest value
 #: includes/installments/checkout/class-installments-checkout.php:130
+#, php-format
 msgid "%1$dx %2$s (%3$s%% interest)"
 msgstr "%1$dx %2$s (%3$s%% de juros)"
 
@@ -697,11 +723,13 @@ msgstr "Falha ao adicionar taxa de juros de parcelamento."
 
 #. translators: %s: interest percentage per installment
 #: includes/installments/checkout/class-wc-interest-order-item-fee.php:90
+#, php-format
 msgid "Interest (%s%% per installment)"
 msgstr "Juros (%s%% por parcela)"
 
 #. translators: %d: number of installments
 #: includes/installments/checkout/class-wc-interest-order-item-fee.php:93
+#, php-format
 msgid "%d installment"
 msgid_plural "%d installments"
 msgstr[0] "%d parcela"
@@ -709,11 +737,13 @@ msgstr[1] "%d parcelas"
 
 #. translators: %s: available meta keys
 #: includes/meta-data/class-customer.php:97
+#, php-format
 msgid "Invalid customer meta key. The available keys are: %s"
 msgstr "Chave do metadado do cliente inválido. As chaves disponíveis são: %s"
 
 #. translators: %s: billing cycles
 #: includes/product/admin/settings/class-product-settings.php:72
+#, php-format
 msgid "Asaas gateway currently supports the following billing cycles: %s."
 msgstr "Atualmente, o gateway Asaas suporta os seguintes ciclos de cobrança: %s."
 
@@ -743,6 +773,7 @@ msgstr "A data de término da assinatura precisa ser maior que a data de hoje."
 
 #. translators: %s: supported billing cicles
 #: includes/subscription/admin/class-subscription-admin.php:171
+#, php-format
 msgid "Asaas does not support the chosen billing period. Please, choose a valid period: %s."
 msgstr "Asaas não suporta o período de cobrança escolhido. Por favor, escolha um período válido: %s."
 
@@ -760,6 +791,7 @@ msgstr "Os webhooks são responsáveis por atualizar os pedidos em sua loja conf
 
 #. translators: %1$s: URL to logs.
 #: includes/webhook/admin/settings/class-webhook-settings-fields.php:89
+#, php-format
 msgid "If you have <a href=\"%1$s\">identified in the logs</a> that your webhook queue is interrupted, click on the bottom below to reactivate it"
 msgstr "Caso você tenha <a href=\"%1$s\">identificado nos logs</a> que sua fila de webhooks está interrompida. Clique no botão abaixo para reabilitar"
 
@@ -770,6 +802,7 @@ msgstr "Reabilitar fila de webhooks"
 
 #. translators: %1$s: URL to Asaas logs, %2$s: URL to Asaas documentation.
 #: includes/webhook/admin/settings/class-webhook-settings-fields.php:92
+#, php-format
 msgid "If even after reactivation you find that your queue is still being interrupted, please <a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">access Asaas</a> to check the webhook information sent. If you have any questions, you can <a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer\">access the documentation</a> or contact Asaas support (integracoes@asaas.com.br)"
 msgstr "Se mesmo após a reativação você verificar que a sua fila continua sendo interrompida, pedimos que <a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">acesse o Asaas</a> para verificar as informações dos webhooks enviados. Caso tenha dúvidas pode <a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer\">acessar a documentação</a> ou contatar o suporte do Asaas (integracoes@asaas.com.br)"
 
@@ -787,6 +820,7 @@ msgstr "Caso sua fila de sincronização seja interrompida devido à algum erro,
 
 #. translators: %s: URL to the gateway settings page.
 #: includes/webhook/admin/settings/class-webhook-settings-status.php:97
+#, php-format
 msgid "We have identified issues with the connection of your store to the Asaas Payment Method, caused by an invalid or missing API key. <a href=\"%s\">Click here to provide a new key</a>."
 msgstr "Identificamos problemas na conexão de sua loja com o Meio de Pagamento Asaas, causados por uma chave de API inválida ou inexistente. <a href=\"%s\">Clique aqui para informar uma nova chave</a>."
 
@@ -796,6 +830,7 @@ msgstr "A chave de API informada é inválida"
 
 #. translators: %s: URL to the system status page.
 #: includes/webhook/admin/settings/class-webhook-settings-status.php:132
+#, php-format
 msgid "We've identified that the Asaas webhook queue is interrupted. <a href=\"%s\">Click here to reactivate</a>"
 msgstr "Identificamos que a fila de webhooks do Asaas está interrompida. <a href=\"%s\">Clique aqui para reabilitar</a>"
 
@@ -851,6 +886,7 @@ msgstr "Webhook foi ignorado por um filtro externo nesta loja"
 
 #. translators: %s: event name
 #: includes/webhook/class-endpoint.php:258
+#, php-format
 msgid "Event %s wasn't registered."
 msgstr "O evento %s não foi registrado."
 
@@ -860,6 +896,7 @@ msgstr "Webhooks do WooCommerce"
 
 #. translators: %s: event name
 #: includes/webhook/class-webhook.php:144
+#, php-format
 msgid "Untreated event: %s"
 msgstr "Evento não tratado: %s"
 
@@ -873,6 +910,7 @@ msgstr "Este pedido já foi pago."
 
 #. translators: %s: subscription status
 #: includes/webhook/class-webhook.php:199
+#, php-format
 msgid "Prevents 500 error from WooCommerce Subscriptions: unable to change subscription status to %s."
 msgstr "Previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para %s."
 
@@ -882,6 +920,7 @@ msgstr "Não é possível alterar o status do pedido."
 
 #. translators: 1: The due date, 2: The subscription order id
 #: includes/webhook/class-webhook.php:278
+#, php-format
 msgid "Payment created. Due date: %1$s / Subscription id: %2$s"
 msgstr "Pagamento criado. Data de vencimento: %1$s / ID da assinatura: %2$s"
 
@@ -891,6 +930,7 @@ msgstr "Pagamento criado."
 
 #. translators: 1: The payment link
 #: includes/webhook/class-webhook.php:290
+#, php-format
 msgid "Payment link: %1$s"
 msgstr "Link do pagamento: %1$s"
 
@@ -930,6 +970,7 @@ msgstr "Detalhes do pagamento"
 
 #. translators: %s: the order status
 #: templates/order/credit-card-thankyou.php:26
+#, php-format
 msgid "Status: <strong>%s</strong>"
 msgstr "Estado do pedido: <strong>%s</strong>"
 
@@ -937,6 +978,7 @@ msgstr "Estado do pedido: <strong>%s</strong>"
 #: templates/order/credit-card-thankyou.php:43
 #: templates/order/pix-thankyou.php:70
 #: templates/order/ticket-thankyou.php:72
+#, php-format
 msgid "This order does not require payment at this time. Your trial period has started and is valid until %1$s."
 msgstr "Este pedido não requer pagamento no momento. Seu período de testes foi iniciado com validade até %1$s."
 
@@ -989,6 +1031,7 @@ msgstr "Revise as informações e confirme o pagamento. Pronto! O status do pedi
 
 #. translators: 1: expiration time setting 2: expiration period
 #: templates/order/pix-thankyou-instructions.php:40
+#, php-format
 msgid "You have %1$d %2$s to pay. After that time, your order will be cancelled."
 msgstr "Você tem %1$d %2$s para pagar. Depois desse tempo, seu pedido será cancelado."
 
@@ -1010,6 +1053,7 @@ msgstr "Seus boleto bancários estão pronto."
 
 #. translators: %1$s: count installments %2$s: total installments
 #: templates/order/ticket-thankyou.php:36
+#, php-format
 msgid "Installment %1$s of %2$s."
 msgstr "Parcela %1$s de %2$s."
 
@@ -1036,6 +1080,7 @@ msgstr "Um erro ocorreu"
 
 #. translators: This message explains what needs to be done when the setting is disabled.
 #: includes/anticipation/admin/settings/class-anticipation-settings-fields.php:101
+#, php-format
 msgid "To use this functionality, inform <a href=\"%s\">API Key</a> below."
 msgstr "Para usar esta funcionalidade, informe a <a href=\"%s\">Chave da API</a> abaixo."
 
@@ -1045,11 +1090,13 @@ msgstr "Seu boleto está pronto."
 
 #. translators: This message explains what the enabled setting does.
 #: includes/anticipation/admin/settings/class-anticipation-settings-fields.php:99
+#, php-format
 msgid "Automatically request advance payments on Asaas <a href=\"%s\" target=\"_blank\" rel=\"noopener\">Click here for more details</a>."
 msgstr "Solicitar automaticamente a antecipação de cobranças no Asaas <a href=\"%s\" target=\"_blank\" rel=\"noopener\">Clique aqui para mais detalhes</a>."
 
 #. translators: %1$s is the net value, %2$s is the Asaas receivable anticipation list URL
 #: includes/anticipation/checkout/class-anticipation-interest-handler.php:86
+#, php-format
 msgid "Anticipation successfully created. Net value of %1$s. Track the status of the advance through Asaas or <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clicking here.</a>"
 msgstr "Antecipação criada com sucesso. Valor líquido de %1$s. Acompanhe o status da antecipação através do Asaas ou <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clicando aqui.</a>"
 
@@ -1098,7 +1145,7 @@ msgstr "O ID da carteira já está em uso."
 msgid "Invalid Wallet ID."
 msgstr "ID de carteira inválido."
 
-#: includes/split/hook/class-split-settings-hook.php:37
+#: includes/split/hook/class-split-settings-hook.php:38
 #: includes/split/post-type/class-asaas-wallet-post-type.php:16
 msgid "Wallets"
 msgstr "Carteiras"
@@ -1166,12 +1213,12 @@ msgstr "Não disponível"
 msgid "Manage Split Wallets"
 msgstr "Gerenciar carteiras de split"
 
-#: includes/split/hook/class-split-settings-hook.php:22
+#: includes/split/hook/class-split-settings-hook.php:23
 #: includes/split/service/class-split-wc-order-service.php:17
 msgid "Split"
 msgstr "Split"
 
-#: includes/split/hook/class-split-settings-hook.php:24
+#: includes/split/hook/class-split-settings-hook.php:25
 msgid "Split does not support subscriptions."
 msgstr "Split não suporta assinaturas."
 
@@ -1185,6 +1232,7 @@ msgstr "Criado por"
 
 #. translators: %1$s%% is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
 #: includes/split/service/class-split-wc-order-service.php:21
+#, php-format
 msgid "%1$s%% for wallet %2$s Wallet ID: %3$s"
 msgstr "%1$s%% para carteira %2$s ID da carteira: %3$s"
 
@@ -1246,5 +1294,6 @@ msgstr "Carteira salva com sucesso"
 
 #. translators: %1$s is the percentual value, %2$s is the wallet nickname, %3$s is the wallet ID.
 #: includes/split/service/class-split-gateway-log-service.php:18
+#, php-format
 msgid "Split configured at the value of %1$s%% for wallet %2$s Wallet ID: %3$s"
 msgstr "Split configurado no valor de %1$s%% para a carteira %2$s ID da carteira: %3$s"

@@ -216,7 +216,7 @@ abstract class Settings {
 				'title'       => __( 'Debug log', 'woo-asaas' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', 'woo-asaas' ),
-				'default'     => 'no',
+				'default'     => 'yes',
 				/* translators: %s: log page link */
 				'description' => sprintf( __( 'Log Asaas API and webhook communication, inside %s.', 'woo-asaas' ), $this->get_log_view() ),
 				'section'     => 'advanced',

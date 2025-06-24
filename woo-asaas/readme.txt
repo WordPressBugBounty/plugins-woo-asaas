@@ -5,7 +5,7 @@ Tags: asaas, payment, payment gateway, woocommerce, credit card, bank ticket
 Requires at least: 4.4
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,13 @@ This gateway requires WooCommerce 2.6 and above.
 3. Credit card settings
 
 == Changelog ==
+
+= 2.7.1 =
+
+* Tweak - Set debug enabled by default
+* Tweak - Set PIX copy/paste enabled by default
+* Fix - Windows compability
+* Fix - Upgrade with legacy split data
 
 = 2.7.0 =
 

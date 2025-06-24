@@ -109,7 +109,7 @@ class Split_Wallet_Save_Hook {
 	public function disable_default_save_message( string $location ) {
 		$post_type = ( new Asaas_Wallet_Post_Type() )->slug();
 		if ( get_current_screen()->post_type !== $post_type ) {
-			return;
+			return $location;
 		}
 
 		$location = remove_query_arg( 'message', $location );

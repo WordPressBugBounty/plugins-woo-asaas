@@ -7,6 +7,8 @@
 
 namespace WC_Asaas\Admin;
 
+use Exception;
+
 /**
  * Admin view class
  */
@@ -44,17 +46,24 @@ class View {
 	 * @return string The absolute path to the template directory.
 	 */
 	public function get_template_path( $module = 'admin' ) : string {
-		$base_dir = __DIR__ . '/views/';
+		$os_separator = DIRECTORY_SEPARATOR;
+		$base_dir = __DIR__ . "{$os_separator}views{$os_separator}";
 
 		if ( 'admin' === $module ) {
 			return $base_dir ;
 		}
 
-		$base_dir = preg_replace( '/includes\/admin\/views\//', "includes/{$module}", $base_dir );
+		$regex_delimiter = '/';
+		$os_separator_escaped = preg_quote( $os_separator, $regex_delimiter );
 
+		$base_dir = preg_replace(
+			"{$regex_delimiter}includes{$os_separator_escaped}admin{$os_separator_escaped}views{$os_separator_escaped}{$regex_delimiter}",
+			"includes{$os_separator}{$module}",
+			$base_dir
+		);
 		$valid_dirs = array(
-			$base_dir . '/views/',
-			$base_dir . '/admin/views/',
+			$base_dir . "{$os_separator}views{$os_separator}",
+			$base_dir . "{$os_separator}admin{$os_separator}views{$os_separator}",
 		);
 
 		foreach ( $valid_dirs as $dir ) {
