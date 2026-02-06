@@ -26,6 +26,12 @@ class Installments_Checkout {
 	protected $gateway;
 
 	/**
+	 * The installment default settings object
+	 *
+	 * @var Default_Installment_Settings $default_settings
+	 */
+	private $default_settings;
+	/**
 	 * Init the default field sections
 	 *
 	 * @param Gateway $gateway The gateway that call the logger.
@@ -80,8 +86,7 @@ class Installments_Checkout {
 	 * @return float
 	 */
 	private function get_min_installment_value() : float {
-		$api_limit                     = new Api_Limit();
-		$default_settings              = new Default_Installment_Settings( $this->gateway, $api_limit );
+		$default_settings              = $this->get_installment_default_settings();
 		$default_min_installment_value = $default_settings->get_min_installment_value();
 
 		$min_installment_value = $this->gateway->settings['min_installment_value'];
@@ -164,18 +169,18 @@ class Installments_Checkout {
 	 * Get the installment list with the number of installments and the value
 	 * for each ones
 	 *
-	 * @return array The list with the intallment count (key) and the
+	 * @return array The list with the installment count (key) and the
 	 *               value of each installment (value).
 	 */
 	private function get_installment_list() {
-		// Disables installments if order/cart contains subscription.
-		if ( $this->gateway->order_has_subscription() ) {
+		$min_installments = $this->get_min_installments();
+		$max_installments = absint( $this->gateway->settings['max_installments'] );
+
+		if ( $min_installments >= $max_installments || $this->gateway->order_has_subscription() ) {
 			return array();
 		}
 
-		$total            = $this->gateway->get_order_total();
-		$max_installments = absint( $this->gateway->settings['max_installments'] );
-
+		$total                 = $this->gateway->get_order_total();
 		$min_installment_value = $this->get_min_installment_value();
 		$installments_qty      = ( new Installments_Calculator_Helper() )->calculate_max_installment_qty( $total, $max_installments, $min_installment_value );
 
@@ -185,5 +190,28 @@ class Installments_Checkout {
 		}
 
 		return $installments_list;
+	}
+
+	/**
+	 * Retrieves the minimum number of installments from the installment settings.
+	 *
+	 * @return int
+	 */
+	public function get_min_installments() {
+		return $this->get_installment_default_settings()->get_min_installments();
+	}
+
+	/**
+	 * Retrieves the default installment settings configuration.
+	 *
+	 * @return Default_Installment_Settings
+	 */
+	private function get_installment_default_settings() {
+		if ( ! isset( $this->default_settings ) ) {
+			$api_limit              = new Api_Limit();
+			$this->default_settings = new Default_Installment_Settings( $this->gateway, $api_limit );
+		}
+
+		return $this->default_settings;
 	}
 }

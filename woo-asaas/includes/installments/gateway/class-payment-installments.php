@@ -72,21 +72,24 @@ class Payment_Installments {
 		$posted_data    = $gateway->get_posted_data();
 		$installments   = absint( $posted_data[ "asaas_{$gateway_prefix}_installments" ] );
 
-		if ( 0 === $installments ) {
-			return $payment_data;
-		}
+		$installments_checkout = new Installments_Checkout( $gateway );
 
-		$have_interest_on_installments = ( new Installments_Checkout( $gateway ) )->have_interest_on_installments( $installments );
+		$have_interest_on_installments = $installments_checkout->have_interest_on_installments( $installments );
 		if ( true === $have_interest_on_installments ) {
 			$this->add_interest_on_order( $installments, $wc_order, $gateway );
 		}
 
-		unset( $payment_data['value'] );
+		$payment_data['value'] = $wc_order->get_total();
 
-		$total = $wc_order->get_total();
+		$min_installments = $installments_checkout->get_min_installments();
+		if ( $min_installments >= $installments ) {
+			return $payment_data;
+		}
 
-		$payment_data['totalValue']       = $total;
+		$payment_data['totalValue']       = $payment_data['value'];
 		$payment_data['installmentCount'] = $installments;
+
+		unset( $payment_data['value'] );
 
 		return $payment_data;
 	}

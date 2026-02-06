@@ -5,7 +5,7 @@ Tags: asaas, payment, payment gateway, woocommerce, credit card, bank ticket
 Requires at least: 4.4
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 2.7.1
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,19 @@ This gateway requires WooCommerce 2.6 and above.
 
 == Changelog ==
 
+= 2.7.3 =
+
+* Dev: Added the filter `asaas_webhook_on_payment_{status}_subscription_new_status` to allow changing the subscription status when a payment is overdue. The allowed `{status}` values are: `deleted`, `overdue`, `refunded`, and `restored`.
+* Fix: Adjusted installment behavior when the installment number is set to 1.
+* Fix: Corrected the use of the `authToken` parameter in Asaas communication.
+
+= 2.7.2 =
+
+* Tweak: Enhanced API key validation messages for better clarity and troubleshooting.
+* Dev: Updated publish.md to include PR in the release description.
+* Fix: Adjusted the guest checkout with an invalid credit card test.
+* Fix - Adjusted instantiation of the class responsible for processing receivables anticipation actions.
+
 = 2.7.1 =
 
 * Tweak - Set debug enabled by default
@@ -70,7 +83,7 @@ This gateway requires WooCommerce 2.6 and above.
 
 = 2.6.4 =
 
-* Dev - Add filter `asaas_webhook_payment_overdue_subscription_status` to allow change the subscription status when a payment is overdue
+* Dev - Add filter `asaas_webhook_on_payment_overdue_subscription_new_status` to allow change the subscription status when a payment is overdue
 * Fix - Minimum order total conditional to show the payment method on the checkout page
 
 = 2.6.3 =

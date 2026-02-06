@@ -52,6 +52,15 @@ class Default_Installment_Settings {
 	}
 
 	/**
+	 * The minimum installments allowed in a order
+	 *
+	 * @return int The min installments
+	 */
+	public function get_min_installments() {
+		return apply_filters( "woocommerce_asaas_{$this->gateway_prefix}_min_installments", 1 );
+	}
+
+	/**
 	 * The minimum value for each installment
 	 *
 	 * @return number The installment value

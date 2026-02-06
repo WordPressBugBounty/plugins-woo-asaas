@@ -8,34 +8,35 @@
 namespace WC_Asaas;
 
 use WC_Asaas\Admin\Plugin_Dependency;
-use WC_Asaas\Split\Split_Manager;
-use WC_Asaas\Webhook\Endpoint;
-use WC_Asaas\Gateway\Gateway;
-use WC_Asaas\Checkout\Form_Field\Card_Expiration;
-use WC_Asaas\Checkout\Form_Field\Label;
+use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Fields;
+use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Status;
+use WC_Asaas\Anticipation\Anticipation;
+use WC_Asaas\Billing_Type\Billing_Type_Exception;
+use WC_Asaas\Cart\Cart;
+use WC_Asaas\Checkout\Checkout;
 use WC_Asaas\Checkout\Form_Field\Card;
-use WC_Asaas\Checkout\Form_Field\One_Click_Options;
+use WC_Asaas\Checkout\Form_Field\Card_Expiration;
 use WC_Asaas\Checkout\Form_Field\Card_Number;
 use WC_Asaas\Checkout\Form_Field\Card_Security_Code;
-use WC_Asaas\Billing_Type\Billing_Type_Exception;
+use WC_Asaas\Checkout\Form_Field\Label;
+use WC_Asaas\Checkout\Form_Field\One_Click_Options;
+use WC_Asaas\Connectivity\Connectivity;
+use WC_Asaas\Coupon\Coupon;
 use WC_Asaas\Cron\Expired_Pix_Cron;
 use WC_Asaas\Cron\Expired_Ticket_Cron;
+use WC_Asaas\Gateway\Gateway;
 use WC_Asaas\Installments\Admin\Settings\Installments_Fields;
 use WC_Asaas\Installments\Gateway\Checkout_Installments;
 use WC_Asaas\Installments\Gateway\Payment_Installments;
-use WC_Asaas\Webhook\Admin\Settings\Webhook_Settings_Fields;
-use WC_Asaas\Webhook\Admin\Settings\Webhook_Settings_Status;
-use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Fields;
-use WC_Asaas\Anticipation\Admin\Settings\Anticipation_Settings_Status;
+use WC_Asaas\My_Account\WooCommerce_My_Account;
 use WC_Asaas\Product\Admin\Settings\Product_Settings;
-use WC_Asaas\Cart\Cart;
-use WC_Asaas\Coupon\Coupon;
-use WC_Asaas\Subscription\Subscription;
+use WC_Asaas\Split\Split_Manager;
 use WC_Asaas\Subscription\Admin\Settings\WooCommerce_Subscriptions_Settings;
 use WC_Asaas\Subscription\Admin\Subscription_Admin;
-use WC_Asaas\My_Account\WooCommerce_My_Account;
-use WC_Asaas\Checkout\Checkout;
-use WC_Asaas\Webhook\Webhook_Ajax;
+use WC_Asaas\Subscription\Subscription;
+use WC_Asaas\Webhook\Admin\Settings\Webhook_Settings_Fields;
+use WC_Asaas\Webhook\Admin\Settings\Webhook_Settings_Status;
+use WC_Asaas\Webhook\Endpoint;
 
 /**
  * Asaas Gateway for WooCommerce main class
@@ -47,7 +48,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.7.1';
+	public $version = '2.7.3';
 
 	/**
 	 * Instance of this class
@@ -133,16 +134,12 @@ class WC_Asaas {
 		add_action( 'admin_notices', array( $this, 'check_checkout_settings' ) );
 		add_action( 'admin_notices', array( $this, 'notices' ) );
 
-		add_action( 'admin_init', array( $this, 'register_webhook_ajax_actions' ) );
+		add_action( 'admin_init', array( $this, 'register_admin_ajax_actions_handlers' ) );
 	}
 
-	/**
-	 * Register webhook ajax actions
-	 *
-	 * @see \WC_Asaas\Webhook\Webhook_Ajax
-	 */
-	public function register_webhook_ajax_actions() {
-		( new Webhook_Ajax() );
+	public function register_admin_ajax_actions_handlers() {
+		( new Anticipation() );
+		( new Connectivity() );
 	}
 
 	/**

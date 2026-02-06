@@ -8,7 +8,6 @@
 namespace WC_Asaas\Gateway;
 
 use WC_Asaas\Admin\Settings\Credit_Card as Credit_Card_Settings;
-use WC_Asaas\Anticipation\Anticipation_Ajax;
 use WC_Asaas\Anticipation\Checkout\Anticipation_Interest_Handler;
 use WC_Asaas\Anticipation\Meta\Anticipation_Meta;
 use WC_Asaas\Api\Response\Error_Response;
@@ -45,20 +44,9 @@ class Credit_Card extends Gateway {
 
 		parent::__construct();
 
-		add_action( 'admin_init', array( $this, 'register_anticipation_ajax_actions' ) );
-
 		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'append_html_to_thankyou_page' ) );
 		add_action( 'woocommerce_receipt_' . $this->id, array( $this, 'append_html_to_thankyou_page' ) );
 		add_action( 'woocommerce_view_order', array( $this, 'append_html_to_thankyou_page' ) );
-	}
-
-	/**
-	 * Register anticipation ajax actions
-	 *
-	 * @see \WC_Asaas\Anticipation\Anticipation_Ajax
-	 */
-	public function register_anticipation_ajax_actions() {
-		( new Anticipation_Ajax( $this ) );
 	}
 
 	/**

@@ -72,7 +72,7 @@ class Installments_Fields {
 
 		$max_installments_message = sprintf(
 			/* translators: %d: maximum installments allowed  */
-			__( 'Define the installment limit allowed. The max value is <code>%d</code>. Use <code>0</code> to disable this option.', 'woo-asaas' ),
+			__( 'Define the installment limit allowed. The max value is <code>%d</code>. Use <code>1</code> to disable this option.', 'woo-asaas' ),
 			$default_settings->get_max_installments()
 		);
 

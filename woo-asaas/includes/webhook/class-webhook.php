@@ -302,10 +302,12 @@ class Webhook {
 	 * @throws Event_Exception If new subscription status is not allowed.
 	 */
 	private function on_payment_deleted() {
+		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_deleted_subscription_new_status', 'on-hold', $this->order, $this->event );
+
 		if ( isset( $this->data->payment->subscription ) ) {
-			Subscription::get_instance()->update_status( $this->subscription, 'on-hold', $this->event );
+			Subscription::get_instance()->update_status( $this->subscription, $new_subscription_status, $this->event );
 		} else {
-			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, 'on-hold', $this->event );
+			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, $new_subscription_status, $this->event );
 		}
 
 		try {
@@ -323,6 +325,7 @@ class Webhook {
 	 */
 	private function on_payment_overdue() {
 		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_overdue_subscription_new_status', 'on-hold', $this->order, $this->event );
+
 		if ( isset( $this->data->payment->subscription ) ) {
 			Subscription::get_instance()->update_status( $this->subscription, $new_subscription_status, $this->event );
 		} else {
@@ -424,6 +427,8 @@ class Webhook {
 	 * @throws Event_Exception If new subscription status is not allowed.
 	 */
 	private function on_payment_refunded() {
+		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_refunded_subscription_new_status', 'on-hold', $this->order, $this->event );
+
 		if ( isset( $this->data->payment->subscription ) ) {
 			// Treats subscription payment refunded event.
 			$api      = new Api( $this->gateway );
@@ -435,11 +440,11 @@ class Webhook {
 
 			if ( $this->data->payment->id === $response->get_json()->data[0]->id ) {
 				// Changes the subscription status if the payment is the most recent.
-				Subscription::get_instance()->update_status( $this->subscription, 'on-hold', $this->event );
+				Subscription::get_instance()->update_status( $this->subscription, $new_subscription_status, $this->event );
 			}
 		} else {
 			// Single payment.
-			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, 'on-hold', $this->event );
+			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, $new_subscription_status, $this->event );
 		}
 
 		try {
@@ -456,10 +461,12 @@ class Webhook {
 	 * @throws Event_Exception If new subscription status is not allowed.
 	 */
 	private function on_payment_restored() {
+		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_restored_subscription_new_status', 'on-hold', $this->order, $this->event );
+
 		if ( isset( $this->data->payment->subscription ) ) {
-			Subscription::get_instance()->update_status( $this->subscription, 'on-hold', $this->event );
+			Subscription::get_instance()->update_status( $this->subscription, $new_subscription_status, $this->event );
 		} else {
-			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, 'on-hold', $this->event );
+			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, $new_subscription_status, $this->event );
 		}
 
 		try {

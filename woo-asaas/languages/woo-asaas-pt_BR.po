@@ -40,10 +40,6 @@ msgstr "Pague sua compra com cartão de crédito."
 msgid "Order minimum total"
 msgstr "Total mínimo do pedido"
 
-#: includes/admin/settings/class-credit-card.php:33
-msgid "The order minimum total to allow use this payment method. Use <code>0</code> to disable this option."
-msgstr "O total mínimo do pedido para permitir este método de pagamento. Use <code>0</code> para desabilitar esta opção."
-
 #: includes/admin/settings/class-credit-card.php:39
 msgid "One-Click Buy"
 msgstr "Compra com um clique"
@@ -232,13 +228,13 @@ msgstr "Boleto Bancário"
 
 #: includes/admin/views/installments-interest-list.php:23
 #: includes/installments/admin/settings/class-installments-fields.php:89
-#: includes/installments/checkout/class-installments-checkout.php:46
+#: includes/installments/checkout/class-installments-checkout.php:52
 msgid "Installments"
 msgstr "Parcelas"
 
 #: includes/admin/views/installments-interest-list.php:24
 #: includes/installments/admin/settings/class-installments-fields.php:98
-#: includes/webhook/class-webhook.php:357
+#: includes/webhook/class-webhook.php:360
 msgid "Interest"
 msgstr "Juros"
 
@@ -469,7 +465,7 @@ msgid "New Credit Card"
 msgstr "Novo Cartão de Crédito"
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:292
+#: includes/class-wc-asaas.php:289
 #: includes/webhook/class-endpoint.php:274
 #, php-format
 msgid "Billing type %s wasn't registered."
@@ -479,12 +475,12 @@ msgstr "Forma de pagamento %s não foi registrada."
 msgid "Asaas gateway currently supports the following coupon types: "
 msgstr "Atualmente, o gateway Asaas suporta os seguintes tipos de cupom de desconto: "
 
-#: includes/class-wc-asaas.php:354
+#: includes/class-wc-asaas.php:351
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr "Asaas requisita o CPF ou CNPJ no checkout para a integração funcionar."
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:360
+#: includes/class-wc-asaas.php:357
 #, php-format
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
@@ -493,44 +489,44 @@ msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
 msgid "* supports only unlimited payments."
 msgstr "* suporta somente pagamentos ilimitados."
 
-#: includes/gateway/class-credit-card.php:36
+#: includes/gateway/class-credit-card.php:35
 msgid "Asaas Credit Card"
 msgstr "Asaas Cartão de Crédito"
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-credit-card.php:38
+#: includes/gateway/class-credit-card.php:37
 #, php-format
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products in installments using credit card."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos em parcelas usando cartão de crédito."
 
-#: includes/gateway/class-credit-card.php:114
+#: includes/gateway/class-credit-card.php:102
 msgid "Are you sure that this card exists?"
 msgstr "Você tem certeza que esse cartão existe?"
 
 #. translators: %d: the order id
-#: includes/gateway/class-credit-card.php:133
+#: includes/gateway/class-credit-card.php:121
 #: includes/gateway/class-pix.php:229
 #: includes/gateway/class-ticket.php:142
 #, php-format
 msgid "Order #%d"
 msgstr "Pedido #%d"
 
-#: includes/gateway/class-credit-card.php:166
+#: includes/gateway/class-credit-card.php:154
 msgid "The related payment isn't pending on the gateway."
 msgstr "O pagamento relacionado não está pendente no gateway."
 
-#: includes/gateway/class-credit-card.php:213
-#: includes/gateway/class-credit-card.php:249
+#: includes/gateway/class-credit-card.php:201
+#: includes/gateway/class-credit-card.php:237
 msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr "Ocorreu uma falha no pagamento e por isso a transação foi revertida."
 
-#: includes/gateway/class-credit-card.php:289
+#: includes/gateway/class-credit-card.php:277
 #: includes/gateway/class-pix.php:308
 #: includes/gateway/class-ticket.php:215
 msgid "There was a failure on subscription generation."
 msgstr "Ocorreu uma falha na criação da assinatura."
 
-#: includes/gateway/class-credit-card.php:342
+#: includes/gateway/class-credit-card.php:330
 msgid "Select a credit card"
 msgstr "Selecione um cartão de crédito"
 
@@ -694,8 +690,8 @@ msgstr "%s é um campo obrigatório."
 #. translators: %d: maximum installments allowed
 #: includes/installments/admin/settings/class-installments-fields.php:75
 #, php-format
-msgid "Define the installment limit allowed. The max value is <code>%d</code>. Use <code>0</code> to disable this option."
-msgstr "Define o limite de parcelas permitido. O valor máximo é <code>%d</code>. Use <code>0</code> para desabilitar esta opção."
+msgid "Define the installment limit allowed. The max value is <code>%d</code>. Use <code>1</code> to disable this option."
+msgstr "Define o limite de parcelas permitido. O valor máximo é <code>%d</code>. Use <code>1</code> para desabilitar esta opção."
 
 #: includes/installments/admin/settings/class-installments-fields.php:80
 msgid "When saving the changes with the installments enabled, an interest table will be released."
@@ -712,7 +708,7 @@ msgid "The minimum value for each installment. The minimum value accepted by Asa
 msgstr "O valor mínimo de cada parcela. Use <code>0</code> para desabilitar esta opção. O valor mínimo aceitado pelo Asaas é <code>%s</code>."
 
 #. translators: %d: installment number, %s: installment value, %s: interest value
-#: includes/installments/checkout/class-installments-checkout.php:130
+#: includes/installments/checkout/class-installments-checkout.php:135
 #, php-format
 msgid "%1$dx %2$s (%3$s%% interest)"
 msgstr "%1$dx %2$s (%3$s%% de juros)"
@@ -796,7 +792,7 @@ msgid "If you have <a href=\"%1$s\">identified in the logs</a> that your webhook
 msgstr "Caso você tenha <a href=\"%1$s\">identificado nos logs</a> que sua fila de webhooks está interrompida. Clique no botão abaixo para reabilitar"
 
 #: includes/webhook/admin/settings/class-webhook-settings-fields.php:90
-#: includes/webhook/admin/views/webhook-status-section.php:43
+#: includes/webhook/admin/views/webhook-status-section.php:40
 msgid "Re-enable webhook queue"
 msgstr "Reabilitar fila de webhooks"
 
@@ -842,37 +838,24 @@ msgstr "O campo \"E-mail para alertas\" é obrigatório."
 msgid "Required field"
 msgstr "Campo obrigatório"
 
-#. translators: Add a tooltip help.
-#: includes/webhook/admin/views/webhook-status-section.php:13
-msgid "If the API key is valid, the connection to Asaas will be established. Otherwise, it will be necessary to update it."
-msgstr "Se a chave de API for válida, a conexão com Asaas será estabelecida. Caso contrário, será necessário atualizá-la."
-
-#: includes/webhook/admin/views/webhook-status-section.php:20
+#: includes/webhook/admin/views/webhook-status-section.php:18
 msgid "Asaas Payment Method"
 msgstr "Meio de Pagamentos Asaas"
 
-#: includes/webhook/admin/views/webhook-status-section.php:25
+#: includes/webhook/admin/views/webhook-status-section.php:23
 msgid "Connection to Asaas"
 msgstr "Conexão ao Asaas"
 
 #: includes/webhook/admin/views/webhook-status-section.php:29
-msgid "Your API key is invalid or missing"
-msgstr "Sua chave de API é inválida ou inexistente"
-
-#: includes/webhook/admin/views/webhook-status-section.php:29
-msgid "Click here to provide your new key"
-msgstr "Clique aqui para informar sua nova chave"
-
-#: includes/webhook/admin/views/webhook-status-section.php:32
-#: includes/webhook/admin/views/webhook-status-section.php:33
+#: includes/webhook/admin/views/webhook-status-section.php:30
 msgid "Webhook Status (Payment Settlements)"
 msgstr "Status dos webhooks (Baixa dos pagamentos)"
 
-#: includes/webhook/admin/views/webhook-status-section.php:33
+#: includes/webhook/admin/views/webhook-status-section.php:30
 msgid "Webhook queue status"
 msgstr "Status da fila de webhooks"
 
-#: includes/webhook/admin/views/webhook-status-section.php:40
+#: includes/webhook/admin/views/webhook-status-section.php:37
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr "Caso a fila de webhooks esteja interrompida, clique no botão ao lado para reativá-la"
 
@@ -890,7 +873,7 @@ msgstr "Webhook foi ignorado por um filtro externo nesta loja"
 msgid "Event %s wasn't registered."
 msgstr "O evento %s não foi registrado."
 
-#: includes/webhook/class-webhook-setting-data.php:102
+#: includes/connectivity/data/class-webhook-factory.php:25
 msgid "Webhooks from WooCommerce"
 msgstr "Webhooks do WooCommerce"
 
@@ -934,31 +917,31 @@ msgstr "Pagamento criado."
 msgid "Payment link: %1$s"
 msgstr "Link do pagamento: %1$s"
 
-#: includes/webhook/class-webhook.php:314
+#: includes/webhook/class-webhook.php:316
 msgid "PAYMENT_DELETED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to cancelled."
 msgstr "PAYMENT_DELETED: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para cancelada."
 
-#: includes/webhook/class-webhook.php:316
+#: includes/webhook/class-webhook.php:318
 msgid "Payment deleted."
 msgstr "Pagamento excluído."
 
-#: includes/webhook/class-webhook.php:335
+#: includes/webhook/class-webhook.php:338
 msgid "PAYMENT_OVERDUE: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to failed."
 msgstr "PAYMENT_OVERDUE: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para falhou."
 
-#: includes/webhook/class-webhook.php:337
+#: includes/webhook/class-webhook.php:340
 msgid "Payment overdue."
 msgstr "Pagamento vencido."
 
-#: includes/webhook/class-webhook.php:349
+#: includes/webhook/class-webhook.php:352
 msgid "Fine tax"
 msgstr "Multa"
 
-#: includes/webhook/class-webhook.php:448
+#: includes/webhook/class-webhook.php:453
 msgid "PAYMENT_REFUNDED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to refunded."
 msgstr "PAYMENT_REFUNDED: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para reembolsada."
 
-#: includes/webhook/class-webhook.php:468
+#: includes/webhook/class-webhook.php:475
 msgid "PAYMENT_RESTORED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to pending."
 msgstr "PAYMENT_RESTORED: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para pendente."
 
@@ -1062,15 +1045,15 @@ msgstr "Parcela %1$s de %2$s."
 msgid "Access ticket"
 msgstr "Acessar boleto"
 
-#: includes/anticipation/class-anticipation-ajax.php:69
-#: includes/anticipation/class-anticipation-ajax.php:102
-#: includes/webhook/class-webhook-ajax.php:104
+#: includes/anticipation/hook/class-anticipation-ajax.php:68
+#: includes/anticipation/hook/class-anticipation-ajax.php:101
+#: includes/connectivity/exception/class-invalid-nonce-exception.php:10
 msgid "Nonce verification failed"
 msgstr "Verificação de nonce falhou"
 
-#: includes/anticipation/class-anticipation-ajax.php:73
-#: includes/anticipation/class-anticipation-ajax.php:106
-#: includes/webhook/class-webhook-ajax.php:108
+#: includes/anticipation/hook/class-anticipation-ajax.php:72
+#: includes/anticipation/hook/class-anticipation-ajax.php:105
+#: includes/connectivity/exception/class-permission-denied-exception.php:10
 msgid "Permission denied"
 msgstr "Permissão negada"
 
@@ -1099,14 +1082,6 @@ msgstr "Solicitar automaticamente a antecipação de cobranças no Asaas <a href
 #, php-format
 msgid "Anticipation successfully created. Net value of %1$s. Track the status of the advance through Asaas or <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clicking here.</a>"
 msgstr "Antecipação criada com sucesso. Valor líquido de %1$s. Acompanhe o status da antecipação através do Asaas ou <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">clicando aqui.</a>"
-
-#: includes/webhook/class-webhook-ajax.php:167
-msgid "The webhook URL of this website was not found on Asaas webhooks list."
-msgstr "O URL do webhook deste site não foi encontrado na lista de webhooks do Asaas."
-
-#: includes/webhook/class-webhook-ajax.php:286
-msgid "An unexpected error occurred while processing the webhook settings update."
-msgstr "Ocorreu um erro inesperado durante o processamento da atualização das configurações do webhook."
 
 #: includes/split/data/class-split-types.php:16
 msgid "Percentage"
@@ -1297,3 +1272,31 @@ msgstr "Carteira salva com sucesso"
 #, php-format
 msgid "Split configured at the value of %1$s%% for wallet %2$s Wallet ID: %3$s"
 msgstr "Split configurado no valor de %1$s%% para a carteira %2$s ID da carteira: %3$s"
+
+#: includes/connectivity/constant/class-api-connection-message.php:18
+msgid "Invalid key or incorrect environment (Sandbox vs Production). Check your API Key."
+msgstr "Chave inválida ou ambiente incorreto (Sandbox vs Produção). Confira sua API Key."
+
+#: includes/connectivity/exception/class-api-error-response-exception.php:10
+msgid "Error obtaining response from API"
+msgstr "Erro ao obter uma resposta da API"
+
+#: includes/webhook/admin/views/webhook-status-section.php:12
+msgid "We validate your API Key with Asaas. If correct and your server has access permission, the connection becomes active. In case of error, we show the HTTP code and guidance to fix it."
+msgstr "Validamos sua API Key com o Asaas. Se estiver correta e seu servidor tiver permissão de acesso, a conexão fica ativa. Em caso de erro, mostramos o código HTTP e orientações para corrigir."
+
+#: includes/connectivity/constant/class-api-connection-message.php:13
+msgid "Valid API Key."
+msgstr "Chave de API válida."
+
+#: includes/connectivity/constant/class-api-connection-message.php:23
+msgid "Access denied: verify if your server IP is authorized to communicate with Asaas."
+msgstr "Acesso negado: verifique se o IP do seu servidor está autorizado a se comunicar com o Asaas."
+
+#: includes/connectivity/constant/class-api-connection-message.php:28
+msgid "Temporary instability. Please try again in a few minutes."
+msgstr "Instabilidade temporária. Tente novamente em alguns minutos."
+
+#: includes/admin/settings/class-credit-card.php:33
+msgid "The order minimum total to allow use this payment method. Use <code>0</code> to disable this option."
+msgstr "O total mínimo do pedido para permitir o uso deste método de pagamento. Use <code>0</code> para desabilitar esta opção."

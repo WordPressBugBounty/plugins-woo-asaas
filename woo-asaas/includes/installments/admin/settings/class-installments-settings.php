@@ -61,14 +61,12 @@ class Installments_Settings {
 	 * @return int The value sanitized.
 	 */
 	public function validate_max_installments_field( string $value ) : int {
-		$value            = absint( $value );
+		$installments = absint( $value );
+
+		$min_installments = $this->default_settings->get_min_installments();
 		$max_installments = $this->default_settings->get_max_installments();
 
-		if ( $max_installments < $value ) {
-			return $max_installments;
-		}
-
-		return $value;
+		return max( $min_installments, min( $max_installments, $installments ) );
 	}
 
 	/**
@@ -98,7 +96,7 @@ class Installments_Settings {
 	public function generate_interest_installment_html( string $key, array $data ) : string {
 		$max_installments = absint( $this->gateway->settings['max_installments'] );
 
-		if ( 0 === $max_installments ) {
+		if ( $this->default_settings->get_min_installments() >= $max_installments ) {
 			return '';
 		}
 
