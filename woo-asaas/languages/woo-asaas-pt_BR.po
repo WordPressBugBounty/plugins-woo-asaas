@@ -873,7 +873,7 @@ msgstr "Webhook foi ignorado por um filtro externo nesta loja"
 msgid "Event %s wasn't registered."
 msgstr "O evento %s não foi registrado."
 
-#: includes/connectivity/data/class-webhook-factory.php:25
+#: includes/connectivity/data/class-webhook-factory.php:69
 msgid "Webhooks from WooCommerce"
 msgstr "Webhooks do WooCommerce"
 
@@ -1300,3 +1300,8 @@ msgstr "Instabilidade temporária. Tente novamente em alguns minutos."
 #: includes/admin/settings/class-credit-card.php:33
 msgid "The order minimum total to allow use this payment method. Use <code>0</code> to disable this option."
 msgstr "O total mínimo do pedido para permitir o uso deste método de pagamento. Use <code>0</code> para desabilitar esta opção."
+
+#: includes/connectivity/api/resource/class-webhook-resource.php:70
+#: includes/connectivity/api/resource/class-webhook-resource.php:76
+msgid "Webhook not found"
+msgstr "Webhook não encontrado"

@@ -14,10 +14,10 @@ class Webhook_Helper {
 	/**
 	 * Generates a random token of the specified length
 	 *
-	 * @param int $length The length of the token to generate. Default is 20.
+	 * @param int $length The length of the token to generate. Default is 32.
 	 * @return string The generated random token.
 	 */
-	public function generate_random_token( $length = 20 ) {
+	public function generate_random_token( $length = 32 ) {
 		$random_token = wp_generate_password( $length, false );
 
 		return $random_token;

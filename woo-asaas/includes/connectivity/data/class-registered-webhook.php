@@ -1,43 +1,49 @@
 <?php
+/**
+ * Registered Webhook
+ *
+ * @package WooAsaas
+ */
 
 namespace WC_Asaas\Connectivity\Data;
 
-class Registered_Webhook {
+/**
+ * Represents a webhook as registered and returned by the Asaas API.
+ */
+class Registered_Webhook extends Identifiable_Webhook {
 	/**
-	 * Webhook id.
+	 * Webhook penalized request count
 	 *
-	 * @var string
+	 * @var int
 	 */
-	private $id;
-	/**
-	 * Webhook enabled status
-	 *
-	 * @var bool
-	 */
-	private $enabled;
-	/**
-	 * Webhook interrupted status
-	 *
-	 * @var bool
-	 */
-	private $interrupted;
+	private $penalized_requests_count;
 
-	public function __construct( string $id, bool $enabled, bool $interrupted ) {
-		$this->id          = $id;
-		$this->enabled     = $enabled;
-		$this->interrupted = $interrupted;
-
+	/**
+	 * Constructor.
+	 *
+	 * @param string $id The webhook ID.
+	 * @param bool   $enabled Whether the webhook is enabled.
+	 * @param bool   $interrupted Whether the webhook is interrupted.
+	 * @param int    $penalized_requests_count The number of penalized requests.
+	 * @param string $email The webhook email address.
+	 */
+	public function __construct(
+		string $id,
+		bool $enabled,
+		bool $interrupted,
+		int $penalized_requests_count,
+		string $email
+	) {
+		parent::__construct( $id, $enabled, $interrupted, $email );
+		$this->penalized_requests_count = $penalized_requests_count;
 	}
 
-	public function id() {
-		return $this->id;
-	}
-
-	public function is_enabled() {
-		return $this->enabled;
-	}
-
-	public function is_interrupted() {
-		return $this->interrupted;
+	/**
+	 * Get penalized requests count.
+	 *
+	 * @return int
+	 */
+	public function penalized_requests_count() {
+		return $this->penalized_requests_count;
 	}
 }

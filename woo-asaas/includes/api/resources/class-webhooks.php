@@ -25,6 +25,13 @@ class Webhooks extends Resource {
 	const PATH = '/webhooks/';
 
 	/**
+	 * Remove Backoff endpoint.
+	 *
+	 * @var string
+	 */
+	const REMOVE_BACKOFF_ENDPOINT = '/removeBackoff';
+
+	/**
 	 * Create a newly webhook configuration
 	 *
 	 * @param  array $data Request body.
@@ -89,6 +96,18 @@ class Webhooks extends Resource {
 	public function update( $id, $data ) {
 		$client = new Client( $this->gateway );
 		return $client->put( self::PATH . $id, $data, array( $this, 'filter_data_log' ) );
+	}
+
+	/**
+	 * Remove the webhook backoff.
+	 *
+	 * @param string $id webhook configuration id.
+	 *
+	 * @return Response The HTTP response.
+	 */
+	public function remove_backoff( string $id ) {
+		$client = new Client( $this->gateway );
+		return $client->post( self::PATH . $id . self::REMOVE_BACKOFF_ENDPOINT );
 	}
 
 	/**

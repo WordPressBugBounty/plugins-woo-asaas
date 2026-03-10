@@ -23,7 +23,7 @@ class Response_Factory {
 	 * @return Response A response object depending of the HTTP response.
 	 */
 	public static function create( $status, $data, Client $client ) {
-		if ( 200 !== $status ) {
+		if ( $status < 200 || $status >= 300 ) {
 			return new Error_Response( $status, $data, $client );
 		}
 

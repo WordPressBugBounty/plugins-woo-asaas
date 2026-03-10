@@ -63,13 +63,10 @@ jQuery(function ($) {
             data: {action: 'webhook_health_check'},
             success: function (response) {
                 $statusQueueRow.find('.loader').hide();
-                console.log(response);
-                const isEnabled = response.data.enabled;
-                const isInterrupted = response.data.interrupted;
 
-                if (isEnabled && !isInterrupted) {
+                if (response.data === true) {
                     $statusQueueRow.find('.queue-yes').show();
-                    disableQueueButton(false);
+                    disableQueueButton();
 
                     return;
                 }
@@ -94,10 +91,10 @@ jQuery(function ($) {
                     return;
                 }
 
-                disableQueueButton(false);
+                disableQueueButton();
                 enableSaveButton();
             } catch (error) {
-                disableQueueButton(false);
+                disableQueueButton();
                 enableSaveButton();
             }
         };
@@ -184,18 +181,15 @@ jQuery(function ($) {
                     disableSaveButton();
                 },
                 success: function (response) {
-                    const isEnabled = response.data.enabled;
-                    const isInterrupted = response.data.interrupted;
-
-                    if (!isEnabled || isInterrupted) {
+                    if (response.data === false) {
                         enableQueueButton();
                     }
 
-                    updateExistingWebhookEmail(response.data.email);
+                    updateExistingWebhookEmail();
                     resolve(true);
                 },
                 error: function () {
-                    disableQueueButton(false);
+                    disableQueueButton();
 
                     resolve(false);
                 }
@@ -208,7 +202,7 @@ jQuery(function ($) {
     $reenableButton.on('click', function (e) {
         e.preventDefault();
 
-        disableQueueButton(false);
+        disableQueueButton();
         reenableWebhookQueue();
     });
 
@@ -216,15 +210,12 @@ jQuery(function ($) {
         $.ajax({
             url: ajaxUrl,
             type: 'POST',
-            data: {action: 'reenable_webhook_queue'},
+            data: {action: 'reenable_webhook'},
             beforeSend: function () {
                 $reenableButton.html('<span class="preloader"></span> Aguarde...');
             },
-            success: function (response) {
-                const {enabled, interrupted} = response.data;
-                const settingsState = !enabled || interrupted;
-
-                disableQueueButton(settingsState);
+            success: function () {
+                disableQueueButton();
 
                 $statusQueueRow.find('.error').removeClass('error').addClass('yes');
                 $statusQueueRow
@@ -243,17 +234,22 @@ jQuery(function ($) {
                 }, 5000);
             },
             error: function () {
+                enableQueueButton();
+
+                let messageContainer = $('<span class="reenable-message"></span>');
+                messageContainer.insertAfter($reenableButton);
+                messageContainer.html('✖ Erro ao reabilitar a fila');
+
+                $reenableButton.text('Reabilitar fila de webhooks');
+
+                setTimeout(function () {
+                    messageContainer.remove();
+                }, 5000);
             },
         });
     }
 
-    function updateExistingWebhookEmail(email) {
-        const emailField = $emailField.val();
-
-        if (emailField === email) {
-            return;
-        }
-
+    function updateExistingWebhookEmail() {
         $.ajax({
             url: ajaxUrl,
             type: 'POST',
