@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Asaas Gateway for WooCommerce 2.7.3\n"
+"Project-Id-Version: Asaas Gateway for WooCommerce 2.7.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-10T00:27:10+00:00\n"
+"POT-Creation-Date: 2026-04-07T01:15:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: woo-asaas\n"
@@ -208,7 +208,7 @@ msgstr ""
 msgid "This option is shared with another Asaas gateway."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:372
+#: includes/admin/settings/class-settings.php:364
 msgid "Status &gt; Logs"
 msgstr ""
 
@@ -563,6 +563,28 @@ msgstr ""
 msgid "* supports only unlimited payments."
 msgstr ""
 
+#. translators: %1$s: Minimum PHP version, %2$s: Current PHP version
+#: includes/environment/class-environment-requirements.php:103
+#, php-format
+msgid "Asaas Gateway requires PHP %1$s or higher. You are running PHP %2$s."
+msgstr ""
+
+#. translators: %1$s: Minimum WordPress version, %2$s: Current WordPress version
+#: includes/environment/class-environment-requirements.php:112
+#, php-format
+msgid "Asaas Gateway requires WordPress %1$s or higher. You are running WordPress %2$s."
+msgstr ""
+
+#. translators: %1$s: Minimum WooCommerce version, %2$s: Current WooCommerce version
+#: includes/environment/class-environment-requirements.php:121
+#, php-format
+msgid "Asaas Gateway requires WooCommerce %1$s or higher. You are running WooCommerce %2$s."
+msgstr ""
+
+#: includes/environment/class-environment-requirements.php:125
+msgid "not installed"
+msgstr ""
+
 #: includes/gateway/class-credit-card.php:35
 msgid "Asaas Credit Card"
 msgstr ""
@@ -573,69 +595,69 @@ msgstr ""
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products in installments using credit card."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:102
+#: includes/gateway/class-credit-card.php:101
 msgid "Are you sure that this card exists?"
 msgstr ""
 
 #. translators: %d: the order id
-#: includes/gateway/class-credit-card.php:121
-#: includes/gateway/class-pix.php:229
-#: includes/gateway/class-ticket.php:142
+#: includes/gateway/class-credit-card.php:120
+#: includes/gateway/class-pix.php:228
+#: includes/gateway/class-ticket.php:141
 #, php-format
 msgid "Order #%d"
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:154
+#: includes/gateway/class-credit-card.php:153
 msgid "The related payment isn't pending on the gateway."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:201
-#: includes/gateway/class-credit-card.php:237
+#: includes/gateway/class-credit-card.php:200
+#: includes/gateway/class-credit-card.php:236
 msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:277
-#: includes/gateway/class-pix.php:308
-#: includes/gateway/class-ticket.php:215
+#: includes/gateway/class-credit-card.php:276
+#: includes/gateway/class-pix.php:307
+#: includes/gateway/class-ticket.php:214
 msgid "There was a failure on subscription generation."
 msgstr ""
 
-#: includes/gateway/class-credit-card.php:330
+#: includes/gateway/class-credit-card.php:329
 msgid "Select a credit card"
 msgstr ""
 
-#: includes/gateway/class-gateway.php:593
+#: includes/gateway/class-gateway.php:584
 msgid "Order not found."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:597
+#: includes/gateway/class-gateway.php:588
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:601
+#: includes/gateway/class-gateway.php:592
 msgid "Partial refunds are not possible."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:605
+#: includes/gateway/class-gateway.php:596
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr ""
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:617
+#: includes/gateway/class-gateway.php:608
 #, php-format
 msgid "%s payment refund request has been processed successfully."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:620
+#: includes/gateway/class-gateway.php:611
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:650
+#: includes/gateway/class-gateway.php:641
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr ""
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:807
+#: includes/gateway/class-gateway.php:798
 #, php-format
 msgid "Subscription #%1$d - %2$s"
 msgstr ""
@@ -660,16 +682,16 @@ msgstr ""
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:376
+#: includes/gateway/class-ticket.php:367
 msgid "Ignore remove tickets by empty setting."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:385
+#: includes/gateway/class-ticket.php:376
 msgid "No expired ticket to remove."
 msgstr ""
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:418
+#: includes/gateway/class-ticket.php:409
 #, php-format
 msgid "Total tickets removed: %d"
 msgstr ""

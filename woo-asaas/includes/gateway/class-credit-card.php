@@ -88,9 +88,8 @@ class Credit_Card extends Gateway {
 			$customer_meta = $customer->get_meta();
 		}
 
-		// Legacy code support.
-		$id        = version_compare( WC()->version, '3.0.0', '<' ) ? $wc_order->id : $wc_order->get_id();
-		$remote_ip = version_compare( WC()->version, '3.0.0', '<' ) ? $wc_order->customer_ip_address : $wc_order->get_customer_ip_address();
+		$id        = $wc_order->get_id();
+		$remote_ip = $wc_order->get_customer_ip_address();
 
 		// Verify if has selected credit card existent.
 		if ( $this->is_one_click_buy() && 'credit-card-new' !== $posted_data['asaas_cc_options'] ) {
@@ -424,14 +423,6 @@ class Credit_Card extends Gateway {
 
 		$validation_helper->validate_fields( $this, $this->get_payment_fields(), $data );
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			foreach ( $this->validation_errors->get_error_messages() as $message ) {
-				wc_add_notice( $message, 'error' );
-			}
-
-			remove_action( 'woocommerce_after_checkout_validation', array( $this, 'add_checkout_validation_errors' ), 99 );
-		}
 
 		return parent::validate_fields();
 	}

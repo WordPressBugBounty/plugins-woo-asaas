@@ -16,7 +16,6 @@ use WC_Asaas\Helper\WP_Error_Helper;
 use WC_Asaas\Meta_Data\Customer;
 use WC_Asaas\Api\Response;
 use WC_Asaas\Api\Response\Error_Response;
-use WC_Asaas\Log\Logger_Legacy;
 use WC_Asaas\Meta_Data\Order;
 use WC_Asaas\Helper\Subscriptions_Helper;
 use WC_Asaas\Subscription\Subscription;
@@ -212,12 +211,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 	 * Initialize the logger
 	 */
 	public function init_logger() {
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$this->logger = new Logger_Legacy( $this );
-			return;
-		}
-
 		$this->logger = new Logger( $this );
 	}
 
@@ -523,9 +516,7 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		$key = filter_input( INPUT_GET, 'key', FILTER_SANITIZE_SPECIAL_CHARS ) ?: false;
 
 		if ( false === $key ) {
-			// Legacy code support.
-			$cart = wc()->cart;
-			return version_compare( WC()->version, '3.2.0', '<' ) ? $cart->total : $cart->get_total( false );
+			return wc()->cart->get_total( false );
 		}
 
 		if ( ! isset( $_GET['key'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification

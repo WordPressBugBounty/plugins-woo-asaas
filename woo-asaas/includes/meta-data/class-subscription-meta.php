@@ -79,12 +79,6 @@ class Subscription_Meta {
 	public function set_meta_data( $data ) {
 		$data = wp_json_encode( $data );
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			update_post_meta( $this->wc->id, self::META_KEY, $data );
-			return;
-		}
-
 		$this->wc->update_meta_data( self::META_KEY, $data );
 		$this->wc->save();
 	}
@@ -99,12 +93,7 @@ class Subscription_Meta {
 			return $this->meta_data;
 		}
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$meta = get_post_meta( $this->wc->id, self::META_KEY, true );
-		} else {
-			$meta = $this->wc->get_meta( self::META_KEY );
-		}
+		$meta = $this->wc->get_meta( self::META_KEY );
 
 		if ( ! $meta ) {
 			return false;
@@ -133,12 +122,6 @@ class Subscription_Meta {
 	 * @return void
 	 */
 	public function set_subscription_id( $subscription_id ) {
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			update_post_meta( $this->wc->id, self::META_KEY_SUBSCRIPTION_ID, $subscription_id );
-			return;
-		}
-
 		$this->wc->update_meta_data( self::META_KEY_SUBSCRIPTION_ID, $subscription_id );
 		$this->wc->save();
 	}
@@ -153,12 +136,7 @@ class Subscription_Meta {
 			return $this->subscription_id;
 		}
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$meta = get_post_meta( $this->wc->id, self::META_KEY_SUBSCRIPTION_ID, true );
-		} else {
-			$meta = $this->wc->get_meta( self::META_KEY_SUBSCRIPTION_ID );
-		}
+		$meta = $this->wc->get_meta( self::META_KEY_SUBSCRIPTION_ID );
 
 		if ( ! $meta ) {
 			return false;
@@ -177,12 +155,6 @@ class Subscription_Meta {
 	public function set_first_payment_strategy( $first_payment_strategy ) {
 		$data = wp_json_encode( $first_payment_strategy );
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			update_post_meta( $this->wc->id, self::META_KEY_FIRST_PAYMENT_STRATEGY, $data );
-			return;
-		}
-
 		$this->wc->update_meta_data( self::META_KEY_FIRST_PAYMENT_STRATEGY, $data );
 		$this->wc->save();
 	}
@@ -197,12 +169,7 @@ class Subscription_Meta {
 			return $this->first_payment_strategy;
 		}
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$meta = get_post_meta( $this->wc->id, self::META_KEY_FIRST_PAYMENT_STRATEGY, true );
-		} else {
-			$meta = $this->wc->get_meta( self::META_KEY_FIRST_PAYMENT_STRATEGY );
-		}
+		$meta = $this->wc->get_meta( self::META_KEY_FIRST_PAYMENT_STRATEGY );
 
 		if ( ! $meta ) {
 			return false;

@@ -197,7 +197,7 @@ msgstr "Logar comunicação da Asaas API e webhook, dentro de %s."
 msgid "This option is shared with another Asaas gateway."
 msgstr "Essa opção é compartilhada com outros métodos de pagamento do Asaas."
 
-#: includes/admin/settings/class-settings.php:372
+#: includes/admin/settings/class-settings.php:364
 msgid "Status &gt; Logs"
 msgstr "Status &gt; Logs"
 
@@ -499,69 +499,69 @@ msgstr "Asaas Cartão de Crédito"
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products in installments using credit card."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos em parcelas usando cartão de crédito."
 
-#: includes/gateway/class-credit-card.php:102
+#: includes/gateway/class-credit-card.php:101
 msgid "Are you sure that this card exists?"
 msgstr "Você tem certeza que esse cartão existe?"
 
 #. translators: %d: the order id
-#: includes/gateway/class-credit-card.php:121
-#: includes/gateway/class-pix.php:229
-#: includes/gateway/class-ticket.php:142
+#: includes/gateway/class-credit-card.php:120
+#: includes/gateway/class-pix.php:228
+#: includes/gateway/class-ticket.php:141
 #, php-format
 msgid "Order #%d"
 msgstr "Pedido #%d"
 
-#: includes/gateway/class-credit-card.php:154
+#: includes/gateway/class-credit-card.php:153
 msgid "The related payment isn't pending on the gateway."
 msgstr "O pagamento relacionado não está pendente no gateway."
 
-#: includes/gateway/class-credit-card.php:201
-#: includes/gateway/class-credit-card.php:237
+#: includes/gateway/class-credit-card.php:200
+#: includes/gateway/class-credit-card.php:236
 msgid "There was a payment failure and therefore the transaction was reversed."
 msgstr "Ocorreu uma falha no pagamento e por isso a transação foi revertida."
 
-#: includes/gateway/class-credit-card.php:277
-#: includes/gateway/class-pix.php:308
-#: includes/gateway/class-ticket.php:215
+#: includes/gateway/class-credit-card.php:276
+#: includes/gateway/class-pix.php:307
+#: includes/gateway/class-ticket.php:214
 msgid "There was a failure on subscription generation."
 msgstr "Ocorreu uma falha na criação da assinatura."
 
-#: includes/gateway/class-credit-card.php:330
+#: includes/gateway/class-credit-card.php:329
 msgid "Select a credit card"
 msgstr "Selecione um cartão de crédito"
 
-#: includes/gateway/class-gateway.php:593
+#: includes/gateway/class-gateway.php:584
 msgid "Order not found."
 msgstr "Pedido não encontrado."
 
-#: includes/gateway/class-gateway.php:597
+#: includes/gateway/class-gateway.php:588
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr "Este pedido não pode ser reembolsado por este fluxo. Por favor, faça o reembolso através do gateway de pagamento ou externamente."
 
-#: includes/gateway/class-gateway.php:601
+#: includes/gateway/class-gateway.php:592
 msgid "Partial refunds are not possible."
 msgstr "Não é possível fazer reembolsos parciais."
 
-#: includes/gateway/class-gateway.php:605
+#: includes/gateway/class-gateway.php:596
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr "Devido ao método de pagamento, para devolver fundos ao cliente, você precisará emitir um reembolso através do seu gateway de pagamento ou externamente."
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:617
+#: includes/gateway/class-gateway.php:608
 #, php-format
 msgid "%s payment refund request has been processed successfully."
 msgstr "A solicitação de reembolso de pagamento de %s foi processada com sucesso."
 
-#: includes/gateway/class-gateway.php:620
+#: includes/gateway/class-gateway.php:611
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr "Pagamento não encontrado. O pedido não pode ser reembolsado por este fluxo."
 
-#: includes/gateway/class-gateway.php:650
+#: includes/gateway/class-gateway.php:641
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr "Pedido reembolsado automaticamente devido a falha total ou parcial no processamento."
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:807
+#: includes/gateway/class-gateway.php:798
 #, php-format
 msgid "Subscription #%1$d - %2$s"
 msgstr "Assinatura #%1$d - %2$s"
@@ -586,16 +586,16 @@ msgstr "Asaas Boleto Bancário"
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos via boleto bancário."
 
-#: includes/gateway/class-ticket.php:376
+#: includes/gateway/class-ticket.php:367
 msgid "Ignore remove tickets by empty setting."
 msgstr "Ignora remoção de boletos pela configuração em branco."
 
-#: includes/gateway/class-ticket.php:385
+#: includes/gateway/class-ticket.php:376
 msgid "No expired ticket to remove."
 msgstr "Nenhum boleto para remover."
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:418
+#: includes/gateway/class-ticket.php:409
 #, php-format
 msgid "Total tickets removed: %d"
 msgstr "Total de boletos removidos: %s"
@@ -1305,3 +1305,25 @@ msgstr "O total mínimo do pedido para permitir o uso deste método de pagamento
 #: includes/connectivity/api/resource/class-webhook-resource.php:76
 msgid "Webhook not found"
 msgstr "Webhook não encontrado"
+
+#. translators: %1$s: Minimum PHP version, %2$s: Current PHP version
+#: includes/environment/class-environment-requirements.php:103
+#, php-format
+msgid "Asaas Gateway requires PHP %1$s or higher. You are running PHP %2$s."
+msgstr "Asaas Gateway requer PHP %1$s ou superior. Você está executando PHP %2$s."
+
+#. translators: %1$s: Minimum WordPress version, %2$s: Current WordPress version
+#: includes/environment/class-environment-requirements.php:112
+#, php-format
+msgid "Asaas Gateway requires WordPress %1$s or higher. You are running WordPress %2$s."
+msgstr "Asaas Gateway requer WordPress %1$s ou superior. Você está executando WordPress %2$s."
+
+#. translators: %1$s: Minimum WooCommerce version, %2$s: Current WooCommerce version
+#: includes/environment/class-environment-requirements.php:121
+#, php-format
+msgid "Asaas Gateway requires WooCommerce %1$s or higher. You are running WooCommerce %2$s."
+msgstr "Asaas Gateway requer WooCommerce %1$s ou superior. Você está executando WooCommerce %2$s."
+
+#: includes/environment/class-environment-requirements.php:125
+msgid "not installed"
+msgstr "não instalado"

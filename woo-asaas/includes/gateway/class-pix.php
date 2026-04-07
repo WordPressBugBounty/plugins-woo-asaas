@@ -216,8 +216,7 @@ class Pix extends Gateway {
 
 		$total = $wc_order->get_total();
 
-		// Legacy code support.
-		$id = version_compare( WC()->version, '3.0.0', '<' ) ? $wc_order->id : $wc_order->get_id();
+		$id = $wc_order->get_id();
 
 		$payment_data = array(
 			'customer'          => false === is_null( $this->asaas_customer_id ) ? $this->asaas_customer_id : $customer_meta['id'],

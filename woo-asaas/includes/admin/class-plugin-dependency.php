@@ -58,7 +58,7 @@ class Plugin_Dependency {
 					'name'            => 'WooCommerce Subscriptions',
 					'plugin_file'     => 'woocommerce-subscriptions/woocommerce-subscriptions.php',
 					'notice_callback' => array( $this, 'woocommerce_subscriptions_missing_notice' ),
-					'min_version'     => '4.4',
+					'min_version'     => '6.4',
 				),
 			)
 		);

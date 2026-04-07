@@ -132,16 +132,6 @@ class Client {
 	 * }
 	 */
 	private function get_response_info( $response ) {
-		global $wp_version;
-
-		// Legacy code support.
-		if ( version_compare( $wp_version, '4.6.0', '<' ) ) {
-			return array(
-				'status' => $response['response']['code'],
-				'data'   => $response['body'],
-			);
-		}
-
 		if ( is_wp_error( $response ) ) {
 			return array(
 				'status' => $response->get_error_code(),

@@ -193,32 +193,6 @@ class Customer {
 		$cpf_cnpj_clean_regex = '/\.|-|\//';
 		$phone_clean_regex    = '/\(|\)|\s|-/';
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			if ( ! empty( $wc_order->billing_cpf ) ) {
-				$cpf_cnpj = $wc_order->billing_cpf;
-			}
-
-			if ( ! empty( $wc_order->billing_cnpj ) ) {
-				$cpf_cnpj = $wc_order->billing_cnpj;
-			}
-
-			$cpf_cnpj = ( 1 === absint( $wc_order->billing_persontype ) ) ? $wc_order->billing_cpf : $wc_order->billing_cnpj;
-			$cpf_cnpj = preg_replace( $cpf_cnpj_clean_regex, '', $cpf_cnpj );
-
-			return array(
-				'name'              => $wc_order->billing_first_name . ' ' . $wc_order->billing_last_name,
-				'email'             => $wc_order->billing_email,
-				'cpfCnpj'           => false === is_null( $cpf_cnpj ) ? $cpf_cnpj : self::extract_cpf_cnpj_from_customer_id( $wc_order->get_customer_id() ),
-				'postalCode'        => $wc_order->billing_postcode,
-				'addressNumber'     => $wc_order->billing_number,
-				'addressComplement' => $wc_order->billing_address_2,
-				'phone'             => preg_replace( $phone_clean_regex, '', $wc_order->billing_phone ),
-				'mobilePhone'       => preg_replace( $phone_clean_regex, '', $wc_order->billing_cellphone ),
-				'remoteIp'          => $wc_order->customer_ip_address,
-			);
-		}
-
 		$data     = $wc_order->get_data();
 		$cpf_cnpj = '';
 

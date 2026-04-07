@@ -69,12 +69,6 @@ class Order {
 	public function set_meta_data( $data ) {
 		$data = wp_json_encode( $data );
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			update_post_meta( $this->wc->id, self::META_KEY, $data );
-			return;
-		}
-
 		$this->wc->update_meta_data( self::META_KEY, $data );
 		$this->wc->save();
 	}
@@ -89,12 +83,7 @@ class Order {
 			return $this->meta_data;
 		}
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$meta = get_post_meta( $this->wc->id, self::META_KEY, true );
-		} else {
-			$meta = $this->wc->get_meta( self::META_KEY );
-		}
+		$meta = $this->wc->get_meta( self::META_KEY );
 
 		if ( ! $meta ) {
 			return false;
@@ -140,12 +129,6 @@ class Order {
 		global $woocommerce;
 		$woocommerce->cart->empty_cart();
 		$this->get_wc()->payment_complete( $transaction_id );
-
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$this->wc->reduce_order_stock();
-			return;
-		}
 
 		wc_reduce_stock_levels( $this->wc->get_id() );
 	}

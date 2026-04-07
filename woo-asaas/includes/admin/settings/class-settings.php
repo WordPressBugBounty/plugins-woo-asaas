@@ -277,19 +277,11 @@ abstract class Settings {
 	 * @return array The array sorted.
 	 */
 	private function sort_by_priority( $list ) {
-		global $wp_version;
-
 		$orderby       = array(
 			'priority' => 'ASC',
 		);
 		$order         = 'ASC';
 		$preserve_keys = true;
-
-		// Legacy code support.
-		if ( version_compare( $wp_version, '4.7.0', '<' ) ) {
-			$util = new WP_List_Util( $list );
-			return $util->sort( $orderby, $order, $preserve_keys );
-		}
 
 		return wp_list_sort( $list, $orderby, $order, $preserve_keys );
 	}

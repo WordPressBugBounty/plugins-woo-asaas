@@ -127,8 +127,7 @@ class Ticket extends Gateway {
 			$this->asaas_customer_id = $meta->customer;
 		}
 
-		// Legacy code support.
-		$id = version_compare( WC()->version, '3.0.0', '<' ) ? $wc_order->id : $wc_order->get_id();
+		$id = $wc_order->get_id();
 
 		$total = $wc_order->get_total();
 
@@ -334,14 +333,6 @@ class Ticket extends Gateway {
 
 		$validation_helper->validate_fields( $this, $this->get_payment_fields(), $data );
 
-		// Legacy code support.
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			foreach ( $this->validation_errors->get_error_messages() as $message ) {
-				wc_add_notice( $message, 'error' );
-			}
-
-			remove_action( 'woocommerce_after_checkout_validation', array( $this, 'add_checkout_validation_errors' ), 99 );
-		}
 
 		return parent::validate_fields();
 	}
