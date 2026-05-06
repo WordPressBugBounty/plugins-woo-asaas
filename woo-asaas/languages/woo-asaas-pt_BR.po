@@ -465,7 +465,7 @@ msgid "New Credit Card"
 msgstr "Novo Cartão de Crédito"
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:289
+#: includes/class-wc-asaas.php:293
 #: includes/webhook/class-endpoint.php:274
 #, php-format
 msgid "Billing type %s wasn't registered."
@@ -475,12 +475,12 @@ msgstr "Forma de pagamento %s não foi registrada."
 msgid "Asaas gateway currently supports the following coupon types: "
 msgstr "Atualmente, o gateway Asaas suporta os seguintes tipos de cupom de desconto: "
 
-#: includes/class-wc-asaas.php:351
+#: includes/class-wc-asaas.php:355
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr "Asaas requisita o CPF ou CNPJ no checkout para a integração funcionar."
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:357
+#: includes/class-wc-asaas.php:361
 #, php-format
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
@@ -506,7 +506,7 @@ msgstr "Você tem certeza que esse cartão existe?"
 #. translators: %d: the order id
 #: includes/gateway/class-credit-card.php:120
 #: includes/gateway/class-pix.php:228
-#: includes/gateway/class-ticket.php:141
+#: includes/gateway/class-ticket.php:142
 #, php-format
 msgid "Order #%d"
 msgstr "Pedido #%d"
@@ -522,7 +522,7 @@ msgstr "Ocorreu uma falha no pagamento e por isso a transação foi revertida."
 
 #: includes/gateway/class-credit-card.php:276
 #: includes/gateway/class-pix.php:307
-#: includes/gateway/class-ticket.php:214
+#: includes/gateway/class-ticket.php:215
 msgid "There was a failure on subscription generation."
 msgstr "Ocorreu uma falha na criação da assinatura."
 
@@ -576,21 +576,21 @@ msgstr "Asaas Pix"
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr "Use <a href=\"%s\">Asaas</a> para permitir seus clientes comprar seus produtos via Pix."
 
-#: includes/gateway/class-ticket.php:29
+#: includes/gateway/class-ticket.php:30
 msgid "Asaas Ticket"
 msgstr "Asaas Boleto Bancário"
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-ticket.php:31
+#: includes/gateway/class-ticket.php:32
 #, php-format
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr "Use <a href=“%s”>Asaas</a> para permitir seus clientes comprar seus produtos via boleto bancário."
 
-#: includes/gateway/class-ticket.php:367
+#: includes/gateway/class-ticket.php:364
 msgid "Ignore remove tickets by empty setting."
 msgstr "Ignora remoção de boletos pela configuração em branco."
 
-#: includes/gateway/class-ticket.php:376
+#: includes/gateway/class-ticket.php:373
 msgid "No expired ticket to remove."
 msgstr "Nenhum boleto para remover."
 
@@ -624,60 +624,60 @@ msgstr "Recebido em dinheiro"
 msgid "Refund requested"
 msgstr "Estorno solicitado"
 
-#: includes/helper/class-subscriptions-helper.php:51
+#: includes/helper/class-subscriptions-helper.php:55
 msgid "WEEKLY"
 msgstr "MENSAL"
 
-#: includes/helper/class-subscriptions-helper.php:55
+#: includes/helper/class-subscriptions-helper.php:59
 msgid "BIWEEKLY"
 msgstr "QUINZENAL"
 
-#: includes/helper/class-subscriptions-helper.php:59
 #: includes/helper/class-subscriptions-helper.php:63
+#: includes/helper/class-subscriptions-helper.php:67
 msgid "MONTHLY"
 msgstr "MENSAL"
 
-#: includes/helper/class-subscriptions-helper.php:67
+#: includes/helper/class-subscriptions-helper.php:71
 msgid "BIMONTHLY"
 msgstr "BIMESTRAL"
 
-#: includes/helper/class-subscriptions-helper.php:71
+#: includes/helper/class-subscriptions-helper.php:75
 msgid "QUARTERLY"
 msgstr "TRIMESTRAL"
 
-#: includes/helper/class-subscriptions-helper.php:75
+#: includes/helper/class-subscriptions-helper.php:79
 msgid "SEMIANNUALLY"
 msgstr "SEMESTRAL"
 
-#: includes/helper/class-subscriptions-helper.php:79
+#: includes/helper/class-subscriptions-helper.php:83
 msgid "YEARLY"
 msgstr "ANUAL"
 
-#: includes/helper/class-subscriptions-helper.php:84
+#: includes/helper/class-subscriptions-helper.php:88
 msgid "Percentage discount"
 msgstr "Porcentagem de desconto"
 
-#: includes/helper/class-subscriptions-helper.php:85
+#: includes/helper/class-subscriptions-helper.php:89
 msgid "Fixed cart discount"
 msgstr "Desconto fixo no carrinho"
 
-#: includes/helper/class-subscriptions-helper.php:86
+#: includes/helper/class-subscriptions-helper.php:90
 msgid "Fixed product discount"
 msgstr "Desconto fixo no produto"
 
-#: includes/helper/class-subscriptions-helper.php:87
+#: includes/helper/class-subscriptions-helper.php:91
 msgid "Sign Up Fee Discount"
 msgstr "Desconto na taxa de inscrição"
 
-#: includes/helper/class-subscriptions-helper.php:88
+#: includes/helper/class-subscriptions-helper.php:92
 msgid "Sign Up Fee % Discount"
 msgstr "Taxa de inscrição % de desconto"
 
-#: includes/helper/class-subscriptions-helper.php:89
+#: includes/helper/class-subscriptions-helper.php:93
 msgid "Recurring Product Discount*"
 msgstr "Desconto sobre o produto recorrente*"
 
-#: includes/helper/class-subscriptions-helper.php:90
+#: includes/helper/class-subscriptions-helper.php:94
 msgid "Recurring Product % Discount*"
 msgstr "% de desconto sobre o produto recorrente*"
 
@@ -751,29 +751,29 @@ msgstr "Erro de atualização da assinatura:"
 msgid "Subscription update error"
 msgstr "Erro de atualização da assinatura"
 
-#: includes/subscription/admin/class-subscription-admin.php:147
+#: includes/subscription/admin/class-subscription-admin.php:146
 msgid "Asaas does not support changes on subscription start date."
 msgstr "Asaas não suporta alterações na data de início da assinatura."
 
-#: includes/subscription/admin/class-subscription-admin.php:151
+#: includes/subscription/admin/class-subscription-admin.php:152
 msgid "Asaas does not support changes on trial date."
 msgstr "Asaas não suporta alterações na data de avaliação."
 
-#: includes/subscription/admin/class-subscription-admin.php:157
+#: includes/subscription/admin/class-subscription-admin.php:160
 msgid "The next payment date must be greater than the current one."
 msgstr "A data do próximo pagamento precisa ser maior que a data de hoje."
 
-#: includes/subscription/admin/class-subscription-admin.php:161
+#: includes/subscription/admin/class-subscription-admin.php:167
 msgid "The end subscription date must be greater than the current one."
 msgstr "A data de término da assinatura precisa ser maior que a data de hoje."
 
 #. translators: %s: supported billing cicles
-#: includes/subscription/admin/class-subscription-admin.php:171
+#: includes/subscription/admin/class-subscription-admin.php:185
 #, php-format
 msgid "Asaas does not support the chosen billing period. Please, choose a valid period: %s."
 msgstr "Asaas não suporta o período de cobrança escolhido. Por favor, escolha um período válido: %s."
 
-#: includes/subscription/admin/class-subscription-admin.php:185
+#: includes/subscription/admin/class-subscription-admin.php:204
 msgid "To update the billing cycle, next payment date or subscription end date you need to have tokenization enabled in your Asaas account."
 msgstr "Para atualizar o ciclo de cobrança, data do próximo pagamento ou data de fim da assinatura você precisa ter a tokenização habilitada na sua conta Asaas."
 
@@ -1327,3 +1327,8 @@ msgstr "Asaas Gateway requer WooCommerce %1$s ou superior. Você está executand
 #: includes/environment/class-environment-requirements.php:125
 msgid "not installed"
 msgstr "não instalado"
+
+#. translators: %s: supported billing cicles
+#: includes/subscription/admin/class-subscription-admin.php:210
+msgid "Please, contact your Asaas manager."
+msgstr "Por favor, entre em contato com o seu gerente do Asaas."

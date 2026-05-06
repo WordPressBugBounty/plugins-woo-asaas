@@ -7,6 +7,10 @@
 
 namespace WC_Asaas\Helper;
 
+use WC_Asaas\Common\Query\Order_Query;
+use WC_Order;
+use WC_Subscription;
+
 /**
  * Subscriptions helper functions
  */
@@ -169,78 +173,73 @@ class Subscriptions_Helper {
 	/**
 	 * Gets Subscription object by Asaas subscription id
 	 *
-	 * @param  string $subscription_id The Asaas subscription id.
+	 * @param string $subscription_id The Asaas subscription id.
+	 *
 	 * @return WC_Subscription|bool WC_Subscription object if it found. Otherwise, false.
 	 */
 	public function get_subscription_by_id( $subscription_id ) {
-		/* @var wpdb $wpdb WordPress database access abstraction object */
-		global $wpdb;
+		if ( ! function_exists( '\wcs_get_subscriptions' ) ) {
+			return false;
+		}
 
-		$cache_key = "subscription_{$subscription_id}";
-		$results   = wp_cache_get( $cache_key );
+		$cache_key              = "subscription_$subscription_id";
+		$cached_subscription_id = wp_cache_get( $cache_key );
 
-		if ( false === $results ) {
-			$results = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-				$wpdb->prepare(
-					"
-				SELECT ID FROM {$wpdb->posts} as P
-				INNER JOIN {$wpdb->postmeta} as PM
-				WHERE P.ID = PM.post_id
-				AND P.post_type   = %s
-				AND PM.meta_key   = %s
-				AND PM.meta_value = %s",
-					array(
-						'shop_subscription',
-						'_asaas_subscription_id',
-						$subscription_id,
-					)
+		if ( false === $cached_subscription_id ) {
+			$subscriptions = \wcs_get_subscriptions(
+				array(
+					// phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_query
+					'meta_query' => array(
+						array(
+							'key'   => '_asaas_subscription_id',
+							'value' => $subscription_id,
+						),
+					),
+					'orderby'    => 'ID',
+					'order'      => 'ASC',
+					'limit'      => 1,
 				)
 			);
 
-			wp_cache_set( $cache_key, $results, '', HOUR_IN_SECONDS );
+			$cached_subscription_id = count( $subscriptions ) > 0 ? key( $subscriptions ) : 0;
+			wp_cache_set( $cache_key, $cached_subscription_id, '', HOUR_IN_SECONDS );
 		}
 
-		if ( count( $results ) > 0 && empty( $wpdb->last_error ) && function_exists( '\wcs_get_subscription' ) ) {
-			return \wcs_get_subscription( $results[0]->ID );
-		}
-
-		return false;
+		return $cached_subscription_id ? wcs_get_subscription( $cached_subscription_id ) : false;
 	}
 
 	/**
 	 * Gets order by Asaas payment id
 	 *
 	 * @param string $payment_id The Asaas payment id.
+	 *
 	 * @return WC_Order|bool WC_Order object if it found. Otherwise, false.
 	 */
 	public function get_order_by_payment_id( $payment_id ) {
-		/* @var wpdb $wpdb WordPress database access abstraction object */
-		global $wpdb;
+		$cache_key       = "order_{$payment_id}";
+		$cached_order_id = wp_cache_get( $cache_key );
 
-		$cache_key = "order_{$payment_id}";
-		$results   = wp_cache_get( $cache_key );
-
-		if ( false === $results ) {
-			$results = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-				$wpdb->prepare(
-					"
-				SELECT post_id FROM {$wpdb->postmeta}
-				WHERE meta_key = %s
-				AND meta_value = %s",
+		if ( false === $cached_order_id ) {
+			$args = array(
+				// phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_query
+				'meta_query' => array(
 					array(
-						'_asaas_id',
-						$payment_id,
-					)
-				)
+						'key'   => '_asaas_id',
+						'value' => $payment_id,
+					),
+				),
+				'orderby'    => 'ID',
+				'order'      => 'ASC',
+				'limit'      => 1,
+				'return'     => 'ids',
 			);
 
-			wp_cache_set( $cache_key, $results, '', HOUR_IN_SECONDS );
+			$orders = ( new Order_Query() )->get_orders_with_meta_query( $args );
+
+			$cached_order_id = count( $orders ) > 0 ? current( $orders ) : 0;
+			wp_cache_set( $cache_key, $cached_order_id, '', HOUR_IN_SECONDS );
 		}
 
-		if ( count( $results ) > 0 && empty( $wpdb->last_error ) ) {
-			return wc_get_order( $results[0]->post_id );
-		}
-
-		return false;
+		return $cached_order_id ? wc_get_order( $cached_order_id ) : false;
 	}
 }

@@ -48,7 +48,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.7.5';
+	public $version = '2.7.6';
 
 	/**
 	 * Instance of this class
@@ -115,7 +115,11 @@ class WC_Asaas {
 		add_filter( 'woocommerce_subscription_settings', array( WooCommerce_Subscriptions_Settings::get_instance(), 'show_notice_unsupport_auto_renewal_toggle' ), 20, 1 );
 		add_filter( 'woocommerce_asaas_settings_sections', array( WooCommerce_Subscriptions_Settings::get_instance(), 'show_notice_unsupport_auto_renewal_toggle' ), 10, 2 );
 
-		add_action( 'pre_post_update', array( Subscription_Admin::get_instance(), 'validate_subscription_changes' ), 10, 2 );
+		add_action(
+			'woocommerce_process_shop_order_meta',
+			array( Subscription_Admin::get_instance(), 'validate_subscription_on_admin_save' ),
+			1
+		);
 
 		add_filter( 'woocommerce_asaas_settings_sections', array( $dependency, 'subscription_dependencies_notice' ), 10, 1 );
 		add_action( 'woocommerce_product_options_general_product_data', array( Product_Settings::get_instance(), 'show_tip_supported_billing_cycles' ), 5 );

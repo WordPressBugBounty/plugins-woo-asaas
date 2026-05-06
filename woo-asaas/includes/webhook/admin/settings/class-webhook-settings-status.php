@@ -90,9 +90,9 @@ class Webhook_Settings_Status {
 	 */
 	private function show_notice_status_connection() {
 		$dashboard_page = 'dashboard' === $this->get_screen()->id;
-		$orders_page    = 'shop_order' === $this->get_screen()->post_type;
+		$asaas_page     = $this->is_asaas_payment_screen();
 
-		if ( $dashboard_page || $orders_page ) {
+		if ( $dashboard_page || $asaas_page ) {
 			// translators: %s: URL to the gateway settings page.
 			$message = sprintf( __( 'We have identified issues with the connection of your store to the Asaas Payment Method, caused by an invalid or missing API key. <a href="%s">Click here to provide a new key</a>.', 'woo-asaas' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) );
 			echo wp_kses_post( '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>' );
@@ -126,8 +126,8 @@ class Webhook_Settings_Status {
 	 * Check the status of the webhooks queue and display a warning message if needed.
 	 */
 	private function show_notice_status_queue() {
-		$orders_page = 'shop_order' === $this->get_screen()->post_type;
-		if ( $orders_page && ! $this->status->get_queue_status() ) {
+		$asaas_page = $this->is_asaas_payment_screen();
+		if ( $asaas_page && ! $this->status->get_queue_status() ) {
 			// translators: %s: URL to the system status page.
 			$message = sprintf( __( 'We\'ve identified that the Asaas webhook queue is interrupted. <a href="%s">Click here to reactivate</a>', 'woo-asaas' ), admin_url( 'admin.php?page=wc-status&tab=status#webhook-status-section' ) );
 
@@ -148,5 +148,15 @@ class Webhook_Settings_Status {
 		}
 
 		return $screen;
+	}
+
+	/**
+	 * Check if current screen is an Asaas payment screen (shop_order or shop_subscription)
+	 */
+	private function is_asaas_payment_screen() {
+		$screen        = $this->get_screen();
+		$asaas_screens = array( 'shop_order', 'shop_subscription' );
+
+		return in_array( $screen->post_type, $asaas_screens, true );
 	}
 }

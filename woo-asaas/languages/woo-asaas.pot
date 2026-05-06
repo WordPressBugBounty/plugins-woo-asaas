@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Asaas Gateway for WooCommerce 2.7.4\n"
+"Project-Id-Version: Asaas Gateway for WooCommerce 2.7.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-07T01:15:07+00:00\n"
+"POT-Creation-Date: 2026-05-06T17:23:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: woo-asaas\n"
@@ -506,18 +506,18 @@ msgid "New Credit Card"
 msgstr ""
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:289
+#: includes/class-wc-asaas.php:293
 #: includes/webhook/class-endpoint.php:274
 #, php-format
 msgid "Billing type %s wasn't registered."
 msgstr ""
 
-#: includes/class-wc-asaas.php:351
+#: includes/class-wc-asaas.php:355
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr ""
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:357
+#: includes/class-wc-asaas.php:361
 #, php-format
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr ""
@@ -602,7 +602,7 @@ msgstr ""
 #. translators: %d: the order id
 #: includes/gateway/class-credit-card.php:120
 #: includes/gateway/class-pix.php:228
-#: includes/gateway/class-ticket.php:141
+#: includes/gateway/class-ticket.php:142
 #, php-format
 msgid "Order #%d"
 msgstr ""
@@ -618,7 +618,7 @@ msgstr ""
 
 #: includes/gateway/class-credit-card.php:276
 #: includes/gateway/class-pix.php:307
-#: includes/gateway/class-ticket.php:214
+#: includes/gateway/class-ticket.php:215
 msgid "There was a failure on subscription generation."
 msgstr ""
 
@@ -672,21 +672,21 @@ msgstr ""
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by Pix."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:29
+#: includes/gateway/class-ticket.php:30
 msgid "Asaas Ticket"
 msgstr ""
 
 #. translators: %s: Asaas website URL
-#: includes/gateway/class-ticket.php:31
+#: includes/gateway/class-ticket.php:32
 #, php-format
 msgid "Use <a href=\"%s\">Asaas</a> to allow your customer buy your products by ticket."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:367
+#: includes/gateway/class-ticket.php:364
 msgid "Ignore remove tickets by empty setting."
 msgstr ""
 
-#: includes/gateway/class-ticket.php:376
+#: includes/gateway/class-ticket.php:373
 msgid "No expired ticket to remove."
 msgstr ""
 
@@ -720,60 +720,60 @@ msgstr ""
 msgid "Refund requested"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:51
+#: includes/helper/class-subscriptions-helper.php:55
 msgid "WEEKLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:55
+#: includes/helper/class-subscriptions-helper.php:59
 msgid "BIWEEKLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:59
 #: includes/helper/class-subscriptions-helper.php:63
+#: includes/helper/class-subscriptions-helper.php:67
 msgid "MONTHLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:67
+#: includes/helper/class-subscriptions-helper.php:71
 msgid "BIMONTHLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:71
+#: includes/helper/class-subscriptions-helper.php:75
 msgid "QUARTERLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:75
+#: includes/helper/class-subscriptions-helper.php:79
 msgid "SEMIANNUALLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:79
+#: includes/helper/class-subscriptions-helper.php:83
 msgid "YEARLY"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:84
+#: includes/helper/class-subscriptions-helper.php:88
 msgid "Percentage discount"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:85
+#: includes/helper/class-subscriptions-helper.php:89
 msgid "Fixed cart discount"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:86
+#: includes/helper/class-subscriptions-helper.php:90
 msgid "Fixed product discount"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:87
+#: includes/helper/class-subscriptions-helper.php:91
 msgid "Sign Up Fee Discount"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:88
+#: includes/helper/class-subscriptions-helper.php:92
 msgid "Sign Up Fee % Discount"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:89
+#: includes/helper/class-subscriptions-helper.php:93
 msgid "Recurring Product Discount*"
 msgstr ""
 
-#: includes/helper/class-subscriptions-helper.php:90
+#: includes/helper/class-subscriptions-helper.php:94
 msgid "Recurring Product % Discount*"
 msgstr ""
 
@@ -1029,30 +1029,35 @@ msgstr ""
 msgid "Subscription update error"
 msgstr ""
 
-#: includes/subscription/admin/class-subscription-admin.php:147
+#: includes/subscription/admin/class-subscription-admin.php:146
 msgid "Asaas does not support changes on subscription start date."
 msgstr ""
 
-#: includes/subscription/admin/class-subscription-admin.php:151
+#: includes/subscription/admin/class-subscription-admin.php:152
 msgid "Asaas does not support changes on trial date."
 msgstr ""
 
-#: includes/subscription/admin/class-subscription-admin.php:157
+#: includes/subscription/admin/class-subscription-admin.php:160
 msgid "The next payment date must be greater than the current one."
 msgstr ""
 
-#: includes/subscription/admin/class-subscription-admin.php:161
+#: includes/subscription/admin/class-subscription-admin.php:167
 msgid "The end subscription date must be greater than the current one."
 msgstr ""
 
 #. translators: %s: supported billing cicles
-#: includes/subscription/admin/class-subscription-admin.php:171
+#: includes/subscription/admin/class-subscription-admin.php:185
 #, php-format
 msgid "Asaas does not support the chosen billing period. Please, choose a valid period: %s."
 msgstr ""
 
-#: includes/subscription/admin/class-subscription-admin.php:185
+#: includes/subscription/admin/class-subscription-admin.php:204
 msgid "To update the billing cycle, next payment date or subscription end date you need to have tokenization enabled in your Asaas account."
+msgstr ""
+
+#. translators: %s: supported billing cicles
+#: includes/subscription/admin/class-subscription-admin.php:210
+msgid "Please, contact your Asaas manager."
 msgstr ""
 
 #: includes/webhook/admin/settings/class-webhook-settings-fields.php:84

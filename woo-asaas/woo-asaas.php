@@ -9,7 +9,7 @@
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:          woo-asaas
  * Domain Path:          /languages
- * Version:              2.7.5
+ * Version:              2.7.6
  * Requires PHP:         7.4
  * Requires at least:    6.2
  * WC requires at least: 8.2
@@ -21,6 +21,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+			'custom_order_tables',
+			__FILE__,
+			true
+		);
+	}
+} );
 
 add_action( 'plugins_loaded', function() {
 	woo_asaas_check_dependencies();

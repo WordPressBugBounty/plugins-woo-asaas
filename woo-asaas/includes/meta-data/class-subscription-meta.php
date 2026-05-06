@@ -67,7 +67,7 @@ class Subscription_Meta {
 	 * @return void
 	 */
 	public function __construct( $order_id ) {
-		$this->wc = new \WC_Order( $order_id );
+		$this->wc = wc_get_order( $order_id );
 	}
 
 	/**

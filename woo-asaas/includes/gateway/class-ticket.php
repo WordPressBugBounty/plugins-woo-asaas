@@ -10,6 +10,7 @@ namespace WC_Asaas\Gateway;
 use WC_Asaas\Admin\Settings\Ticket as Ticket_Settings;
 use WC_Asaas\Api\Response\Error_Response;
 use WC_Asaas\Billing_Type\Ticket as Ticket_Type;
+use WC_Asaas\Common\Query\Order_Query;
 use WC_Asaas\Helper\Validation_Helper;
 use WC_Asaas\Installments\Admin\Settings\Installments_Settings;
 use WC_Asaas\Meta_Data\Order;
@@ -333,7 +334,6 @@ class Ticket extends Gateway {
 
 		$validation_helper->validate_fields( $this, $this->get_payment_fields(), $data );
 
-
 		return parent::validate_fields();
 	}
 
@@ -355,9 +355,6 @@ class Ticket extends Gateway {
 	 * @return string Response message with removal result.
 	 */
 	public function remove_expired_ticket() {
-		/* @var wpdb $wpdb WordPress database access abstraction object */
-		global $wpdb;
-
 		$validity_period = apply_filters( 'woocommerce_asaas_default_ticket_validity_period', '' );
 		if ( isset( $this->settings['validity_period'] ) && '' !== $this->settings['validity_period'] ) {
 			$validity_period = intval( $this->settings['validity_period'] );
@@ -378,24 +375,27 @@ class Ticket extends Gateway {
 
 		$totals = 0;
 		foreach ( $payments->items as $payment ) {
-			$cache_key        = "ticket_{$payment->id}";
-			$order_meta_count = wp_cache_get( $cache_key );
+			$cache_key              = "ticket_{$payment->id}";
+			$is_woocommerce_payment = wp_cache_get( $cache_key );
 
-			if ( false === $order_meta_count ) {
-				$order_meta_count = intval(
-					$wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-						$wpdb->prepare(
-							"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_asaas_id' AND meta_value = %s", array(
-								'_asaas_id' => $payment->id,
-							)
-						)
-					)
+			if ( false === $is_woocommerce_payment ) {
+				$args = array(
+					// phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_query
+					'meta_query' => array(
+						array(
+							'key'   => '_asaas_id',
+							'value' => $payment->id,
+						),
+					),
+					'limit'      => 1,
+					'return'     => 'ids',
 				);
 
-				wp_cache_set( $cache_key, $order_meta_count, '', HOUR_IN_SECONDS );
-			}
+				$orders = ( new Order_Query() )->get_orders_with_meta_query( $args );
 
-			$is_woocommerce_payment = 0 < $order_meta_count;
+				$is_woocommerce_payment = count( $orders ) > 0;
+				wp_cache_set( $cache_key, $is_woocommerce_payment, '', HOUR_IN_SECONDS );
+			}
 
 			if ( ! $is_woocommerce_payment ) {
 				continue;
