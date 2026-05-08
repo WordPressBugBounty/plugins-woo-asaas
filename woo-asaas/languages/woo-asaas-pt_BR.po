@@ -751,29 +751,29 @@ msgstr "Erro de atualização da assinatura:"
 msgid "Subscription update error"
 msgstr "Erro de atualização da assinatura"
 
-#: includes/subscription/admin/class-subscription-admin.php:146
+#: includes/subscription/admin/class-subscription-admin.php:150
 msgid "Asaas does not support changes on subscription start date."
 msgstr "Asaas não suporta alterações na data de início da assinatura."
 
-#: includes/subscription/admin/class-subscription-admin.php:152
+#: includes/subscription/admin/class-subscription-admin.php:156
 msgid "Asaas does not support changes on trial date."
 msgstr "Asaas não suporta alterações na data de avaliação."
 
-#: includes/subscription/admin/class-subscription-admin.php:160
+#: includes/subscription/admin/class-subscription-admin.php:164
 msgid "The next payment date must be greater than the current one."
 msgstr "A data do próximo pagamento precisa ser maior que a data de hoje."
 
-#: includes/subscription/admin/class-subscription-admin.php:167
+#: includes/subscription/admin/class-subscription-admin.php:171
 msgid "The end subscription date must be greater than the current one."
 msgstr "A data de término da assinatura precisa ser maior que a data de hoje."
 
 #. translators: %s: supported billing cicles
-#: includes/subscription/admin/class-subscription-admin.php:185
+#: includes/subscription/admin/class-subscription-admin.php:189
 #, php-format
 msgid "Asaas does not support the chosen billing period. Please, choose a valid period: %s."
 msgstr "Asaas não suporta o período de cobrança escolhido. Por favor, escolha um período válido: %s."
 
-#: includes/subscription/admin/class-subscription-admin.php:204
+#: includes/subscription/admin/class-subscription-admin.php:208
 msgid "To update the billing cycle, next payment date or subscription end date you need to have tokenization enabled in your Asaas account."
 msgstr "Para atualizar o ciclo de cobrança, data do próximo pagamento ou data de fim da assinatura você precisa ter a tokenização habilitada na sua conta Asaas."
 
@@ -1329,6 +1329,6 @@ msgid "not installed"
 msgstr "não instalado"
 
 #. translators: %s: supported billing cicles
-#: includes/subscription/admin/class-subscription-admin.php:210
+#: includes/subscription/admin/class-subscription-admin.php:214
 msgid "Please, contact your Asaas manager."
 msgstr "Por favor, entre em contato com o seu gerente do Asaas."

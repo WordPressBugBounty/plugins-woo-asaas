@@ -9,7 +9,7 @@
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:          woo-asaas
  * Domain Path:          /languages
- * Version:              2.7.6
+ * Version:              2.7.7
  * Requires PHP:         7.4
  * Requires at least:    6.2
  * WC requires at least: 8.2

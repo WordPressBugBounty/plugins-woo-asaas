@@ -98,6 +98,10 @@ class Subscription_Admin {
 	 * @return void
 	 */
 	public function validate_subscription_on_admin_save( $subscription_id ) {
+		if ( ! function_exists( '\wcs_get_subscription' ) ) {
+			return;
+		}
+
 		$subscription = \wcs_get_subscription( $subscription_id );
 		if ( false === $subscription ) {
 			return;

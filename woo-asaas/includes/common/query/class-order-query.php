@@ -7,6 +7,8 @@
 
 namespace WC_Asaas\Common\Query;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
+
 /**
  * Query helper for orders with meta_query support in both HPOS and CPT modes
  */
@@ -19,7 +21,7 @@ class Order_Query {
 	 * @return array Array of WC_Order objects or IDs depending on 'return' argument.
 	 */
 	public function get_orders_with_meta_query( array $args ) : array {
-		if ( wcs_is_custom_order_tables_usage_enabled() ) {
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
 			return wc_get_orders( $args );
 		}
 
