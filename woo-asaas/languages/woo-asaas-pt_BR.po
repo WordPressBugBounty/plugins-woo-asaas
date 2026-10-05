@@ -234,7 +234,8 @@ msgstr "Parcelas"
 
 #: includes/admin/views/installments-interest-list.php:24
 #: includes/installments/admin/settings/class-installments-fields.php:98
-#: includes/webhook/class-webhook.php:360
+#: includes/webhook/service/class-payment-reconciliation-service.php:164
+#: includes/webhook/service/class-payment-reconciliation-service.php:190
 msgid "Interest"
 msgstr "Juros"
 
@@ -312,6 +313,7 @@ msgstr "O plugin Asaas para o WooCommerce não suporta a funcionalidade de renov
 #: includes/cron/class-expired-pix-cron.php:46
 #: includes/cron/class-expired-ticket-cron.php:43
 #: includes/installments/admin/settings/class-installments-fields.php:45
+#: includes/installments/cancellation/class-cancellation.php:81
 #: includes/installments/gateway/class-checkout-installments.php:45
 #: includes/installments/gateway/class-payment-installments.php:47
 #: includes/my-account/class-woocommerce-my-account.php:43
@@ -465,8 +467,8 @@ msgid "New Credit Card"
 msgstr "Novo Cartão de Crédito"
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:293
-#: includes/webhook/class-endpoint.php:274
+#: includes/class-wc-asaas.php:295
+#: includes/webhook/validator/class-webhook-request-validator.php:89
 #, php-format
 msgid "Billing type %s wasn't registered."
 msgstr "Forma de pagamento %s não foi registrada."
@@ -475,12 +477,12 @@ msgstr "Forma de pagamento %s não foi registrada."
 msgid "Asaas gateway currently supports the following coupon types: "
 msgstr "Atualmente, o gateway Asaas suporta os seguintes tipos de cupom de desconto: "
 
-#: includes/class-wc-asaas.php:355
+#: includes/class-wc-asaas.php:357
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr "Asaas requisita o CPF ou CNPJ no checkout para a integração funcionar."
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:361
+#: includes/class-wc-asaas.php:363
 #, php-format
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr "<a href=\"%s\">Clique aqui</a> para alterar os campos do checkout."
@@ -530,38 +532,38 @@ msgstr "Ocorreu uma falha na criação da assinatura."
 msgid "Select a credit card"
 msgstr "Selecione um cartão de crédito"
 
-#: includes/gateway/class-gateway.php:584
+#: includes/gateway/class-gateway.php:592
 msgid "Order not found."
 msgstr "Pedido não encontrado."
 
-#: includes/gateway/class-gateway.php:588
+#: includes/gateway/class-gateway.php:596
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr "Este pedido não pode ser reembolsado por este fluxo. Por favor, faça o reembolso através do gateway de pagamento ou externamente."
 
-#: includes/gateway/class-gateway.php:592
+#: includes/gateway/class-gateway.php:600
 msgid "Partial refunds are not possible."
 msgstr "Não é possível fazer reembolsos parciais."
 
-#: includes/gateway/class-gateway.php:596
+#: includes/gateway/class-gateway.php:604
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr "Devido ao método de pagamento, para devolver fundos ao cliente, você precisará emitir um reembolso através do seu gateway de pagamento ou externamente."
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:608
+#: includes/gateway/class-gateway.php:616
 #, php-format
 msgid "%s payment refund request has been processed successfully."
 msgstr "A solicitação de reembolso de pagamento de %s foi processada com sucesso."
 
-#: includes/gateway/class-gateway.php:611
+#: includes/gateway/class-gateway.php:619
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr "Pagamento não encontrado. O pedido não pode ser reembolsado por este fluxo."
 
-#: includes/gateway/class-gateway.php:641
+#: includes/gateway/class-gateway.php:648
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr "Pedido reembolsado automaticamente devido a falha total ou parcial no processamento."
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:798
+#: includes/gateway/class-gateway.php:793
 #, php-format
 msgid "Subscription #%1$d - %2$s"
 msgstr "Assinatura #%1$d - %2$s"
@@ -595,7 +597,7 @@ msgid "No expired ticket to remove."
 msgstr "Nenhum boleto para remover."
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:409
+#: includes/gateway/class-ticket.php:419
 #, php-format
 msgid "Total tickets removed: %d"
 msgstr "Total de boletos removidos: %s"
@@ -699,7 +701,7 @@ msgstr "Ao salvar as alterações com as parcelas habilitadas, uma tabela de jur
 
 #: includes/installments/admin/settings/class-installments-fields.php:105
 msgid "Minimum installment value"
-msgstr "Mínimo do valor de parcelas"
+msgstr "Valor mínimo das parcelas"
 
 #. translators: %d: minimum installments value
 #: includes/installments/admin/settings/class-installments-fields.php:108
@@ -859,89 +861,89 @@ msgstr "Status da fila de webhooks"
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr "Caso a fila de webhooks esteja interrompida, clique no botão ao lado para reativá-la"
 
-#: includes/webhook/class-endpoint.php:179
+#: includes/webhook/class-endpoint.php:175
 msgid "Webhook has been processed with success"
 msgstr "Webhook processado com sucesso"
 
-#: includes/webhook/class-endpoint.php:182
+#: includes/webhook/class-endpoint.php:178
 msgid "Webhook was ignored by an external filter in this store"
 msgstr "Webhook foi ignorado por um filtro externo nesta loja"
 
 #. translators: %s: event name
-#: includes/webhook/class-endpoint.php:258
+#: includes/webhook/validator/class-webhook-request-validator.php:74
 #, php-format
 msgid "Event %s wasn't registered."
 msgstr "O evento %s não foi registrado."
 
-#: includes/connectivity/data/class-webhook-factory.php:69
+#: includes/connectivity/data/class-webhook-factory.php:72
 msgid "Webhooks from WooCommerce"
 msgstr "Webhooks do WooCommerce"
 
 #. translators: %s: event name
-#: includes/webhook/class-webhook.php:144
+#: includes/webhook/class-webhook.php:154
 #, php-format
 msgid "Untreated event: %s"
 msgstr "Evento não tratado: %s"
 
-#: includes/webhook/class-webhook.php:171
+#: includes/webhook/class-webhook.php:180
 msgid "Payment confirmed."
 msgstr "Pagamento confirmado."
 
-#: includes/webhook/class-webhook.php:186
+#: includes/webhook/class-webhook.php:192
 msgid "This order was already paid."
 msgstr "Este pedido já foi pago."
 
 #. translators: %s: subscription status
-#: includes/webhook/class-webhook.php:199
+#: includes/webhook/class-webhook.php:224
 #, php-format
 msgid "Prevents 500 error from WooCommerce Subscriptions: unable to change subscription status to %s."
 msgstr "Previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para %s."
 
-#: includes/webhook/class-webhook.php:203
+#: includes/webhook/class-webhook.php:233
 msgid "Unable to change the order status."
 msgstr "Não é possível alterar o status do pedido."
 
 #. translators: 1: The due date, 2: The subscription order id
-#: includes/webhook/class-webhook.php:278
+#: includes/webhook/class-webhook.php:299
 #, php-format
 msgid "Payment created. Due date: %1$s / Subscription id: %2$s"
 msgstr "Pagamento criado. Data de vencimento: %1$s / ID da assinatura: %2$s"
 
-#: includes/webhook/class-webhook.php:282
+#: includes/webhook/class-webhook.php:303
 msgid "Payment created."
 msgstr "Pagamento criado."
 
 #. translators: 1: The payment link
-#: includes/webhook/class-webhook.php:290
+#: includes/webhook/class-webhook.php:311
 #, php-format
 msgid "Payment link: %1$s"
 msgstr "Link do pagamento: %1$s"
 
-#: includes/webhook/class-webhook.php:316
+#: includes/webhook/class-webhook.php:337
 msgid "PAYMENT_DELETED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to cancelled."
 msgstr "PAYMENT_DELETED: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para cancelada."
 
-#: includes/webhook/class-webhook.php:318
+#: includes/webhook/class-webhook.php:339
 msgid "Payment deleted."
 msgstr "Pagamento excluído."
 
-#: includes/webhook/class-webhook.php:338
+#: includes/webhook/class-webhook.php:360
 msgid "PAYMENT_OVERDUE: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to failed."
 msgstr "PAYMENT_OVERDUE: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para falhou."
 
-#: includes/webhook/class-webhook.php:340
+#: includes/webhook/class-webhook.php:362
 msgid "Payment overdue."
 msgstr "Pagamento vencido."
 
-#: includes/webhook/class-webhook.php:352
+#: includes/webhook/service/class-payment-reconciliation-service.php:181
 msgid "Fine tax"
 msgstr "Multa"
 
-#: includes/webhook/class-webhook.php:453
+#: includes/webhook/class-webhook.php:394
 msgid "PAYMENT_REFUNDED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to refunded."
 msgstr "PAYMENT_REFUNDED: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para reembolsada."
 
-#: includes/webhook/class-webhook.php:475
+#: includes/webhook/class-webhook.php:416
 msgid "PAYMENT_RESTORED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to pending."
 msgstr "PAYMENT_RESTORED: previne erro 500 gerado no WooCommerce Subscriptions: não é possível alterar o status da assinatura para pendente."
 
@@ -1057,7 +1059,7 @@ msgstr "Verificação de nonce falhou"
 msgid "Permission denied"
 msgstr "Permissão negada"
 
-#: includes/webhook/class-webhook.php:201
+#: includes/webhook/class-webhook.php:229
 msgid "An error occurred"
 msgstr "Um erro ocorreu"
 
@@ -1227,7 +1229,7 @@ msgstr "Tipo de aplicação"
 msgid "Value"
 msgstr "Valor"
 
-#: includes/split/views/object-setting/object-setting-row.php:28
+#: includes/split/views/object-setting/object-setting-row.php:35
 msgid "Delete row"
 msgstr "Excluir linha"
 
@@ -1332,3 +1334,38 @@ msgstr "não instalado"
 #: includes/subscription/admin/class-subscription-admin.php:214
 msgid "Please, contact your Asaas manager."
 msgstr "Por favor, entre em contato com o seu gerente do Asaas."
+
+#: includes/installments/cancellation/data/class-ticket-installment-payment-factory.php:45
+#: includes/installments/cancellation/validator/class-ticket-installment-payment-validator.php:43
+msgid "Payment has no installment ID; not a ticket installment."
+msgstr "Pagamento não possui ID de parcelamento; não é um boleto parcelado."
+
+#: includes/installments/cancellation/validator/class-ticket-installment-payment-validator.php:46
+msgid "Payment billing type does not match the ticket billing type."
+msgstr "O tipo de cobrança do pagamento não corresponde ao tipo de cobrança do boleto."
+
+#: includes/installments/cancellation/validator/class-ticket-installment-payment-validator.php:49
+msgid "Payment installment number is not a positive integer."
+msgstr "O número da parcela do pagamento não é um inteiro positivo."
+
+#: includes/installments/cancellation/notice/class-installment-order-note.php:26
+msgid "Installment payment plan cancelled. The ticket expired without payment and no installment had been paid, so all installments were removed."
+msgstr "Parcelamento cancelado. O boleto venceu sem pagamento e nenhuma parcela havia sido paga, então todas as parcelas foram removidas."
+
+#: includes/installments/cancellation/notice/class-installment-order-note.php:53
+msgid "There is already a paid installment in this payment plan, so the order status was kept and no installment was removed."
+msgstr "Já existe uma parcela paga neste parcelamento, então o status do pedido foi mantido e nenhuma parcela foi removida."
+
+#. translators: %d: installment number.
+#: includes/installments/cancellation/notice/class-installment-order-note.php:40
+#, php-format
+msgid "Installment %d was not paid, but the order has paid installments, so its status was kept and the installment plan was not removed."
+msgstr "A parcela %d não foi paga, mas o pedido possui parcelas pagas, então o status foi mantido e o parcelamento não foi removido."
+
+#: includes/webhook/service/class-payment-reconciliation-service.php:257
+msgid "Payment value is lower than order total."
+msgstr "O valor do pagamento é menor que o total do pedido."
+
+#: includes/webhook/service/class-payment-reconciliation-service.php:262
+msgid "Payment value is higher than order total."
+msgstr "O valor do pagamento é maior que o total do pedido."

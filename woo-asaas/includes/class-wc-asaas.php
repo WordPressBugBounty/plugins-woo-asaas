@@ -26,6 +26,7 @@ use WC_Asaas\Cron\Expired_Pix_Cron;
 use WC_Asaas\Cron\Expired_Ticket_Cron;
 use WC_Asaas\Gateway\Gateway;
 use WC_Asaas\Installments\Admin\Settings\Installments_Fields;
+use WC_Asaas\Installments\Cancellation\Cancellation;
 use WC_Asaas\Installments\Gateway\Checkout_Installments;
 use WC_Asaas\Installments\Gateway\Payment_Installments;
 use WC_Asaas\My_Account\WooCommerce_My_Account;
@@ -48,7 +49,7 @@ class WC_Asaas {
 	 *
 	 * @var string
 	 */
-	public $version = '2.7.7';
+	public $version = '2.7.8';
 
 	/**
 	 * Instance of this class
@@ -90,6 +91,7 @@ class WC_Asaas {
 		add_filter( 'woocommerce_asaas_payment_data', array( Payment_Installments::get_instance(), 'installment_payment_data' ), 10, 3 );
 
 		add_action( 'init', array( Split_Manager::class, 'get_instance' ) );
+		add_action( 'init', array( Cancellation::class, 'get_instance' ) );
 
 		add_filter( 'woocommerce_asaas_ticket_payment_fields', array( Checkout_Installments::get_instance(), 'add_ticket_installment_field' ), 10, 2 );
 		add_filter( 'woocommerce_asaas_cc_payment_fields', array( Checkout_Installments::get_instance(), 'add_cc_installment_field' ), 10, 2 );

@@ -11,6 +11,9 @@ namespace WC_Asaas\Connectivity\Data;
 
 use InvalidArgumentException;
 use stdClass;
+use WC_Asaas\Connectivity\Data\Creatable_Webhook;
+use WC_Asaas\Connectivity\Data\Registered_Webhook;
+use WC_Asaas\Connectivity\Data\Updatable_Webhook;
 use WC_Asaas\Connectivity\Provider\Gateway_Provider;
 use WC_Asaas\Connectivity\Provider\Webhook_Events_Provider;
 use WC_Asaas\Connectivity\Provider\Webhook_Helper_Provider;
@@ -68,7 +71,7 @@ class Webhook_Factory {
 	public function create_webhook_with_woocommerce_data() {
 		$name       = __( 'Webhooks from WooCommerce', 'woo-asaas' );
 		$url        = home_url() . self::WEBHOOK_SUFFIX;
-		$email      = ( new Gateway_Provider() )->gateway()->get_setting( 'email_notification' );
+		$email      = ( new Gateway_Provider() )->gateway()->get_option( 'email_notification' );
 		$send_type  = 'SEQUENTIALLY';
 		$auth_token = ( new Webhook_Helper_Provider() )->webhook_helper()->generate_random_token();
 		$events     = ( new Webhook_Events_Provider() )->events();

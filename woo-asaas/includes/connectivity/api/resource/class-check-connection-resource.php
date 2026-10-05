@@ -21,7 +21,10 @@ class Check_Connection_Resource {
 	public function check_connection() {
 		$response = $this->resource->exists( '' );
 		if ( $response instanceof Error_Response ) {
-			throw new API_Error_Response_Exception( $response->get_errors()->get_error_message(), $response->code );
+			throw new API_Error_Response_Exception(
+				esc_html( $response->get_errors()->get_error_message() ),
+				(int) $response->code
+			);
 		}
 	}
 }

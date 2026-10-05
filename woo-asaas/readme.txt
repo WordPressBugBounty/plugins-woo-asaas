@@ -3,9 +3,9 @@ Contributors: asaas, aztecweb
 Donate link:
 Tags: asaas, payment, payment gateway, woocommerce, credit card, bank ticket
 Requires at least: 6.2
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.7.7
+Stable tag: 2.7.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,11 +13,25 @@ Take transparent credit card and bank ticket payment checkouts on your store usi
 
 == Description ==
 
-Use [Asaas](https://www.asaas.com) as payment method in your WooCommerce store.
+Use [Asaas](https://www.asaas.com/) as a payment method for your store.
 
-This plugin is an implementation of [Asaas API v3](https://asaasv3.docs.apiary.io). The checkout mechanism is completely transparent. The customer will not go out of your store to finish the order. The data are sent to Asaas service, that process the payment and return its status.
+This plugin is an implementation of the [Asaas API v3](https://docs.asaas.com/). The checkout process is completely transparent, with the entire payment flow taking place within your store, without the need to access our invoice. The data is sent to Asaas, which processes the payment and automatically returns the transaction status.
 
-For any doubt about the plugin installation and integration, please read the FAQ. If it doesn't solve, use the plugin Support area that we will help you as soon as possible.
+With this plugin, you can use the following features:
+
+- PIX
+- Bank Slip
+- Credit Card
+- Payment Split
+- One-Click Buy
+- Automatic Advance (for business customers)
+- Installments up to 12x
+- Interest configuration based on the number of installments
+- Subscription Creation (using WooCommerce Subscriptions)
+
+For any questions about plugin installation and integration, we provide an installation tutorial as well as an explanation of the most common errors, [in our documentation.](https://docs.asaas.com/docs/woocommerce-1)
+
+If you still need support, you can contact our integrations team via email at [integracoes@asaas.com.br](mailto:integracoes@asaas.com.br).
 
 == Installation ==
 
@@ -41,11 +55,24 @@ This gateway requires WooCommerce 8.2 and above.
 
 == Screenshots ==
 
-1. Checkout example
-2. Bank ticket settings
-3. Credit card settings
+1. Credit Card
+2. Bank Slip
+3. PIX
+4. Checkout Customization
+5. Checkout
+6. Payment Split: Access
+7. Payment Split: Wallets
+8. Payment Split: Split Configuration
+9. API
+10. Advanced Settings
+11. Logs
 
 == Changelog ==
+
+= 2.7.8 =
+
+* Fix - When the first installment of a bank slip payment plan expires unpaid, the whole plan is now removed in Asaas, and an order that is already paid is no longer moved back to failed.
+* Tweak - Internal improvements to webhook processing and payment reconciliation.
 
 = 2.7.7 =
 

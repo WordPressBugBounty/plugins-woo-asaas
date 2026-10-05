@@ -160,6 +160,17 @@ abstract class Gateway extends \WC_Payment_Gateway {
 	}
 
 	/**
+	 * Check whether the webhook access token is missing.
+	 *
+	 * @return bool True when no usable webhook access token is configured.
+	 */
+	public function access_token_is_missing(): bool {
+		$configured_token = $this->get_option( 'webhook_access_token' );
+
+		return ! is_string( $configured_token ) || '' === $configured_token;
+	}
+
+	/**
 	 * Get Asaas customer metadata object
 	 *
 	 * @param int $user_id (Optional) The user ID. Default: Current logged user.
@@ -337,7 +348,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		$response = apply_filters( 'woocommerce_asaas_set_customer_api_response', call_user_func_array( array( $this->api->customers(), $action ), $params ) );
 
 		if ( is_a( $response, Error_Response::class ) ) {
-			// print the messages because the customer handle is after the checkout validation.
 			$this->send_checkout_failure_response( $response );
 		}
 
@@ -522,7 +532,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		if ( ! isset( $_GET['key'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 			return 0;
 		}
-		// Payment from "My Account" page.
 		$key      = sanitize_text_field( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 		$order_id = wc_get_order_id_by_order_key( $key );
 		$order    = wc_get_order( $order_id );
@@ -557,7 +566,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		if ( ! isset( $_GET['key'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 			return false;
 		}
-		// Payment from "My Account" page.
 		$key      = sanitize_text_field( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 		$order_id = wc_get_order_id_by_order_key( $key );
 		if ( 0 !== $order_id ) {
@@ -626,7 +634,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 
 		$did_payment_rollback = false;
 
-		// Is the payment confirmed or received? Do the refund.
 		$payment_id = $this->get_payment_id_from_order( $wc_order );
 		if ( false !== $payment_id ) {
 			$response = $this->api->payments()->find( $payment_id );
@@ -649,7 +656,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 			}
 		}
 
-		// Are there subscriptions created? Expire all.
 		if ( true === $order->has_subscription() ) {
 			$subscriptions = wcs_get_subscriptions_for_order( $wc_order, array( 'order_type' => array( 'any' ) ) );
 			foreach ( $subscriptions as $subscription ) {
@@ -682,16 +688,13 @@ abstract class Gateway extends \WC_Payment_Gateway {
 	 */
 	protected function need_single_payment_transaction( $wc_order, $subscriptions ) {
 		if ( count( $subscriptions ) > 1 ) {
-			// The order has more than one signature.
 			return true;
 		}
 
 		foreach ( $subscriptions as $subscription ) {
 			if ( $subscription->get_sign_up_fee() > 0 ) {
-				// One or more subscription has sign up fee.
 				return true;
 			}
-			// Subscription needs one time shipping?
 			$subscription_items = $subscription->get_items();
 			foreach ( $subscription_items as $subscription_item ) {
 				$line_item = wcs_find_matching_line_item( $wc_order, $subscription_item, $match_type = 'match_product_ids' );
@@ -706,7 +709,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		foreach ( $wc_order->get_items() as $item_id => $item ) {
 			$product = $item->get_product();
 			if ( false !== $product && false === in_array( $product->get_type(), $subscriptions_helper->subscription_product_types, true ) && $item->get_total() > 0 ) {
-				// The order has one or more non-free product.
 				return true;
 			}
 		}
@@ -727,10 +729,8 @@ abstract class Gateway extends \WC_Payment_Gateway {
 		$wc_order = $order->get_wc();
 		$total    = $wc_order->get_total();
 
-		// Build the transactions queue.
 		$transactions_queue = array();
 		if ( true === $order->has_subscription() ) {
-			// Order with one or more subscription items: parse WC_Subscription[] to populate transactions queue.
 			$sign_up_fees                    = 0;
 			$imediate_subscriptions_charges  = 0;
 			$subscriptions_helper            = new Subscriptions_Helper();
@@ -746,32 +746,28 @@ abstract class Gateway extends \WC_Payment_Gateway {
 					$line_item = wcs_find_matching_line_item( $wc_order, $subscription_item, $match_type = 'match_product_ids' );
 					$product   = $line_item->get_product();
 
-					// One time shipping?
 					if ( \WC_Subscriptions_Product::needs_one_time_shipping( $product ) ) {
 						$one_time_shipping = true;
 					}
 
-					// The subscription item total does not include the sign-up fee.
 					$subscription_total += $subscription_item->get_total();
 					$sign_up_fees       += ( $subscription->get_items_sign_up_fee( $subscription_item ) * $line_item->get_quantity() );
 
 					$items_names[] = $subscription_item->get_name();
 				}
 
-				// Subscription shipping totals.
 				if ( $need_single_payment_transaction || ( false === $need_single_payment_transaction && false === $one_time_shipping ) ) {
 					foreach ( $subscription->get_items( 'shipping' ) as $item_id => $item ) {
 						$subscription_total += ( $item->get_total() + $item->get_total_tax() );
 					}
 				}
 
-				// Subscription payment data.
 				$subscription_payment_data = $payment_data;
 				unset( $subscription_payment_data['dueDate'] );
 
 				$subscription_payment_data['value'] = $subscription_total;
 				$first_payment_strategy             = array(
-					'processed_by_parent_order'      => 0, // parent order id (if the payment will be processed there).
+					'processed_by_parent_order'      => 0,
 					'included_in_single_transaction' => false,
 				);
 				if ( 0 === $trial_end ) {
@@ -779,7 +775,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 					if ( false === $need_single_payment_transaction ) {
 						$subscription_payment_data['nextDueDate'] = $gateway->create_due_date( date_i18n( 'Y-m-d' ) )->format( 'Y-m-d' );
 					} else {
-						// The first charge is included in single transaction. So, here we inform the date of the second/next charge and includes the 1st charge in the single transaction.
 						$first_payment_strategy['included_in_single_transaction'] = true;
 						$imediate_subscriptions_charges                          += $subscription_total;
 						$subscription_payment_data['nextDueDate']                 = $gateway->create_due_date( $subscription->get_date( 'next_payment', 'site' ) )->format( 'Y-m-d' );
@@ -806,7 +801,6 @@ abstract class Gateway extends \WC_Payment_Gateway {
 				);
 			}
 
-			// Single charge.
 			if ( true === $need_single_payment_transaction && $total > 0 ) {
 				$payment_data['value'] = $total;
 				$payment_data          = apply_filters( 'woocommerce_asaas_payment_data', $payment_data, $wc_order, $gateway );
@@ -816,11 +810,9 @@ abstract class Gateway extends \WC_Payment_Gateway {
 					'payment_data' => $payment_data,
 				);
 
-				// Single charge at first position.
 				array_unshift( $transactions_queue, $single_charge_transaction );
 			}
 		} else {
-			// Order without subscription items. Only single charge transaction.
 			$need_single_payment_transaction = true;
 
 			$payment_data = apply_filters( 'woocommerce_asaas_payment_data', $payment_data, $wc_order, $gateway );

@@ -91,4 +91,13 @@ class Api {
 	public function webhooks() {
 		return new Resources\Webhooks( $this->gateway );
 	}
+
+	/**
+	 * API Installments resource.
+	 *
+	 * @return Resources\Installments
+	 */
+	public function installments() {
+		return new Resources\Installments( $this->gateway );
+	}
 }

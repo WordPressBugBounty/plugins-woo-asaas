@@ -139,8 +139,8 @@ class Payments extends Resource {
 	/**
 	 * Get ticket installment list.
 	 *
-	 * @param  int $id Installment id.
-	 * @param  int $limit Limit number of installments.
+	 * @param  string $id Installment id.
+	 * @param  int    $limit Limit number of installments.
 	 * @return Response The HTTP response.
 	 */
 	public function installment_list( $id, $limit = 100 ) {

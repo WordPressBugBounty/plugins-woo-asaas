@@ -1,3 +1,10 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+?>
 <tr class="object-setting-table__row" data-index="<?php echo esc_attr( $key ); ?>">
 	<td>
 		<select style="min-width: 100%"

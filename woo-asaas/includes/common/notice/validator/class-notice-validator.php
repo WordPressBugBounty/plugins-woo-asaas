@@ -21,7 +21,7 @@ class Notice_Validator {
 		}
 
 		if ( 0 < count( $this->errors ) ) {
-			throw new Validation_Exception( 'Invalid notice.', 0, null, $this->errors );
+			throw new Validation_Exception( esc_html( 'Invalid notice.' ), 0, null, array_map( 'esc_html', $this->errors ) );
 		}
 	}
 }

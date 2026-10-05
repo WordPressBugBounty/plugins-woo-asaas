@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Asaas Gateway for WooCommerce 2.7.6\n"
+"Project-Id-Version: Asaas Gateway for WooCommerce 2.7.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-asaas\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-08T19:47:50+00:00\n"
+"POT-Creation-Date: 2026-10-05T16:59:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: woo-asaas\n"
@@ -245,7 +245,8 @@ msgstr ""
 
 #: includes/admin/views/installments-interest-list.php:24
 #: includes/installments/admin/settings/class-installments-fields.php:98
-#: includes/webhook/class-webhook.php:360
+#: includes/webhook/service/class-payment-reconciliation-service.php:164
+#: includes/webhook/service/class-payment-reconciliation-service.php:190
 msgid "Interest"
 msgstr ""
 
@@ -323,6 +324,7 @@ msgstr ""
 #: includes/cron/class-expired-pix-cron.php:46
 #: includes/cron/class-expired-ticket-cron.php:43
 #: includes/installments/admin/settings/class-installments-fields.php:45
+#: includes/installments/cancellation/class-cancellation.php:81
 #: includes/installments/gateway/class-checkout-installments.php:45
 #: includes/installments/gateway/class-payment-installments.php:47
 #: includes/my-account/class-woocommerce-my-account.php:43
@@ -506,18 +508,18 @@ msgid "New Credit Card"
 msgstr ""
 
 #. translators: %s: billing type name
-#: includes/class-wc-asaas.php:293
-#: includes/webhook/class-endpoint.php:274
+#: includes/class-wc-asaas.php:295
+#: includes/webhook/validator/class-webhook-request-validator.php:89
 #, php-format
 msgid "Billing type %s wasn't registered."
 msgstr ""
 
-#: includes/class-wc-asaas.php:355
+#: includes/class-wc-asaas.php:357
 msgid "Asaas needs the CPF or CNPJ at checkout for the integration works."
 msgstr ""
 
 #. translators: %s: Extra Checkout fields for Brazil settings URL
-#: includes/class-wc-asaas.php:361
+#: includes/class-wc-asaas.php:363
 #, php-format
 msgid "<a href=\"%s\">Click here</a> to change checkout fields."
 msgstr ""
@@ -547,7 +549,7 @@ msgstr ""
 msgid "Temporary instability. Please try again in a few minutes."
 msgstr ""
 
-#: includes/connectivity/data/class-webhook-factory.php:69
+#: includes/connectivity/data/class-webhook-factory.php:72
 msgid "Webhooks from WooCommerce"
 msgstr ""
 
@@ -626,38 +628,38 @@ msgstr ""
 msgid "Select a credit card"
 msgstr ""
 
-#: includes/gateway/class-gateway.php:584
+#: includes/gateway/class-gateway.php:592
 msgid "Order not found."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:588
+#: includes/gateway/class-gateway.php:596
 msgid "This order cannot be refunded via this flow. Please, refund through your payment gateway or externally."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:592
+#: includes/gateway/class-gateway.php:600
 msgid "Partial refunds are not possible."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:596
+#: includes/gateway/class-gateway.php:604
 msgid "Due to payment method, to return funds to the customer you will need to issue a refund through your payment gateway or externally."
 msgstr ""
 
 #. translators: %s: Asaas payment id
-#: includes/gateway/class-gateway.php:608
+#: includes/gateway/class-gateway.php:616
 #, php-format
 msgid "%s payment refund request has been processed successfully."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:611
+#: includes/gateway/class-gateway.php:619
 msgid "Payment not found. The order cannot be refunded via this flow."
 msgstr ""
 
-#: includes/gateway/class-gateway.php:641
+#: includes/gateway/class-gateway.php:648
 msgid "Order automatically refunded due to total or partial processing failure."
 msgstr ""
 
 #. translators: 1: the subscription order id, 2: The items names
-#: includes/gateway/class-gateway.php:798
+#: includes/gateway/class-gateway.php:793
 #, php-format
 msgid "Subscription #%1$d - %2$s"
 msgstr ""
@@ -691,7 +693,7 @@ msgid "No expired ticket to remove."
 msgstr ""
 
 #. translators: %d: Total of removed tickets
-#: includes/gateway/class-ticket.php:409
+#: includes/gateway/class-ticket.php:419
 #, php-format
 msgid "Total tickets removed: %d"
 msgstr ""
@@ -801,6 +803,33 @@ msgstr ""
 #: includes/installments/admin/settings/class-installments-fields.php:108
 #, php-format
 msgid "The minimum value for each installment. The minimum value accepted by Asaas is <code>%s</code>."
+msgstr ""
+
+#: includes/installments/cancellation/data/class-ticket-installment-payment-factory.php:45
+#: includes/installments/cancellation/validator/class-ticket-installment-payment-validator.php:43
+msgid "Payment has no installment ID; not a ticket installment."
+msgstr ""
+
+#: includes/installments/cancellation/notice/class-installment-order-note.php:26
+msgid "Installment payment plan cancelled. The ticket expired without payment and no installment had been paid, so all installments were removed."
+msgstr ""
+
+#. translators: %d: installment number.
+#: includes/installments/cancellation/notice/class-installment-order-note.php:40
+#, php-format
+msgid "Installment %d was not paid, but the order has paid installments, so its status was kept and the installment plan was not removed."
+msgstr ""
+
+#: includes/installments/cancellation/notice/class-installment-order-note.php:53
+msgid "There is already a paid installment in this payment plan, so the order status was kept and no installment was removed."
+msgstr ""
+
+#: includes/installments/cancellation/validator/class-ticket-installment-payment-validator.php:46
+msgid "Payment billing type does not match the ticket billing type."
+msgstr ""
+
+#: includes/installments/cancellation/validator/class-ticket-installment-payment-validator.php:49
+msgid "Payment installment number is not a positive integer."
 msgstr ""
 
 #. translators: %d: installment number, %s: installment value, %s: interest value
@@ -993,7 +1022,7 @@ msgstr ""
 msgid "%1$s%% for wallet %2$s Wallet ID: %3$s"
 msgstr ""
 
-#: includes/split/views/object-setting/object-setting-row.php:28
+#: includes/split/views/object-setting/object-setting-row.php:35
 msgid "Delete row"
 msgstr ""
 
@@ -1146,90 +1175,98 @@ msgstr ""
 msgid "If the webhook queue is interrupted, click the button next to it to reactivate it"
 msgstr ""
 
-#: includes/webhook/class-endpoint.php:179
+#: includes/webhook/class-endpoint.php:175
 msgid "Webhook has been processed with success"
 msgstr ""
 
-#: includes/webhook/class-endpoint.php:182
+#: includes/webhook/class-endpoint.php:178
 msgid "Webhook was ignored by an external filter in this store"
 msgstr ""
 
 #. translators: %s: event name
-#: includes/webhook/class-endpoint.php:258
-#, php-format
-msgid "Event %s wasn't registered."
-msgstr ""
-
-#. translators: %s: event name
-#: includes/webhook/class-webhook.php:144
+#: includes/webhook/class-webhook.php:154
 #, php-format
 msgid "Untreated event: %s"
 msgstr ""
 
-#: includes/webhook/class-webhook.php:171
+#: includes/webhook/class-webhook.php:180
 msgid "Payment confirmed."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:186
+#: includes/webhook/class-webhook.php:192
 msgid "This order was already paid."
 msgstr ""
 
 #. translators: %s: subscription status
-#: includes/webhook/class-webhook.php:199
+#: includes/webhook/class-webhook.php:224
 #, php-format
 msgid "Prevents 500 error from WooCommerce Subscriptions: unable to change subscription status to %s."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:201
+#: includes/webhook/class-webhook.php:229
 msgid "An error occurred"
 msgstr ""
 
-#: includes/webhook/class-webhook.php:203
+#: includes/webhook/class-webhook.php:233
 msgid "Unable to change the order status."
 msgstr ""
 
 #. translators: 1: The due date, 2: The subscription order id
-#: includes/webhook/class-webhook.php:278
+#: includes/webhook/class-webhook.php:299
 #, php-format
 msgid "Payment created. Due date: %1$s / Subscription id: %2$s"
 msgstr ""
 
-#: includes/webhook/class-webhook.php:282
+#: includes/webhook/class-webhook.php:303
 msgid "Payment created."
 msgstr ""
 
 #. translators: 1: The payment link
-#: includes/webhook/class-webhook.php:290
+#: includes/webhook/class-webhook.php:311
 #, php-format
 msgid "Payment link: %1$s"
 msgstr ""
 
-#: includes/webhook/class-webhook.php:316
+#: includes/webhook/class-webhook.php:337
 msgid "PAYMENT_DELETED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to cancelled."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:318
+#: includes/webhook/class-webhook.php:339
 msgid "Payment deleted."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:338
+#: includes/webhook/class-webhook.php:360
 msgid "PAYMENT_OVERDUE: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to failed."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:340
+#: includes/webhook/class-webhook.php:362
 msgid "Payment overdue."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:352
-msgid "Fine tax"
-msgstr ""
-
-#: includes/webhook/class-webhook.php:453
+#: includes/webhook/class-webhook.php:394
 msgid "PAYMENT_REFUNDED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to refunded."
 msgstr ""
 
-#: includes/webhook/class-webhook.php:475
+#: includes/webhook/class-webhook.php:416
 msgid "PAYMENT_RESTORED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to pending."
+msgstr ""
+
+#: includes/webhook/service/class-payment-reconciliation-service.php:181
+msgid "Fine tax"
+msgstr ""
+
+#: includes/webhook/service/class-payment-reconciliation-service.php:257
+msgid "Payment value is lower than order total."
+msgstr ""
+
+#: includes/webhook/service/class-payment-reconciliation-service.php:262
+msgid "Payment value is higher than order total."
+msgstr ""
+
+#. translators: %s: event name
+#: includes/webhook/validator/class-webhook-request-validator.php:74
+#, php-format
+msgid "Event %s wasn't registered."
 msgstr ""
 
 #: templates/order/credit-card-thankyou.php:19

@@ -7,11 +7,24 @@
 
 namespace WC_Asaas\Webhook;
 
-use WC_Asaas\Gateway\Gateway;
+use Exception;
+use stdClass;
 use WC_Asaas\Api\Api;
+use WC_Asaas\Gateway\Gateway;
+use WC_Asaas\Helper\Subscriptions_Helper;
 use WC_Asaas\WC_Asaas;
 use WC_Asaas\Billing_Type\Billing_Type_Exception;
-use WC_Asaas\Helper\Subscriptions_Helper;
+use WC_Asaas\Billing_Type\Billing_Types;
+use WC_Asaas\Webhook\Data\Webhook_Targets;
+use WC_Asaas\Webhook\Event_Exception;
+use WC_Asaas\Webhook\Inconsistency_Data_Exception;
+use WC_Asaas\Webhook\Invalid_Token_Exception;
+use WC_Asaas\Webhook\Service\Payment_Reconciliation_Service;
+use WC_Asaas\Webhook\Service\Payment_Status_Service;
+use WC_Asaas\Webhook\Service\Webhook_Targets_Service;
+use WC_Asaas\Webhook\Validator\Access_Token_Validator;
+use WC_Asaas\Webhook\Validator\Webhook_Request_Validator;
+use WC_Asaas\Webhook\Webhook;
 
 /**
  * Endpoint
@@ -52,41 +65,6 @@ class Endpoint {
 	 * @var self
 	 */
 	protected static $instance = null;
-
-	/**
-	 * Billing type name for ticket
-	 *
-	 * @var string
-	 */
-	const BOLETO = 'BOLETO';
-
-	/**
-	 * Billing type name for credit card
-	 *
-	 * @var string
-	 */
-	const CREDIT_CARD = 'CREDIT_CARD';
-
-	/**
-	 * Billing type name for deposit
-	 *
-	 * @var string
-	 */
-	const DEPOSIT = 'DEPOSIT';
-
-	/**
-	 * Billing type name for transfer
-	 *
-	 * @var string
-	 */
-	const TRANSFER = 'TRANSFER';
-
-	/**
-	 * Billing type name for pix
-	 *
-	 * @var string
-	 */
-	const PIX = 'PIX';
 
 	/**
 	 * Initialize the plugin public actions
@@ -134,47 +112,65 @@ class Endpoint {
 	/**
 	 * Processes webhook and redirects to its specific method
 	 *
-	 * @throws \Exception Returned message to API.
+	 * @throws Exception Returned message to API.
 	 */
 	public function process_webhook() {
 		if ( '1' === get_query_var( $this->query_var ) ) {
 			try {
-				$raw_data = file_get_contents( 'php://input' ); // @codingStandardsIgnoreLine WordPress.WP.AlternativeFunctions.file_get_contents wp_remote_get not work with php://input
-				$this->validate_data( $raw_data );
-				$data = json_decode( $raw_data );
+				$raw_data      = file_get_contents( 'php://input' ); // @codingStandardsIgnoreLine WordPress.WP.AlternativeFunctions.file_get_contents wp_remote_get not work with php://input
+				$data          = json_decode( $raw_data );
+				$this->gateway = $this->get_request_gateway( $data );
 
-				$this->validate_event( $data->event );
-				$this->validate_billing_type( $data->payment->billingType );
+				$this->validate_token();
 
-				$data->payment->billingType = $this->convert_other_billing_types_to_boleto( $data->payment->billingType );
-
-				$this->gateway = WC_Asaas::get_instance()->get_gateway_by_billing_type( $data->payment->billingType );
+				$request_validator = new Webhook_Request_Validator();
+				$request_validator->validate_data( $raw_data );
+				$request_validator->validate_event( $data->event );
+				$request_validator->validate_billing_type( $data->payment->billingType );
+				$request_validator->validate_content();
 
 				$this->gateway->get_logger()->log( 'WEBHOOK REQUEST ' . $raw_data );
 
-				$order                = false;
-				$subscriptions_helper = new Subscriptions_Helper();
-				if ( isset( $data->payment->subscription ) ) {
-					// Tries to find the order without externalReference beacause maybe it isn't assigned yet.
-					$order = $subscriptions_helper->get_order_by_payment_id( $data->payment->id );
-				}
-				if ( false === $order ) {
-					$order = wc_get_order( $data->payment->externalReference );
-				}
-				$this->ignore_non_woocommerce_payment( $order );
+				$is_payment_confirmation = in_array(
+					$data->event,
+					array( Webhook::PAYMENT_CONFIRMED, Webhook::PAYMENT_RECEIVED ),
+					true
+				);
 
-				$subscription = null;
-				if ( isset( $data->payment->subscription ) ) {
-					$subscription = $subscriptions_helper->get_subscription_by_id( $data->payment->subscription );
-					$this->ignore_non_woocommerce_subscription( $subscription );
+				$payment_status_service = new Payment_Status_Service( $this->gateway, new Api( $this->gateway ) );
+				$confirmed_payment      = ( $is_payment_confirmation
+					&& ! $payment_status_service->should_skip( $data ) )
+					? $payment_status_service->validate( $data )
+					: null;
+
+				$targets = ( new Webhook_Targets_Service( new Subscriptions_Helper() ) )->resolve(
+					$data,
+					$is_payment_confirmation,
+					$confirmed_payment
+				);
+				$this->ignore_non_woocommerce_targets( $targets );
+
+				if ( ! $is_payment_confirmation && ! $payment_status_service->should_skip( $data ) ) {
+					$payment_status_service->validate( $data );
 				}
 
-				$this->validate_token();
-				$this->validate_content();
-				$this->validate_status( $data );
+				$webhook_data = $this->canonicalize_webhook_data( $data, $confirmed_payment );
 
-				if ( apply_filters( 'woocommerce_asaas_should_process_webhook', true, $data, $order, $subscription ) ) {
-					$webhook = new Webhook( $this->gateway, $order, $subscription, $data );
+				$should_process = apply_filters(
+					'woocommerce_asaas_should_process_webhook',
+					true,
+					$data,
+					$targets->order(),
+					$targets->request_subscription()
+				);
+				if ( $should_process ) {
+					$webhook = new Webhook(
+						$this->gateway,
+						$targets->order(),
+						$targets->subscription(),
+						$webhook_data,
+						new Payment_Reconciliation_Service( $this->gateway, $targets->order(), $webhook_data->payment )
+					);
 					$webhook->process_event();
 					$this->response( 200, __( 'Webhook has been processed with success', 'woo-asaas' ) );
 				}
@@ -187,164 +183,98 @@ class Endpoint {
 				$this->response( 200, $error->getMessage() );
 			} catch ( Event_Exception $error ) {
 				$this->response( 200, $error->getMessage() );
-			} catch ( \Exception $error ) {
+			} catch ( Invalid_Token_Exception $error ) {
+				$this->response( 401, $error->getMessage() );
+			} catch ( Exception $error ) {
 				$this->response( 500, $error->getMessage() );
 			}
 		}
 	}
 
 	/**
-	 * Get the order gateway id
+	 * Resolve the request gateway by the payment billing type.
 	 *
-	 * Normalize old versions that used `woocommerce-` as gateway prefix.
+	 * Resolving the gateway before the token validation scopes the token to the
+	 * gateway of the payment's billing type. When the billing type isn't known
+	 * yet, no gateway is returned and every gateway may validate the request.
 	 *
-	 * @param \WC_Order $order The WooCommerce order.
-	 * @return string The gateway id sanitized.
+	 * The billing type is converted and stored on the request data, so the
+	 * conversion is done only once and reused by the request validation.
+	 *
+	 * @param mixed $data The request data.
+	 * @return Gateway|null The gateway, or null when the billing type isn't a gateway one.
 	 */
-	private function get_gateway_id( $order ) {
-		$gateway_id = $order->get_payment_method( false );
-		$gateway_id = preg_replace( '/^woocommerce-/', '', $gateway_id );
-		return $gateway_id;
+	private function get_request_gateway( $data ) {
+		if (
+			! is_object( $data )
+			|| ! isset( $data->payment->billingType )
+			|| ! is_string( $data->payment->billingType )
+		) {
+			return null;
+		}
+
+		$data->payment->billingType = Billing_Types::normalize( $data->payment->billingType );
+
+		if ( ! in_array( $data->payment->billingType, Billing_Types::GATEWAY_TYPES, true ) ) {
+			return null;
+		}
+
+		return WC_Asaas::get_instance()->get_gateway_by_billing_type( $data->payment->billingType );
 	}
 
 	/**
-	 * Ignore request returning 200 if `externalReference` is null.
+	 * Build the data the event is processed with.
 	 *
-	 * @param \WC_Order $order The request data.
+	 * When Asaas returned a canonical payment, it replaces the request payment so the
+	 * event is processed with the payment Asaas actually holds. The request data is
+	 * cloned because the filters still receive the original payload.
+	 *
+	 * @param stdClass      $data The request data.
+	 * @param stdClass|null $confirmed_payment The payment returned by Asaas, when validated.
+	 * @return stdClass The data the event must be processed with.
 	 */
-	private function ignore_non_woocommerce_payment( $order ) {
-		if ( false === $order ) {
+	private function canonicalize_webhook_data( stdClass $data, ?stdClass $confirmed_payment ) {
+		if ( null === $confirmed_payment ) {
+			return $data;
+		}
+
+		$webhook_data          = clone $data;
+		$webhook_data->payment = $confirmed_payment;
+
+		return $webhook_data;
+	}
+
+	/**
+	 * Ignore the request returning 200 when the payment isn't bound to a WooCommerce object.
+	 *
+	 * @param Webhook_Targets $targets The targets resolved from the request.
+	 */
+	private function ignore_non_woocommerce_targets( Webhook_Targets $targets ) {
+		if ( $targets->order_missing() ) {
 			$this->response( 200, 'This request isn\'t a WooCommerce order.' );
 		}
-	}
 
-	/**
-	 * Ignore request returning 200 if `subscription` is invalid.
-	 *
-	 * @param \WC_Subscription $subscription The WooCommerce Subscription object.
-	 */
-	private function ignore_non_woocommerce_subscription( $subscription ) {
-		if ( false === $subscription ) {
+		if ( $targets->subscription_missing() ) {
 			$this->response( 200, 'This request isn\'t a WooCommerce subscription.' );
 		}
 	}
 
 	/**
-	 * Validate if gateway exist
-	 *
-	 * The gateway is created by the billing type. The gateway is null if the billing type doesn't exist.
-	 *
-	 * @param string $data The request data.
-	 * @throws \Exception If data is empty.
-	 */
-	private function validate_data( $data ) {
-		if ( '' === $data ) {
-			throw new \Exception( 'Data is empty.' );
-		}
-	}
-
-	/**
-	 * Validate if event exist
-	 *
-	 * The event must be accepted for the webhook to be processed.
-	 *
-	 * @param string $event The request event.
-	 * @throws \Event_Exception If event is not acceptable.
-	 */
-	private function validate_event( $event ) {
-		$accepted_events = array( Webhook::PAYMENT_CONFIRMED, Webhook::PAYMENT_CREATED, Webhook::PAYMENT_DELETED, Webhook::PAYMENT_OVERDUE, Webhook::PAYMENT_RECEIVED, Webhook::PAYMENT_REFUNDED, Webhook::PAYMENT_RESTORED, Webhook::PAYMENT_UPDATED );
-		if ( false === array_search( $event, $accepted_events, true ) ) {
-			/* translators: %s: event name  */
-			throw new Event_Exception( sprintf( esc_html__( 'Event %s wasn\'t registered.', 'woo-asaas' ), esc_html( $event ) ) );
-		}
-	}
-
-	/**
-	 * Validate if billing type exist
-	 *
-	 * The billing type must be accepted for the webhook to be processed.
-	 *
-	 * @param string $billing_type The request billing type.
-	 * @throws \Billing_Type_Exception If billing type is not acceptable.
-	 */
-	private function validate_billing_type( $billing_type ) {
-		$accepted_billing_type = array( self::BOLETO, self::CREDIT_CARD, self::DEPOSIT, self::TRANSFER, self::PIX );
-		if ( false === array_search( $billing_type, $accepted_billing_type, true ) ) {
-			/* translators: %s: billing type name  */
-			throw new Billing_Type_Exception( sprintf( esc_html__( 'Billing type %s wasn\'t registered.', 'woo-asaas' ), esc_html( $billing_type ) ) );
-		}
-	}
-
-	/**
-	 * Converts other types of charge to boleto
-	 *
-	 * The billing type must be DEPOSIT or TRANSFER for it to be converted..
-	 *
-	 * @param string $billing_type The request billing type.
-	 * @return string
-	 */
-	private function convert_other_billing_types_to_boleto( $billing_type ) {
-		$other_billing_types = array( self::DEPOSIT, self::TRANSFER );
-		if ( false === array_search( $billing_type, $other_billing_types, true ) ) {
-			return $billing_type;
-		}
-		return self::BOLETO;
-	}
-
-	/**
 	 * Validate if the request token is the same set in gateway settings
 	 *
-	 * @throws \Exception If the token is invalid.
+	 * The token is scoped to the gateway of the payment's billing type: a token
+	 * configured in another gateway doesn't authenticate the request. When the
+	 * billing type isn't known yet, every gateway may validate it.
+	 *
+	 * @throws Invalid_Token_Exception If the token is invalid.
 	 */
 	private function validate_token() {
-		$access_token = isset( $_SERVER['HTTP_ASAAS_ACCESS_TOKEN'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_ASAAS_ACCESS_TOKEN'] ) ) : '';
-		if ( $this->gateway->get_option( 'webhook_access_token' ) !== $access_token && html_entity_decode( $this->gateway->get_option( 'webhook_access_token' ) ) !== $access_token ) {
-			throw new \Exception( 'Invalid Token' );
-		}
-	}
+		$gateways     = null === $this->gateway ? WC_Asaas::get_instance()->get_gateways() : array( $this->gateway );
+		$access_token = isset( $_SERVER['HTTP_ASAAS_ACCESS_TOKEN'] )
+			? sanitize_text_field( wp_unslash( $_SERVER['HTTP_ASAAS_ACCESS_TOKEN'] ) )
+			: '';
 
-	/**
-	 * Validate request content type
-	 *
-	 * The content type must be `application/json`.
-	 *
-	 * @throws \Exception If the content is invalid.
-	 */
-	private function validate_content() {
-		$content_type = isset( $_SERVER['CONTENT_TYPE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['CONTENT_TYPE'] ) ) : '';
-		if ( 'application/json' !== $content_type ) {
-			throw new \Exception( 'Content-Type not accepted' );
-		}
-	}
-
-	/**
-	 * Validate if the payment exists and the status is the same of the request
-	 *
-	 * @param \stdClass $data The request data.
-	 * @throws \Exception If the response is an error or the status in request doesn't match with the request one.
-	 * @throws \Inconsistency_Data_Exception If is a PAYMENT_CREATED event without a subscription associated.
-	 */
-	private function validate_status( $data ) {
-		$want_skip = isset( $data->skip_api_status_validation ) ? $data->skip_api_status_validation : false;
-		$api_skip  = new Api_Skip();
-		if ( true === $api_skip->can_skip() && true === $want_skip ) {
-			return;
-		}
-
-		$api      = new Api( $this->gateway );
-		$response = $api->payments()->find( $data->payment->id );
-
-		if ( 200 !== $response->code ) {
-			throw new \Exception( sprintf( 'Error verifying payment status in Asaas. Response HTTP status: %d', esc_html( $response->code ) ) );
-		}
-
-		if ( Webhook::PAYMENT_CREATED === $data->event && ! isset( $data->payment->subscription ) ) {
-			throw new Inconsistency_Data_Exception( 'PAYMENT_CREATED status ignored' );
-		}
-
-		if ( $data->payment->status !== $response->get_json()->status ) {
-			throw new Inconsistency_Data_Exception( 'Status doesn\'t match with Asaas' );
-		}
+		( new Access_Token_Validator() )->validate( $gateways, $access_token );
 	}
 
 	/**

@@ -7,6 +7,10 @@
 
 namespace WC_Asaas;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Autoload plugin files using WordPress naming conventions
  *

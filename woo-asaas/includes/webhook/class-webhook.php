@@ -7,12 +7,20 @@
 
 namespace WC_Asaas\Webhook;
 
-use WC_Asaas\Gateway\Gateway;
+use Exception;
+use stdClass;
 use WC_Asaas\Api\Api;
-use WC_Asaas\Meta_Data\Subscription_Meta;
+use WC_Asaas\Gateway\Gateway;
 use WC_Asaas\Meta_Data\Order;
+use WC_Asaas\Meta_Data\Subscription_Meta;
 use WC_Asaas\Subscription\Subscription;
 use WC_Asaas\Webhook\Error_Response;
+use WC_Asaas\Webhook\Event_Exception;
+use WC_Asaas\Webhook\Inconsistency_Data_Exception;
+use WC_Asaas\Webhook\Service\Payment_Reconciliation_Service;
+use WC_DateTime;
+use WC_Order;
+use WC_Subscription;
 
 /**
  * Webhook
@@ -29,23 +37,23 @@ class Webhook {
 	/**
 	 * Order related to webhook
 	 *
-	 * @var \WC_Order
+	 * @var WC_Order
 	 */
 	private $order;
 
 	/**
 	 * Subscription related to webhook
 	 *
-	 * @var \WC_Subscription|null
+	 * @var WC_Subscription|null
 	 */
 	private $subscription;
 
 	/**
-	 * Discounts values
+	 * Service that reconciles the order total with the confirmed payment value.
 	 *
-	 * @var float
+	 * @var Payment_Reconciliation_Service
 	 */
-	private $discounts_values;
+	private $payment_reconciliation;
 
 	const PREFIX_LOG = 'Asaas: ';
 
@@ -65,29 +73,31 @@ class Webhook {
 
 	const PAYMENT_RESTORED = 'PAYMENT_RESTORED';
 
-	const PERCENTAGE_CALCULUS_TYPE = 'PERCENTAGE';
-
-	const FIXED_CALCULUS_TYPE = 'FIXED';
-
-	const CREDIT_CARD_PAYMENT_TYPE = 'CREDIT_CARD';
-
 	/**
 	 * Initialize the object
 	 *
-	 * @param Gateway               $gateway The payment gateway.
-	 * @param \WC_Order             $order The webhook that will be processed.
-	 * @param \WC_Subscription|null $subscription The subscription related to the webhook.
-	 * @param \stdClass             $data The webhook data.
+	 * @param Gateway                        $gateway The payment gateway.
+	 * @param WC_Order                      $order The webhook that will be processed.
+	 * @param WC_Subscription|null          $subscription The subscription related to the webhook.
+	 * @param stdClass                      $data The webhook data.
+	 * @param Payment_Reconciliation_Service $payment_reconciliation The service that reconciles the
+	 *                                                               order total with the confirmed
+	 *                                                               payment value.
 	 */
-	public function __construct( Gateway $gateway, \WC_Order $order, \WC_Subscription $subscription = null, \stdClass $data ) {
-		$this->gateway      = $gateway;
-		$this->order        = $order;
-		$this->subscription = $subscription;
-		$this->data         = $data;
+	public function __construct(
+		Gateway $gateway,
+		WC_Order $order,
+		WC_Subscription $subscription = null,
+		stdClass $data,
+		Payment_Reconciliation_Service $payment_reconciliation
+	) {
+		$this->gateway                = $gateway;
+		$this->order                  = $order;
+		$this->subscription           = $subscription;
+		$this->data                   = $data;
+		$this->payment_reconciliation = $payment_reconciliation;
 
-		$this->order->set_date_modified( new \WC_DateTime( gmdate( 'Y-m-d H:i:s' ) ) );
-
-		add_action( 'woocommerce_order_after_calculate_totals', array( $this, 'set_order_discount' ) );
+		$this->order->set_date_modified( new WC_DateTime( gmdate( 'Y-m-d H:i:s' ) ) );
 	}
 
 	/**
@@ -103,7 +113,7 @@ class Webhook {
 	/**
 	 * Process the event according to its type
 	 *
-	 * @throws \Exception Case event not found.
+	 * @throws Exception Case event not found.
 	 */
 	public function process_event() {
 		switch ( $this->event ) {
@@ -151,7 +161,6 @@ class Webhook {
 	private function on_payment_confirmed() {
 		$this->process_payment();
 
-		// Updates the next due date on WC_Subscriptions object.
 		if ( isset( $this->data->payment->subscription ) ) {
 			$api      = new Api( $this->gateway );
 			$response = $api->subscriptions()->find( $this->data->payment->subscription );
@@ -162,7 +171,7 @@ class Webhook {
 				);
 				try {
 					$this->subscription->update_dates( $dates );
-				} catch ( \Exception $error ) {
+				} catch ( Exception $error ) {
 					$this->gateway->get_logger()->log( 'FAILED TO UPDATE SUBSCRIPTION NEXT PAYMENT DATE ' . $error->getMessage() );
 				}
 			}
@@ -174,75 +183,88 @@ class Webhook {
 	/**
 	 * Process the payment object
 	 *
-	 * @throws Inconsistency_Data_Exception If order is paid.
-	 * @throws Event_Exception If new subscription status is not allowed.
-	 * @throws \Exception On failure to change the order status.
+	 * @throws Inconsistency_Data_Exception If order is paid, or the confirmed payment value
+	 *                                       doesn't match the order total.
 	 */
-	private function process_payment() {
-		$order_data = $this->order->get_data();
-
+	private function process_payment(): void {
 		$paid_statuses = wc_get_is_paid_statuses();
 		if ( $this->order->has_status( $paid_statuses ) ) {
 			throw new Inconsistency_Data_Exception( esc_html__( 'This order was already paid.', 'woo-asaas' ) );
 		}
 
-		// Value for change total of order.
-		if ( $order_data['total'] !== $this->payment->value && self::CREDIT_CARD_PAYMENT_TYPE === $this->payment->billingType ) {
-			$this->update_order_values_on_credit_card();
-		}
+		$this->payment_reconciliation->reconcile();
 
 		try {
 			$this->order->payment_complete( $this->payment->id );
-		} catch ( \Exception $error ) {
-			if ( null !== $this->subscription && 'active' !== $this->subscription->get_status() && false === $this->subscription->can_be_updated_to( 'active' ) ) {
-				/* translators: %s: subscription status  */
-				throw new Event_Exception( sprintf( esc_html__( 'Prevents 500 error from WooCommerce Subscriptions: unable to change subscription status to %s.', 'woo-asaas' ), 'active' ) );
-			} elseif ( null !== $this->subscription ) {
-				throw new Event_Exception( esc_html__( 'An error occurred', 'woo-asaas' ) . ': ' . esc_html( $error->getMessage() ) );
-			} else {
-				throw new \Exception( esc_html__( 'Unable to change the order status.', 'woo-asaas' ) );
-			}
+		} catch ( Exception $error ) {
+			$this->throw_payment_complete_failure( $error );
 		}
+	}
+
+	/**
+	 * Throw the exception that explains a payment completion failure.
+	 *
+	 * The exception depends on the subscription state: when the subscription
+	 * cannot be updated to active, the failure is an event inconsistency; when
+	 * a subscription exists but the update isn't the cause, the failure is an
+	 * event error; otherwise the order status couldn't be changed.
+	 *
+	 * @param Exception $error The original payment completion error.
+	 * @return never This method never returns; it always throws.
+	 * @throws Event_Exception Depending on the subscription state.
+	 * @throws Exception If the order status couldn't be changed.
+	 */
+	private function throw_payment_complete_failure( Exception $error ) {
+		if (
+			null !== $this->subscription
+			&& 'active' !== $this->subscription->get_status()
+			&& false === $this->subscription->can_be_updated_to( 'active' )
+		) {
+			/* translators: %s: subscription status  */
+			throw new Event_Exception( sprintf( esc_html__( 'Prevents 500 error from WooCommerce Subscriptions: unable to change subscription status to %s.', 'woo-asaas' ), 'active' ) );
+		}
+
+		if ( null !== $this->subscription ) {
+			throw new Event_Exception(
+				esc_html__( 'An error occurred', 'woo-asaas' ) . ': ' . esc_html( $error->getMessage() )
+			);
+		}
+
+		throw new Exception( esc_html__( 'Unable to change the order status.', 'woo-asaas' ) );
 	}
 
 	/**
 	 * Method used when payment is created.
 	 *
-	 * @throws \Exception If API response is not OK.
+	 * @throws Exception If API response is not OK.
 	 */
 	private function on_payment_created() {
 		if ( isset( $this->data->payment->subscription ) ) {
-			// Treats subscription payment created event.
 			$api      = new Api( $this->gateway );
 			$response = $api->subscriptions()->payments( $this->data->payment->subscription );
 
 			if ( 200 !== $response->code ) {
-				throw new \Exception( sprintf( 'Error getting payments for a subscription in Asaas. Response HTTP status: %d', esc_html( $response->code ) ) );
+				throw new Exception( sprintf( 'Error getting payments for a subscription in Asaas. Response HTTP status: %d', esc_html( $response->code ) ) );
 			}
 
-			// Subscription meta.
 			$subscription_meta      = new Subscription_Meta( $this->subscription->get_id() );
 			$first_payment_strategy = $subscription_meta->get_first_payment_strategy();
 			$create_renewal         = true;
 			if ( 1 === $response->get_json()->totalCount ) {
 				if ( 0 !== $first_payment_strategy->processed_by_parent_order && false === $first_payment_strategy->included_in_single_transaction ) {
-					// The first payment was processed by parent order, but it wasn't included in single transaction. So, this is the first.
 					$create_renewal = false;
 				}
 			}
 			if ( false === $create_renewal ) {
-				// Parent order.
 				$transaction_order = $this->subscription->get_parent();
 			} else {
-				// Creates the renewal order (for the >=2nd payment or 1st payment when the subscription has trial period).
 				$transaction_order = wcs_create_renewal_order( $this->subscription );
 				$transaction_order->set_payment_method( wc_get_payment_gateway_by_order( $this->subscription ) );
-				if ( is_callable( array( $transaction_order, 'save' ) ) ) { // WC 3.0+ We need to save the payment method.
+				if ( is_callable( array( $transaction_order, 'save' ) ) ) {
 					$transaction_order->save();
 				}
 			}
 
-			// Saves order subscription payment meta data.
 			$this->gateway->add_payment_id_to_order( $this->data->payment->id, $transaction_order );
 			$order_meta = new Order( $transaction_order->get_id() );
 			if ( false === $order_meta->get_meta_data() ) {
@@ -258,7 +280,7 @@ class Webhook {
 					$pix_info_response = $api->payments()->pix_info( $this->data->payment->id );
 					if ( is_a( $pix_info_response, Error_Response::class ) ) {
 						wp_delete_post( $transaction_order->get_id(), true );
-						throw new \Exception( sprintf( 'Error getting PIX information for a payment subscription in Asaas. Response HTTP status: %d', esc_html( $pix_info_response->code ) ) );
+						throw new Exception( sprintf( 'Error getting PIX information for a payment subscription in Asaas. Response HTTP status: %d', esc_html( $pix_info_response->code ) ) );
 					}
 
 					$pix_info = $pix_info_response->get_json();
@@ -267,7 +289,6 @@ class Webhook {
 				}
 			}
 
-			// Tries to set the new externalReference for payment in Asaas (this is only possible if the payment is still pending).
 			$payment_data = array(
 				'externalReference' => $transaction_order->get_id(),
 			);
@@ -312,7 +333,7 @@ class Webhook {
 
 		try {
 			$this->order->update_status( 'cancelled' );
-		} catch ( \Exception $error ) {
+		} catch ( Exception $error ) {
 			throw new Event_Exception( esc_html__( 'PAYMENT_DELETED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to cancelled.', 'woo-asaas' ) );
 		}
 		$this->add_order_note( __( 'Payment deleted.', 'woo-asaas' ) );
@@ -322,6 +343,7 @@ class Webhook {
 	 * Method used when payment is overdue
 	 *
 	 * @throws Event_Exception If new subscription status is not allowed.
+	 * @throws \Exception On transient failure deleting installment plan.
 	 */
 	private function on_payment_overdue() {
 		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_overdue_subscription_new_status', 'on-hold', $this->order, $this->event );
@@ -334,122 +356,41 @@ class Webhook {
 
 		try {
 			$this->order->update_status( 'failed' );
-		} catch ( \Exception $error ) {
+		} catch ( Exception $error ) {
 			throw new Event_Exception( esc_html__( 'PAYMENT_OVERDUE: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to failed.', 'woo-asaas' ) );
 		}
 		$this->add_order_note( __( 'Payment overdue.', 'woo-asaas' ) );
-	}
 
-	/**
-	 * Update order values on credit card gateway
-	 */
-	private function update_order_values_on_credit_card() {
-		if ( $this->payment->value > $this->payment->originalValue ) {
-			// Add tax for fine.
-			if ( isset( $this->payment->fine->value ) ) {
-				$item_total = $this->calculate_item_total( $this->payment->fine, $this->payment->originalValue );
-
-				$item_name = __( 'Fine tax', 'woo-asaas' );
-				$this->add_item_fee_to_order( $item_name, $item_total );
-			}
-
-			// Add tax for interest.
-			if ( isset( $this->payment->interest->value ) ) {
-				$item_total = $this->calculate_item_total( $this->payment->interest, $this->payment->originalValue );
-
-				$item_name = __( 'Interest', 'woo-asaas' );
-				$this->add_item_fee_to_order( $item_name, $item_total );
-			}
-		}
-
-		if ( $this->payment->value < $this->payment->originalValue ) {
-			// Add order discount.
-			if ( isset( $this->payment->discount->value ) ) {
-				$item_total = $this->calculate_item_total( $this->payment->discount, $this->payment->originalValue );
-
-				$this->discounts_values = $item_total;
-			}
-		}
-
-		// Calculate totals order.
-		$this->order->calculate_totals();
-	}
-
-	/**
-	 * Calculate item total
-	 *
-	 * @param object $item_object The object value.
-	 * @param float  $total The order total value.
-	 */
-	private function calculate_item_total( $item_object, $total ) {
-		$fine_type = self::FIXED_CALCULUS_TYPE;
-		if ( isset( $item_object->type ) ) {
-			$fine_type = $item_object->type;
-		}
-
-		$item_total = $this->calculate_item_fee_value( $total, $fine_type, $item_object->value );
-
-		return $item_total;
-	}
-
-	/**
-	 * Calculate item fee value
-	 *
-	 * @param float  $current_value The current value.
-	 * @param string $type The type of calculus.
-	 * @param float  $amount The amount value.
-	 */
-	private function calculate_item_fee_value( $current_value, $type, $amount ) {
-		if ( self::PERCENTAGE_CALCULUS_TYPE === $type ) {
-			return ( $current_value * ( $amount / 100 ) );
-		}
-
-		return $amount;
-	}
-
-	/**
-	 * Add a fee to an order
-	 *
-	 * @param string $name The fee name.
-	 * @param float  $total The total fee cost.
-	 */
-	private function add_item_fee_to_order( $name, $total ) {
-		$item_fee = new \WC_Order_Item_Fee();
-		$item_fee->set_name( $name );
-		$item_fee->set_total( $total );
-		$this->order->add_item( $item_fee );
+		do_action( 'asaas_webhook_payment_overdue', $this->data->payment, $this->order );
 	}
 
 	/**
 	 * Method used when payment is refunded
 	 *
-	 * @throws \Exception If API response is not OK.
+	 * @throws Exception If API response is not OK.
 	 * @throws Event_Exception If new subscription status is not allowed.
 	 */
 	private function on_payment_refunded() {
 		$new_subscription_status = apply_filters( 'asaas_webhook_on_payment_refunded_subscription_new_status', 'on-hold', $this->order, $this->event );
 
 		if ( isset( $this->data->payment->subscription ) ) {
-			// Treats subscription payment refunded event.
 			$api      = new Api( $this->gateway );
 			$response = $api->subscriptions()->payments( $this->data->payment->subscription );
 
 			if ( 200 !== $response->code ) {
-				throw new \Exception( sprintf( 'Error getting payments for a subscription in Asaas. Response HTTP status: %d', esc_html( $response->code ) ) );
+				throw new Exception( sprintf( 'Error getting payments for a subscription in Asaas. Response HTTP status: %d', esc_html( $response->code ) ) );
 			}
 
 			if ( $this->data->payment->id === $response->get_json()->data[0]->id ) {
-				// Changes the subscription status if the payment is the most recent.
 				Subscription::get_instance()->update_status( $this->subscription, $new_subscription_status, $this->event );
 			}
 		} else {
-			// Single payment.
 			Subscription::get_instance()->update_subscriptions_related_to_parent_order( $this->order, $new_subscription_status, $this->event );
 		}
 
 		try {
 			$this->order->update_status( 'refunded' );
-		} catch ( \Exception $error ) {
+		} catch ( Exception $error ) {
 			throw new Event_Exception( esc_html__( 'PAYMENT_REFUNDED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to refunded.', 'woo-asaas' ) );
 		}
 		$this->add_order_note( 'Payment refunded.', 'woo-asaas' );
@@ -471,7 +412,7 @@ class Webhook {
 
 		try {
 			$this->order->update_status( 'pending' );
-		} catch ( \Exception $error ) {
+		} catch ( Exception $error ) {
 			throw new Event_Exception( esc_html__( 'PAYMENT_RESTORED: prevents 500 error from WooCommerce Subscriptions: unable to change subscription/order status to pending.', 'woo-asaas' ) );
 		}
 		$this->add_order_note( 'Payment restored.', 'woo-asaas' );
@@ -485,20 +426,6 @@ class Webhook {
 			$this->order->update_status( 'pending' );
 		}
 		$this->add_order_note( 'Payment updated', 'woo-asaas' );
-	}
-
-	/**
-	 * Discount should be applied after calculate order totals
-	 */
-	public function set_order_discount() {
-		if ( null === $this->discounts_values ) {
-			return;
-		}
-
-		$order_total = $this->order->get_total() - $this->discounts_values;
-
-		$this->order->set_discount_total( $this->discounts_values );
-		$this->order->set_total( $order_total );
 	}
 
 	/**

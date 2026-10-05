@@ -375,10 +375,10 @@ class Ticket extends Gateway {
 
 		$totals = 0;
 		foreach ( $payments->items as $payment ) {
-			$cache_key              = "ticket_{$payment->id}";
-			$is_woocommerce_payment = wp_cache_get( $cache_key );
+			$cache_key = "ticket_{$payment->id}";
+			$order_id  = wp_cache_get( $cache_key );
 
-			if ( false === $is_woocommerce_payment ) {
+			if ( false === $order_id ) {
 				$args = array(
 					// phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_query
 					'meta_query' => array(
@@ -391,18 +391,28 @@ class Ticket extends Gateway {
 					'return'     => 'ids',
 				);
 
-				$orders = ( new Order_Query() )->get_orders_with_meta_query( $args );
-
-				$is_woocommerce_payment = count( $orders ) > 0;
-				wp_cache_set( $cache_key, $is_woocommerce_payment, '', HOUR_IN_SECONDS );
+				$orders   = ( new Order_Query() )->get_orders_with_meta_query( $args );
+				$order_id = count( $orders ) > 0 ? (int) $orders[0] : 0;
+				wp_cache_set( $cache_key, $order_id, '', HOUR_IN_SECONDS );
 			}
 
-			if ( ! $is_woocommerce_payment ) {
+			if ( 0 === $order_id ) {
 				continue;
 			}
 
-			$this->api->payments()->delete( $payment->id );
-			$totals++;
+			try {
+				$should_delete = apply_filters( 'asaas_should_delete_expired_ticket', true, $payment, $order_id );
+				if ( $should_delete ) {
+					$this->api->payments()->delete( $payment->id );
+				}
+				$totals++;
+			} catch ( \Exception $e ) {
+				$this->get_logger()->log(
+					sprintf( 'Skipping expired payment %s due to transient failure: %s', $payment->id, $e->getMessage() ),
+					'error'
+				);
+				continue;
+			}
 		}
 
 		/* translators: %d: Total of removed tickets  */
